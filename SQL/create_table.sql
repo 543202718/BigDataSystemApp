@@ -1,4 +1,6 @@
+use bigdata;
 -- 项目表
+drop table if exists `project`;
 create table `project`(
     `id` varchar(50) primary key,     -- 项目号
     `name` varchar(50), -- 项目名称
@@ -9,6 +11,7 @@ create table `project`(
 );
 
 -- 装置表
+drop table if exists `system`;
 create table `system`(
     `id` int auto_increment primary key, -- 自增的内部id
     `project_id` varchar(50) , -- 项目号（外键）
@@ -35,6 +38,7 @@ create table `system`(
 );
 
 -- 材料性质简表
+drop table if exists `material`;
 create table `material`(
     `id` int auto_increment primary key, -- 自增的原料号
     `system_id` int, -- 从属的装置id（外键）
@@ -60,35 +64,42 @@ create table `material`(
 );
 
 -- 原料元素含量表
+drop table if exists `element`;
 create table `element`(
-    `material_id` int primary key, -- 原料号（外键）
-    `symbol` varchar(5) primary key, -- 元素符号 
+    `material_id` int, -- 原料号（外键）
+    `symbol` varchar(5), -- 元素符号 
     `unit` varchar(20) not null, -- 单位
     `value` float not null, -- 含量值
-    foreign key (`material_id`) references `material`(`id`)
+    foreign key (`material_id`) references `material`(`id`),
+    primary key (`material_id`,`symbol`)
 );
 
 -- 原料粘度简表
-create table `viscosity`(
-    `material_id` int primary key, -- 原料号（外键）
-    `tempature` float primary key, -- 温度 
+drop table if exists `viscosity_material`;
+create table `viscosity_material`(
+    `material_id` int, -- 原料号（外键）
+    `tempature` float, -- 温度 
     `value` float not null, -- 粘度值
-    foreign key (`material_id`) references `material`(`id`)
+    foreign key (`material_id`) references `material`(`id`),
+    primary key (`material_id`,`tempature`)
 );
 
 -- 原料轻烃组成表
+drop table if exists `hydrocarbon`;
 create table `hydrocarbon`(
-    `material_id` int primary key, -- 原料号（外键）
-    `name` varchar(20) primary key, -- 轻烃名称
+    `material_id` int, -- 原料号（外键）
+    `name` varchar(20), -- 轻烃名称
     `unit` varchar(20) not null, -- 单位
     `value` float not null, -- 含量值
-    foreign key (`material_id`) references `material`(`id`)
+    foreign key (`material_id`) references `material`(`id`),
+    primary key (`material_id`,`name`)
 );
 
 -- 原料性质详表
+drop table if exists `material_detail`;
 create table `material_detail`(
-    `material_id` int primary key, -- 原料号（外键）
-    `boiling_range` varchar(30) primary key, -- 沸点范围
+    `material_id` int, -- 原料号（外键）
+    `boiling_range` varchar(30), -- 沸点范围
     `yield_fraction` float, -- 每馏分收率，单位%
     `yield_total` float, -- 总收率，单位%
     `density` float, -- 密度（20℃），单位kg/m^3
@@ -102,15 +113,159 @@ create table `material_detail`(
     `refraction_v1` float, -- 在温度1下的折射率
     `refraction_t2` float, -- 温度2，用于折射率，单位℃
     `refraction_v2` float, -- 在温度2下的折射率
-    foreign key (`material_id`) references `material`(`id`)
+    foreign key (`material_id`) references `material`(`id`),
+    primary key (`material_id`,`boiling_range`)
 );
 
 -- 原料粘度详表
-create table `viscosity`(
-    `material_id` int primary key, -- 原料号（外键）
-    `boiling_range` varchar(30) primary key, -- 沸点范围（外键）
-    `tempature` float primary key, -- 温度 
+drop table if exists `viscosity_detail`;
+create table `viscosity_detail`(
+    `material_id` int, -- 原料号（外键）
+    `boiling_range` varchar(30), -- 沸点范围（外键）
+    `tempature` float, -- 温度 
     `value` float not null, -- 粘度值
-    foreign key (`material_id`) references `material_detail`(`material_id`),
-    foreign key (`boiling_range`) references `material_detail`(`boiling_range`)
+    foreign key (`material_id`,`boiling_range`) references `material_detail`(`material_id`,`boiling_range`),
+    primary key (`material_id`,`boiling_range`,`tempature`)
 );
+
+-- 塔表
+drop table if exists `tower`;
+create table `tower`(
+	`name` varchar(30), -- 名称
+    `system_id` int, -- 装置号（外键）
+    foreign key (`system_id`) references `system`(`id`),
+    primary key (`name`,`system_id`)
+); 
+
+-- 操作条件表
+drop table if exists `operation_condition`;
+create table `operation_condition`(
+	`name` varchar(30), -- 操作名称
+    `tower_name` varchar(30), -- 塔名（外键）
+    `system_id` int, -- 装置号（外键）
+    `unit` varchar(30), -- 单位
+    `value` float not null, -- 值
+    foreign key (`tower_name`,`system_id`) references `tower`(`name`,`system_id`),
+    primary key (`name`,`tower_name`)
+);
+
+-- 化学药剂表
+drop table if exists `chemical`;
+create table `chemical`(
+	`name` varchar(30), -- 药剂名称
+    `system_id` int, -- 装置号（外键）
+    `unit` varchar(30), -- 单位
+    `value` float not null, -- 值
+    `type` varchar(30), -- 类别
+    `pattern` varchar(30), -- 型号或规格
+    `transport` enum('barrel','pipe'), -- 运输方式，桶装或管道
+    `note` varchar(100), -- 备注
+    foreign key (`system_id`) references `system`(`id`),
+    primary key (`name`,`system_id`)
+);
+
+-- 三废排放表
+drop table if exists `waste`;
+create table `waste`(
+	`name` varchar(30), -- 三废名称
+    `system_id` int, -- 装置号（外键）
+    `unit` varchar(30), -- 单位
+    `value_con` float, -- 排放量
+    `value_dis` float, -- 间断排放量
+    `note` varchar(100), -- 备注
+    foreign key (`system_id`) references `system`(`id`),
+    primary key (`name`,`system_id`)
+);
+
+-- 公用工程表
+drop table if exists `publicwork`;
+create table `publicwork`(
+	`name` varchar(30), -- 三废名称
+    `system_id` int, -- 装置号（外键）
+    `unit` varchar(30), -- 单位
+    `value` float not null, -- 值
+    `note` varchar(100), -- 备注
+    foreign key (`system_id`) references `system`(`id`),
+    primary key (`name`,`system_id`)
+);
+
+-- 装置投资表
+drop table if exists `investment`;
+create table `investment`(
+	`system_id` int primary key, -- 装置号（外键） 
+    `total` float not null, -- 工程项目总投资，单位万元
+    `con_invest` float, -- 建设投资，单位万元
+    `project_cost` float, -- 工程费用，单位万元
+    `equipment_fee` float, -- 设备购置费，单位万元
+    `installation_fee` float, -- 安装工程费，单位万元
+    `construction_fee` float, -- 建筑工程费，单位万元
+    `else` float, -- 其它费用，单位万元
+    foreign key (`system_id`) references `system`(`id`)
+);
+
+-- 主要设备表
+drop table if exists `device`;
+create table `device`(
+	`type` varchar(30), -- 设备类型
+    `system_id` int, -- 装置号（外键）
+    `internal` int default 0 not null, -- 国内订货数
+    `overseas` int default 0 not null, -- 国外订货数
+	`note` varchar(100), -- 备注
+    foreign key (`system_id`) references `system`(`id`)
+);
+
+-- 产品性质表
+drop table if exists `product`;
+create table `product`(
+	`id` int auto_increment primary key, -- 产品号
+    `system_id` int, -- 装置号（外键）
+    `name` varchar(30), -- 名称
+    `density` float, -- 密度（20℃），单位kg/m^3
+    `api` float, -- 比重指数
+    `m_weight` float, -- 分子量
+    `characteristic` float, -- 特质因数
+    `acid` float, -- 酸值，单位mgKOH/g
+    `sulfur_content` float, -- 硫含量，单位wt/%
+    foreign key (`system_id`) references `system`(`id`)
+);
+
+-- 产品粘度表
+drop table if exists `viscosity_product`;
+create table `viscosity_product`(
+    `product_id` int, -- 原料号（外键）
+    `tempature` float, -- 温度 
+    `value` float not null, -- 粘度值
+    foreign key (`product_id`) references `product`(`id`),
+    primary key (`product_id`,`tempature`)
+);
+
+-- 物料表
+drop table if exists `balance_item`;
+create table `balance_item`(
+	`id` int auto_increment primary key, -- 物料号
+    `name` varchar(30) not null, -- 名称
+    `inout` enum('出方','入方') not null -- 出入方
+);
+
+-- 物料平衡表
+drop table if exists `balance`;
+create table `balance`(
+	`item_id` int, -- 物料号（外键）
+    `system_id` int, -- 装置号（外键）
+    `cutting_range` varchar(30), -- 实沸点切割范围，单位℃
+    `yield` float, -- 收率，单位m%
+    `flow` float, -- 流率，单位万吨/年
+    `note` varchar(200), -- 备注
+    foreign key (`item_id`) references `balance_item`(`id`),
+    foreign key (`system_id`) references `system`(`id`),
+    primary key (`item_id`,`system_id`)
+);
+
+
+
+
+
+
+
+
+
