@@ -1,11 +1,12 @@
 <template>
 <div>
-    <el-radio-group v-model="sizeForm">
-        <el-radio-button @click="sizeForm.show[0]=false" label="装置概况"></el-radio-button>
-        <el-radio-button label="原料性质"></el-radio-button>
+    <el-radio-group v-model="radio1">
+        <el-radio-button @click.native="changeFormShow(0)" label="装置概况"></el-radio-button>
+        <el-radio-button @click.native="changeFormShow(1)" label="原料性质"></el-radio-button>
         <el-radio-button label="产品性质"></el-radio-button>
         <el-radio-button label="物料平衡"></el-radio-button>
         <el-radio-button label="操作条件"></el-radio-button>
+        <br>
         <el-radio-button label="公用工程"></el-radio-button>
         <el-radio-button label="装置投资"></el-radio-button>
         <el-radio-button label="主要设备"></el-radio-button>
@@ -13,7 +14,7 @@
         <el-radio-button label="化学药剂"></el-radio-button>
     </el-radio-group>
     <br>
-    <el-form v-if="show[0]" ref="form" :model="sizeForm" label-width="100px" size="mini" style="margin-top: 20px">
+    <el-form v-if="this.show[0]" ref="form" :model="sizeForm" label-width="100px" size="mini" style="margin-top: 20px">
         <el-form-item label="项目名称">
             <el-input v-model="sizeForm.name"></el-input>
         </el-form-item>
@@ -53,7 +54,7 @@
             <el-button>取消</el-button>
         </el-form-item>
     </el-form>
-    <el-form v-if="show[1]" ref="form" :model="sizeForm" label-width="100px" size="mini" style="margin-top: 20px">
+    <el-form v-if="this.show[1]" ref="form" :model="sizeForm" label-width="100px" size="mini" style="margin-top: 20px">
         <el-form-item label="原料名称">
             <el-input v-model="sizeForm.name"></el-input>
         </el-form-item>
@@ -80,12 +81,12 @@
             </el-checkbox-group>
         </el-form-item>
         <el-form-item label="三废排放">
-            <el-input v-model="sizeForm.resource" size="medium" placeholder="废水">
+            <el-input v-model="sizeForm.resource[0]" size="medium" placeholder="废水">
             </el-input>
 
-            <el-input v-model="sizeForm.resource" size="medium" placeholder="废气">
+            <el-input v-model="sizeForm.resource[1]" size="medium" placeholder="废气">
             </el-input>
-            <el-input v-model="sizeForm.resource" size="medium" placeholder="废渣">
+            <el-input v-model="sizeForm.resource[2]" size="medium" placeholder="废渣">
             </el-input>
         </el-form-item>
         <el-form-item size="large">
@@ -113,7 +114,7 @@ export default {
                 date2: '',
                 delivery: false,
                 type: [],
-                resource: '',
+                resource: ['','',''],
                 desc: ''
             }
         };
@@ -122,6 +123,12 @@ export default {
         onSubmit() {
             console.log('submit!');
         },
+        changeFormShow(showFormID){
+            console.log('change showed form');
+            this.show = [false,false,false]
+            this.show[showFormID] = true;
+            console.log(this.show);
+        }
     }
 };
 </script>
