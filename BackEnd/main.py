@@ -5,6 +5,10 @@ from flask import jsonify
 from flask import make_response
 app = Flask(__name__)
 
+@app.route('/changjianya',methods = ['POST'])
+def changjianya():
+    return
+
 @app.route('/author', methods=['POST'])
 def author():
     results = getAuthor()

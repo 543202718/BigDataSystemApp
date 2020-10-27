@@ -4,7 +4,7 @@
         <div v-html="message"></div>
         <br />
         <div>
-            <button class="buttonred">
+            <button class="buttonred" v-on:click="goChangjianya">
                 <span>常减压装置</span>
             </button>
             <button class="buttonred">
@@ -40,6 +40,9 @@ export default {
         goAuthor: function() {
             this.$router.push("/author");
         },
+        goChangjianya: function(){
+            this.$router.push("/changjianya");
+        }, 
     }
 };
 </script>
