@@ -64,9 +64,7 @@
 <script>
 export default {
     name: "Index",
-    data:{
-        show : [1,0,0,0,0,0,0,0],
-    },
+
     created() {
         console.log("get here")
     },
