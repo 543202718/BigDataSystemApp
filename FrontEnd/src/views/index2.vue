@@ -15,7 +15,7 @@
                                     <span>常减压装置</span>
                                 </template>
                                 <el-menu-item-group>
-                                    <el-menu-item index="1-1" v-on:click="inputTemplate1">输入</el-menu-item>
+                                    <el-menu-item index="1-1" v-on:click="inputTemplate1" style="">输入</el-menu-item>
                                     <el-menu-item index="1-2">查询</el-menu-item>
                                     <el-menu-item index="1-3">比对</el-menu-item>
                                 </el-menu-item-group>
@@ -91,11 +91,13 @@ export default {
 }
 
 .el-aside {
-    overflow-y: auto;
+    overflow-y:hidden;
     height: 100%;
-    width: 20px;
+    width: auto;
 }
-
+.el-submenu .el-menu-item{
+    min-width: 100px;
+}
 .el-footer {
     text-align:center;
     background-color: #545c64;
