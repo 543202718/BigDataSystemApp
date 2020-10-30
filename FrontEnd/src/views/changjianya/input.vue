@@ -111,7 +111,7 @@
 <script>
 export default {
     
-     
+    
     data() {
         console.log('get here')
         return {
