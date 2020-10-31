@@ -2,7 +2,7 @@
     <div>
         <h1>项目人员</h1>
         <table border="1" align="center">
-            <tr v-for="item in items">
+            <tr v-for="item in items" :key="item">
                 <td>{{ item.identity }}</td>
                 <td>{{ item.name }}</td>
             </tr>
@@ -19,6 +19,7 @@ export default {
         };
     },
     created() {
+        console.log('start fetch data');
         this.$http
             .post(
                 "http://" + document.domain + ":5000/author",
