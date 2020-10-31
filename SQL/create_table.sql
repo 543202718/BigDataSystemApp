@@ -1,6 +1,5 @@
 use bigdata;
 -- 项目表
-drop table if exists `project`;
 create table `project`(
     `id` varchar(50) primary key,     -- 项目号
     `name` varchar(50), -- 项目名称
@@ -11,7 +10,6 @@ create table `project`(
 );
 
 -- 装置表
-drop table if exists `system`;
 create table `system`(
     `id` int auto_increment primary key, -- 自增的内部id
     `project_id` varchar(50) , -- 项目号（外键）
@@ -38,7 +36,6 @@ create table `system`(
 );
 
 -- 材料性质简表
-drop table if exists `material`;
 create table `material`(
     `id` int auto_increment primary key, -- 自增的原料号
     `system_id` int, -- 从属的装置id（外键）
@@ -64,7 +61,6 @@ create table `material`(
 );
 
 -- 原料元素含量表
-drop table if exists `element`;
 create table `element`(
     `material_id` int, -- 原料号（外键）
     `symbol` varchar(5), -- 元素符号 
@@ -75,7 +71,6 @@ create table `element`(
 );
 
 -- 原料粘度简表
-drop table if exists `viscosity_material`;
 create table `viscosity_material`(
     `material_id` int, -- 原料号（外键）
     `tempature` float, -- 温度 
@@ -85,7 +80,6 @@ create table `viscosity_material`(
 );
 
 -- 原料轻烃组成表
-drop table if exists `hydrocarbon`;
 create table `hydrocarbon`(
     `material_id` int, -- 原料号（外键）
     `name` varchar(20), -- 轻烃名称
@@ -96,7 +90,6 @@ create table `hydrocarbon`(
 );
 
 -- 原料性质详表
-drop table if exists `material_detail`;
 create table `material_detail`(
     `material_id` int, -- 原料号（外键）
     `boiling_range` varchar(30), -- 沸点范围
@@ -118,7 +111,6 @@ create table `material_detail`(
 );
 
 -- 原料粘度详表
-drop table if exists `viscosity_detail`;
 create table `viscosity_detail`(
     `material_id` int, -- 原料号（外键）
     `boiling_range` varchar(30), -- 沸点范围（外键）
@@ -128,29 +120,18 @@ create table `viscosity_detail`(
     primary key (`material_id`,`boiling_range`,`tempature`)
 );
 
--- 塔表
-drop table if exists `tower`;
-create table `tower`(
-	`name` varchar(30), -- 名称
-    `system_id` int, -- 装置号（外键）
-    foreign key (`system_id`) references `system`(`id`),
-    primary key (`name`,`system_id`)
-); 
-
 -- 操作条件表
-drop table if exists `operation_condition`;
 create table `operation_condition`(
 	`name` varchar(30), -- 操作名称
-    `tower_name` varchar(30), -- 塔名（外键）
     `system_id` int, -- 装置号（外键）
+    `tower_name` varchar(30), -- 塔名    
     `unit` varchar(30), -- 单位
     `value` float not null, -- 值
-    foreign key (`tower_name`,`system_id`) references `tower`(`name`,`system_id`),
-    primary key (`name`,`tower_name`)
+    foreign key (`system_id`) references `system`(`id`),
+    primary key (`name`,`system_id`,`tower_name`)
 );
 
 -- 化学药剂表
-drop table if exists `chemical`;
 create table `chemical`(
 	`name` varchar(30), -- 药剂名称
     `system_id` int, -- 装置号（外键）
@@ -165,7 +146,6 @@ create table `chemical`(
 );
 
 -- 三废排放表
-drop table if exists `waste`;
 create table `waste`(
 	`name` varchar(30), -- 三废名称
     `system_id` int, -- 装置号（外键）
@@ -178,7 +158,6 @@ create table `waste`(
 );
 
 -- 公用工程表
-drop table if exists `publicwork`;
 create table `publicwork`(
 	`name` varchar(30), -- 三废名称
     `system_id` int, -- 装置号（外键）
@@ -190,7 +169,6 @@ create table `publicwork`(
 );
 
 -- 装置投资表
-drop table if exists `investment`;
 create table `investment`(
 	`system_id` int primary key, -- 装置号（外键） 
     `total` float not null, -- 工程项目总投资，单位万元
@@ -204,7 +182,6 @@ create table `investment`(
 );
 
 -- 主要设备表
-drop table if exists `device`;
 create table `device`(
 	`type` varchar(30), -- 设备类型
     `system_id` int, -- 装置号（外键）
@@ -215,7 +192,6 @@ create table `device`(
 );
 
 -- 产品性质表
-drop table if exists `product`;
 create table `product`(
 	`id` int auto_increment primary key, -- 产品号
     `system_id` int, -- 装置号（外键）
@@ -230,7 +206,6 @@ create table `product`(
 );
 
 -- 产品粘度表
-drop table if exists `viscosity_product`;
 create table `viscosity_product`(
     `product_id` int, -- 原料号（外键）
     `tempature` float, -- 温度 
@@ -240,7 +215,6 @@ create table `viscosity_product`(
 );
 
 -- 物料表
-drop table if exists `balance_item`;
 create table `balance_item`(
 	`id` int auto_increment primary key, -- 物料号
     `name` varchar(30) not null, -- 名称
@@ -248,7 +222,6 @@ create table `balance_item`(
 );
 
 -- 物料平衡表
-drop table if exists `balance`;
 create table `balance`(
 	`item_id` int, -- 物料号（外键）
     `system_id` int, -- 装置号（外键）
