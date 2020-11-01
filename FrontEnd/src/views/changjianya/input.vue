@@ -147,7 +147,7 @@ export default {
     methods: {
         onSubmit() {
             console.log(this.data.deviceInfo);
-            this.$http.post('http://' + document.domain + ':5000/author', {
+            this.$http.post('http://' + document.domain + ':5000/AVDU_import', {
                 deviceInfo: this.deviceInfo,
                 //发送给后端的信息，可以按照需求增加条目
             }, {
