@@ -62,7 +62,7 @@ export default {
 
     methods: {
         inputTemplate1: function () {
-            this.$router.push("/changjianya/input");
+            this.$router.push("/AVDU/input");
         },
         handleOpen(key, keyPath) {
             console.log(key, keyPath);
