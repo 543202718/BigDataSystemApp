@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Index from "@/views/index2.vue";
+import Index from "@/views/index.vue";
 export default {
     name: "App",
     components: {
@@ -18,97 +18,16 @@ export default {
 </script>
 
 <style>
-#app {
-    font-family: "Fira Code", "汉仪南宫体简", Helvetica, Arial, sans-serif;
+
+  html, body, #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #1070cf;
-    margin-top: 0px;
-    min-height: 600px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-html {
-    height: 100%;
     margin: 0;
     padding: 0;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: repeat-y;
-    background-attachment: scroll;
-}
-
-.body {
-    display: flex;
-    flex-flow: column;
-    min-height: 70vh;
-}
-
-body .el-table th.gutter {
-    display: table-cell !important;
-}
-
-body .table {
-    border: 2px solid #429fff;
-    /* 表格边框 */
-    font-family: "汉仪南宫体简";
-    font-size: 18px;
-    border-collapse: collapse;
-    /*边框重叠 */
-    overflow-x: auto;
-    overflow-y: auto;
-}
-
-body .table tr:hover {
-    background-color: #d2e8ff;
-    /* 动态变色,IE6下无效！*/
-}
-
-body .table caption {
-    padding-top: 3px;
-    padding-bottom: 2px;
-    font: bold 1.1em;
-    color: #ff00ff;
-    background-color: #f0f7ff;
-    border: 1px solid #429fff;
-    /* 表格标题边框 */
-}
-
-body .table th {
-    border: 1px solid #429fff;
-    /* 行、列名称边框 */
-    background-color: #d2e8ff;
-    font-weight: bold;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 10px;
-    padding-right: 10px;
-    text-align: center;
-}
-
-body .table tr {
-    background-color: rgb(240, 240, 240);
-}
-
-body .table td {
-    border: 1px solid #429fff;
-    /* 单元格边框 */
-    text-align: center;
-    padding: 4px;
-}
-
-.footer {
-    font-family: "Fira Code", "汉仪南宫体简";
-    font-size: 14px;
-    color: grey;
-    text-align: center;
-    height: 40px;
+    height: 100%;
     width: 100%;
-    /*展开footer宽度*/
-}
+    background-color: #324057;
+  }
 </style>
