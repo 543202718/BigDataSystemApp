@@ -25,6 +25,23 @@ def author():
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
 
+@app.route('/AVDU_import', methods=['POST'])
+def AVDU_import():
+    deviceInfo=request.form['deviceInfo']
+    print(deviceInfo['name'])
+
+    response = make_response(
+        jsonify(
+            {
+                'code': 200                
+            }
+        )
+    )
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
+    response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
+    return response
+
 
 def getAuthor():
     # 打开数据库连接
