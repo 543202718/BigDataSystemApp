@@ -18,11 +18,14 @@
     <!--装置概况-->
     <el-form v-if="this.show[0]" ref="form" :model="deviceInfo" label-width="100px" size="mini" style="margin-top: 20px">
         <el-form-item label="项目名称">
-            <el-input v-model="deviceInfo.name" placeholder = "例：xx科技有限公司1000万吨/年的炼油化工一体项目"></el-input>
+            <el-input v-model="deviceInfo.name" placeholder="例：xx科技有限公司1000万吨/年的炼油化工一体项目"></el-input>
         </el-form-item>
         <el-form-item label="项目描述">
             <el-input v-model="deviceInfo.describe" placeholder="例：xx科技有限公司炼油化工一体项目100万吨/年常减压蒸馏装置">
             </el-input>
+        </el-form-item>
+        <el-form-item label="项目号">
+            <el-input v-model="deviceInfo.id" placeholder="例：20200101"></el-input>
         </el-form-item>
         <el-form-item label="设计完成时间">
             <el-col :span="11">
@@ -33,7 +36,7 @@
                 <el-time-picker placeholder="选择时间" v-model="deviceInfo.date2" style="width: 100%;"></el-time-picker>
             </el-col>
         </el-form-item>
-        
+
         <el-form-item label="装置类别">
             <el-checkbox-group v-model="deviceInfo.deviceType">
                 <el-checkbox-button label="炼油装置（燃料油）" name="type"></el-checkbox-button>
@@ -56,8 +59,7 @@
             <el-button>取消</el-button>
         </el-form-item>
 
-
-<!--原料性质-->
+        <!--原料性质-->
 
     </el-form>
     <el-form v-if="this.show[1]" ref="form" :model="sizeForm" label-width="100px" size="mini" style="margin-top: 20px">
@@ -66,13 +68,13 @@
         </el-form-item>
         <el-form-item :inline="true" label="原料密度">
             <el-col :span="5">
-            <el-input v-model="sizeForm.name" placeholder="例：沙轻和科威特混合原油"></el-input>
+                <el-input v-model="sizeForm.name" placeholder="例：沙轻和科威特混合原油"></el-input>
             </el-col>
             <el-col :span="5">
                 <el-select v-on="sizeForm.unit" placeholder="请选择单位">
-                <el-option label="g/m^3" value="g/m^3"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
-    </el-select>
+                    <el-option label="g/m^3" value="g/m^3"></el-option>
+                    <el-option label="区域二" value="beijing"></el-option>
+                </el-select>
             </el-col>
         </el-form-item>
         <el-form-item label="设计完成时间">
@@ -110,20 +112,23 @@
 
 <script>
 export default {
-    
-    
+
     data() {
         console.log('get here')
         return {
             show: [true, false, false],
             radio1: '装置概况',
-            deviceInfo:{
-                name:'',
-                describe:'',
-                startTime:'',
-                endTime:'',
-                deviceType:'',
+            deviceInfo: {
+                id: '',
+                name: '',
+                describe: '',
+                place: '',
+                owner: '',
+                owner_doc_no: '',
 
+                startTime: '',
+                endTime: '',
+                deviceType: '',
 
             },
             sizeForm: {
@@ -131,21 +136,33 @@ export default {
                 describe: '',
                 date1: '',
                 date2: '',
-                unit:'',
+                unit: '',
                 delivery: false,
                 type: [],
-                resource: ['','',''],
+                resource: ['', '', ''],
                 desc: ''
             }
         };
     },
     methods: {
         onSubmit() {
+            console.log(this.data.deviceInfo);
+            this.$http.post('http://' + document.domain + ':5000/AVDU_import', {
+                deviceInfo: this.deviceInfo,
+                //发送给后端的信息，可以按照需求增加条目
+            }, {
+                emulateJSON: true //必需，否则可能会json解析出错
+            }).then(function (response) {
+                //response.body是报文的主体内容
+                if (parseInt(response.body.code) === 200) {
+                    
+                }
+            })
             console.log('submit!');
         },
-        changeFormShow(showFormID){
+        changeFormShow(showFormID) {
             console.log('change showed form');
-            this.show = [false,false,false]
+            this.show = [false, false, false]
             this.show[showFormID] = true;
             console.log(this.show);
         }
