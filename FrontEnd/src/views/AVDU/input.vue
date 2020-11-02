@@ -19,7 +19,7 @@
     <router-view></router-view>
     <el-form v-if="this.show[0]" ref="form" :model="deviceInfo" label-width="100px" size="mini" style="margin-top: 20px">
         <el-form-item label="项目名称">
-            <el-input v-model="deviceInfo.system_name" placeholder="例：xx科技有限公司1000万吨/年的炼油化工一体项目"></el-input>
+            <el-input v-model="deviceInfo.project_name" placeholder="例：xx科技有限公司1000万吨/年的炼油化工一体项目"></el-input>
         </el-form-item>
         <el-form-item label="项目描述">
             <el-input v-model="deviceInfo.description" placeholder="例：xx科技有限公司炼油化工一体项目100万吨/年常减压蒸馏装置">
@@ -31,39 +31,41 @@
         <el-form-item label="建设地点">
             <el-input v-model="deviceInfo.place" placeholder="例：某地"></el-input>
         </el-form-item>
+        <el-form-item label="业主单位">
+            <el-input v-model="deviceInfo.owner" placeholder="例：xx科技有限公司">
+            </el-input>
+        </el-form-item>
         <el-form-item label="业主文件号">
             <el-input v-model="deviceInfo.owner_doc_no"></el-input>
         </el-form-item>
-
-        <el-form-item label="业主单位">
-            <el-input v-model="deviceInfo.describe" placeholder="例：xx科技有限公司">
-            </el-input>
-        </el-form-item>
+        <el-form-item label="装置号">
+            <el-input v-model="deviceInfo.system_id"></el-input>
+        </el-form-item>    
+        <el-form-item label="装置名称">
+            <el-input v-model="deviceInfo.system_name" placeholder="例：20200101"></el-input>
+        </el-form-item>    
+        <el-form-item label="装置类别" style="text-align:left">
+            <el-select v-model="deviceInfo.system_type" filterable allow-create>
+                <el-option label="炼油装置（燃料油）" value="炼油装置（燃料油）" ></el-option>
+                <el-option label="炼油装置（润滑油）" value="炼油装置（润滑油）"></el-option>
+                <el-option label="化工装置" value="化工装置"></el-option>
+                <el-option label="炼油化工一体化装置" value="炼油化工一体化装置"></el-option>
+            </el-select>
+        </el-form-item>    
+        <el-form-item label="装置性质" style="text-align:left">
+            <el-radio-group v-model="deviceInfo.property">
+                <el-radio-button label="新建"></el-radio-button>
+                <el-radio-button label="改扩建"></el-radio-button>
+            </el-radio-group>
+        </el-form-item>      
         <el-form-item label="设计单位">
-            <el-input v-model="deviceInfo.describe" placeholder="例：SEI">
+            <el-input v-model="deviceInfo.designer" placeholder="例：SEI">
             </el-input>
         </el-form-item>
         <el-form-item label="设计完成时间">
             <el-col :span="11">
-                <el-date-picker type="date" placeholder="选择日期" v-model="deviceInfo.date1" style="width: 100%;"></el-date-picker>
+                <el-date-picker type="date" placeholder="选择日期" v-model="deviceInfo.design_time" style="width: 100%;"></el-date-picker>
             </el-col>
-            <el-col class="line" :span="2">-</el-col>
-            <el-col :span="11">
-                <el-time-picker placeholder="选择时间" v-model="deviceInfo.date2" style="width: 100%;"></el-time-picker>
-            </el-col>
-        </el-form-item>
-
-        <el-form-item label="装置名称">
-            <el-input v-model="deviceInfo.device_name" placeholder="例：20200101"></el-input>
-        </el-form-item>
-        <el-form-item label="装置类别" style="text-align:left">
-            <el-radio-group v-model="deviceInfo.deviceType">
-                <el-radio-button label="炼油装置（燃料油）"></el-radio-button>
-                <el-radio-button label="炼油装置（润滑油）"></el-radio-button>
-                <el-radio-button label="化工装置"></el-radio-button>
-                <el-radio-button label="炼油化工一体化装置"></el-radio-button>
-                <el-radio-button label="其它"></el-radio-button>
-            </el-radio-group>
         </el-form-item>
         <el-form-item label="设计阶段" style="text-align:left">
             <el-radio-group v-model="deviceInfo.design_stage">
@@ -91,13 +93,12 @@
             <el-input v-model="deviceInfo.flexibility" placeholder="单位：%"></el-input>
         </el-form-item>
         <el-form-item label="工艺类型" style="text-align:left">
-            <el-radio-group v-model="deviceInfo.process_type">
-                <el-radio-button label="单常压装置"></el-radio-button>
-                <el-radio-button label="单减压装置"></el-radio-button>
-                <el-radio-button label="常减压装置"></el-radio-button>
-                <el-radio-button label="双减压装置"></el-radio-button>
-                <el-radio-button label="其他"></el-radio-button>
-            </el-radio-group>
+            <el-select v-model="deviceInfo.process_type" filterable allow-create>
+                <el-option label="单常压装置" value="单常压装置" ></el-option>
+                <el-option label="单减压装置" value="单减压装置"></el-option>
+                <el-option label="常减压装置" value="常减压装置"></el-option>
+                <el-option label="双减压装置" value="双减压装置"></el-option>
+            </el-select>
         </el-form-item>
 
         <el-form-item label="专利商">
@@ -143,16 +144,17 @@ export default {
             radio2: '化工装置',
             deviceInfo: {
                 id: '',
-                system_name: '',
+                project_name: '',
                 description: '',
                 place: '',
                 owner: '',
                 owner_doc_no: '',
-                device_name: '',
-                startTime: '',
-                endTime: '',
-                deviceType: '其它',
-                property: '',
+                system_id:'',                
+                system_name: '',
+                system_type: '炼油装置（燃料油）',
+                designer:'',
+                design_time: '',               
+                property: '新建',
                 design_stage: '可行性研究',
                 scale: '',
                 set: '1',
@@ -176,8 +178,33 @@ export default {
             console.log("change to system input");
             this.$router.push("/AVDU/system");
         },
+        dateFormat(fmt, date) {
+            let ret;
+            const opt = {
+                "Y+": date.getFullYear().toString(),        // 年
+                "m+": (date.getMonth() + 1).toString(),     // 月
+                "d+": date.getDate().toString(),            // 日
+                "H+": date.getHours().toString(),           // 时
+                "M+": date.getMinutes().toString(),         // 分
+                "S+": date.getSeconds().toString()          // 秒
+                // 有其他格式化字符需求可以继续添加，必须转化成字符串
+            };
+            for (let k in opt) {
+                ret = new RegExp("(" + k + ")").exec(fmt);
+                if (ret) {
+                    fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+                };
+            };
+            return fmt;
+        },
         onSubmit() {
             console.log(this.deviceInfo);
+            if (this.deviceInfo.design_time instanceof Date){
+                this.deviceInfo.design_time=this.dateFormat("YYYY-mm-dd",this.deviceInfo.design_time);//格式化日期，否则传到后端会出错
+            }
+            else{
+                this.deviceInfo.design_time="";
+            }
             this.$http
                 .post('http://' + document.domain + ':5000/AVDU_import', {
                     deviceInfo: this.deviceInfo,
@@ -187,7 +214,19 @@ export default {
                 }).then(function (response) {
                     //response.body是报文的主体内容
                     if (parseInt(response.body.code) === 200) {
-
+                        this.$message({
+                            message: '创建成功',
+                            type: 'success',
+                            duration: 3000,
+                            showClose: true
+                        });
+                    }else{
+                        this.$message({
+                            message: '创建失败，请检查您的输入',
+                            type: 'error',
+                            duration: 3000,
+                            showClose: true
+                        });
                     }
                 })
             console.log('submit!');
