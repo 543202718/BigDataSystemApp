@@ -23,7 +23,7 @@ create table `system`(
     `scale` int, -- 装置规模，单位万吨/年
     `set` int, -- 装置系列
     `work_hour` int, -- 年开工时，单位小时
-    `flexibility` float, -- 操作弹性，单位%
+    `flexibility` varchar(30), -- 操作弹性，单位%
     `process_type` varchar(30), -- 工艺类型
     `patentee` varchar(50), -- 专利商
     `field` text, -- 装置范围
