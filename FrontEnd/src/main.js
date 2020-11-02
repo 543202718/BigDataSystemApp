@@ -14,13 +14,14 @@ import VueResource from 'vue-resource'
 import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-
+import Vuex from 'vuex'
 Vue.use(VueElementExtends)
 Vue.use(Elements)
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(VCharts)
 Vue.use(ElementUI);
+Vue.use(Vuex);
 
 const router = new VueRouter({
     mode: 'history',
