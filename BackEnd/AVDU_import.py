@@ -12,6 +12,7 @@ def AVDU_import():
     dict = request.values.to_dict()
     # print(dict)
     code = insert(dict)
+    print("AVDU_import return code = %d" %(code))
     response = make_response(
         jsonify(
             {
@@ -42,13 +43,21 @@ def insert(dict):
         cursor.execute(sql, values)
         # 提交sql更新
         db.commit()
-    except:
+    except Exception as err:
         # 发生错误时回滚
+        print(err)
         db.rollback()
         code = 400
     # 关闭数据库连接
     db.close()
     return code
+
+# 将空字符串转化为null
+def processEmptyString(s):
+    if s=="":
+        return null
+    else:
+        return s
 
 
 # Tips:
@@ -79,9 +88,9 @@ def system(dict):
         '%s', '%s', '%s', %s, %s, \
         %s, %s, '%s', '%s', '%s', \
         '%s', %s, %s, %s)"
-    values = [dict['deviceInfo[project_id]'], dict['deviceInfo[system_id]'], dict['deviceInfo[type]'],
+    values = [dict['deviceInfo[id]'], dict['deviceInfo[system_id]'], dict['deviceInfo[type]'],
               dict['deviceInfo[designer]'], dict['deviceInfo[design_time]'],  # 第一行
-              dict['deviceInfo[name]'], dict['deviceInfo[property]'], dict['deviceInfo[design_stage]'],
+              dict['deviceInfo[system_name]'], dict['deviceInfo[property]'], dict['deviceInfo[design_stage]'],
               dict['deviceInfo[scale]'], dict['deviceInfo[set]'],  # 第二行
               dict['deviceInfo[work_hour]'], dict['deviceInfo[flexibility]'], dict['deviceInfo[process_type]'],
               dict['deviceInfo[patentee]'], dict['deviceInfo[field]'],  # 第三行

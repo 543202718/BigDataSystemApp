@@ -14,7 +14,7 @@ create table `system`(
     `id` int auto_increment primary key, -- 自增的内部id
     `project_id` varchar(50) , -- 项目号（外键）
     `system_id` varchar(50), -- 装置号
-    `type` enum('炼油装置（燃料油）','炼油装置（润滑油）','化工装置','炼油化工一体化装置','其它') not null, -- 装置类型
+    `type` varchar(30) not null, -- 装置类型
     `designer` varchar(50), -- 设计单位
     `design_time` date, -- 设计完成时间
     `name` varchar(50), -- 装置名称
@@ -24,7 +24,7 @@ create table `system`(
     `set` int, -- 装置系列
     `work_hour` int, -- 年开工时，单位小时
     `flexibility` float, -- 操作弹性，单位%
-    `process_type` enum('单常压装置','单减压装置','常减压装置','双减压装置','其它'), -- 工艺类型
+    `process_type` varchar(30), -- 工艺类型
     `patentee` varchar(50), -- 专利商
     `field` text, -- 装置范围
     `technical_route` text, -- 工艺技术路线
