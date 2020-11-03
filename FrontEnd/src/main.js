@@ -22,6 +22,7 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(VCharts)
 Vue.use(ElementUI);
+Vue.use(store)
 
 const router = new VueRouter({
     mode: 'history',
