@@ -14,6 +14,7 @@ import VueResource from 'vue-resource'
 import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import store from './store/store.js'
 
 Vue.use(VueElementExtends)
 Vue.use(Elements)
@@ -34,6 +35,7 @@ new Vue({ /* Vue实例化 */
     el: '#app',
     /* 将所有视图放在id值为app这个dom元素中 */
     router,
+    store,
     /* 表明引入的文件，即上述的App.vue文件，这个文件的内容将以<App/>这样的标签写进去#app中 */
     components: { App },
     /* 告知当前页面想使用App这个组件 */
