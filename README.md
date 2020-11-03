@@ -41,7 +41,9 @@
     > cnpm install -g vue  
     > cnpm install -g vue-cli
   + 下载elementUI
-    > npm i element-ui -S
+    > npm install element-ui -S
+  + 下载vuex
+    > npm install vuex --save
 ### Chrome浏览器
 + 版本：83.0.4103.97
 + 下载地址：https://www.google.cn/chrome/
