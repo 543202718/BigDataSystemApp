@@ -30,7 +30,7 @@ def insert(dict):
     code = 200
     # 打开数据库连接
     db = pymysql.connect(host="localhost", user="root",
-                         password="123456", db="bigdata",
+                         password="", db="bigdata",
                          charset='utf8', cursorclass=pymysql.cursors.DictCursor)
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
@@ -94,12 +94,12 @@ def tostring(s):
 def project(dict):
     sql = "insert into `project` (`id`, `name`, `description`, `place`, `owner`, `owner_doc_no`) \
         values (%s, %s, %s, %s, %s, %s)"
-    values = [tostring(dict['deviceInfo[id]']),
-              tostring(dict['deviceInfo[project_name]']),
-              tostring(dict['deviceInfo[description]']),
-              tostring(dict['deviceInfo[place]']),
-              tostring(dict['deviceInfo[owner]']),
-              tostring(dict['deviceInfo[owner_doc_no]'])]
+    values = [tostring(dict['systemInfo[id]']),
+              tostring(dict['systemInfo[project_name]']),
+              tostring(dict['systemInfo[description]']),
+              tostring(dict['systemInfo[place]']),
+              tostring(dict['systemInfo[owner]']),
+              tostring(dict['systemInfo[owner_doc_no]'])]
     return sql, values
 
 
@@ -113,23 +113,23 @@ def system(dict):
         %s, %s, %s, %s, %s, \
         %s, %s, %s, %s, %s, \
         %s, %s, %s, %s)"
-    values = [tostring(dict['deviceInfo[id]']),
-              tostring(dict['deviceInfo[system_id]']),
-              tostring(dict['deviceInfo[system_type]']),
-              tostring(dict['deviceInfo[designer]']),
-              tostring(dict['deviceInfo[design_time]']),  # 第一行
-              tostring(dict['deviceInfo[system_name]']),
-              tostring(dict['deviceInfo[property]']),
-              tostring(dict['deviceInfo[design_stage]']),
-              toint(dict['deviceInfo[scale]']),
-              toint(dict['deviceInfo[set]']),  # 第二行
-              toint(dict['deviceInfo[work_hour]']),
-              tostring(dict['deviceInfo[flexibility]']),
-              tostring(dict['deviceInfo[process_type]']),
-              tostring(dict['deviceInfo[patentee]']),
-              tostring(dict['deviceInfo[field]']),  # 第三行
-              tostring(dict['deviceInfo[technical_route]']),
-              toint(dict['deviceInfo[area]']),
-              toint(dict['deviceInfo[population]']),
-              tofloat(dict['deviceInfo[energy]'])]
+    values = [tostring(dict['systemInfo[id]']),
+              tostring(dict['systemInfo[system_id]']),
+              tostring(dict['systemInfo[system_type]']),
+              tostring(dict['systemInfo[designer]']),
+              tostring(dict['systemInfo[design_time]']),  # 第一行
+              tostring(dict['systemInfo[system_name]']),
+              tostring(dict['systemInfo[property]']),
+              tostring(dict['systemInfo[design_stage]']),
+              toint(dict['systemInfo[scale]']),
+              toint(dict['systemInfo[set]']),  # 第二行
+              toint(dict['systemInfo[work_hour]']),
+              tostring(dict['systemInfo[flexibility]']),
+              tostring(dict['systemInfo[process_type]']),
+              tostring(dict['systemInfo[patentee]']),
+              tostring(dict['systemInfo[field]']),  # 第三行
+              tostring(dict['systemInfo[technical_route]']),
+              toint(dict['systemInfo[area]']),
+              toint(dict['systemInfo[population]']),
+              tofloat(dict['systemInfo[energy]'])]
     return sql, values
