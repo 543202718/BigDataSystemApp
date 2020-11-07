@@ -30,7 +30,7 @@ def insert(dict):
     code = 200
     # 打开数据库连接
     db = pymysql.connect(host="localhost", user="root",
-                         password="", db="bigdata",
+                         password="123456", db="bigdata",
                          charset='utf8', cursorclass=pymysql.cursors.DictCursor)
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()

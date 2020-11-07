@@ -14,6 +14,7 @@ import operation_condition from '@/views/AVDU/operation_condition.vue'
 import product from '@/views/AVDU/product.vue'
 import public_work from '@/views/AVDU/public_work.vue'
 import waste from '@/views/AVDU/waste.vue'
+import search from '@/views/AVDU/search.vue'
 const routers = [{
         path: '/',
         name: 'Index',
@@ -53,8 +54,11 @@ const routers = [{
                     path: '/AVDU/waste',
                     component: waste,
                 },
-            ]
-        }, ]
+                ]
+        },{
+            path: '/AVDU/search',
+            component: search,
+        } ]
     },
     {
         path: '/author',
