@@ -176,7 +176,6 @@ export default {
                 cyclopentane:'',
             },
         };
-
     },
 
     created: function () {

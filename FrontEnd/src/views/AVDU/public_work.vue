@@ -1,6 +1,5 @@
 <template>
 <div id="hello">
-    <h4 style="display: inline-block;margin:0;">测试表</h4>
     <div style="display: inline-block;float: right;">
         <el-button size="mini" type="primary" @click="consoleDatas">打印数据</el-button>
         <el-button size="mini" type="primary" @click="addRow">增加行</el-button>
@@ -15,7 +14,6 @@
             <template slot="header" slot-scope="scope1">
                 <p v-show="column.show" @dblclick="column.show=false">
                     {{column.txt}}
-                    <i class="el-icon-edit-outline" @click="column.show=false"></i>
                 </p>
                 <el-input size="mini" v-show="!column.show" v-model="column.txt" @blur="column.show=true">
                 </el-input>

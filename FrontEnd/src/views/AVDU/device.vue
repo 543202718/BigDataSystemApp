@@ -1,6 +1,5 @@
 <template>
 <div id="hello">
-    <h4 style="display: inline-block;margin:0;">测试表</h4>
     <div style="display: inline-block;float: right;">
         <el-button size="mini" type="primary" @click="consoleDatas">打印数据</el-button>
         <el-button size="mini" type="primary" @click="addRow">增加行</el-button>
@@ -15,7 +14,6 @@
             <template slot="header" slot-scope="scope1">
                 <p v-show="column.show" @dblclick="column.show=false">
                     {{column.txt}}
-                    <i class="el-icon-edit-outline" @click="column.show=false"></i>
                 </p>
                 <el-input size="mini" v-show="!column.show" v-model="column.txt" @blur="column.show=true">
                 </el-input>
@@ -31,81 +29,241 @@
             </template>
         </el-table-column>
     </el-table>
-
+<el-button type="primary" @click="addToStore">暂存此页</el-button>
 
 </div>
+        
 </template>
 
 <script>
 export default {
     data() {
         return {
-            testCols: [
-                { col: "type", txt: '项目', show: true },
-                { col: "internal", txt: '国内订货/台数', show: true },
-                { col: "overseas", txt: '国外订货/台数', show: true },
-                { col: "note", txt: '备注', show: true }
+            testCols: [{
+                    col: "type",
+                    txt: '项目',
+                    show: true
+                },
+                {
+                    col: "internal",
+                    txt: '国内订货/台数',
+                    show: true
+                },
+                {
+                    col: "overseas",
+                    txt: '国外订货/台数',
+                    show: true
+                },
+                {
+                    col: "note",
+                    txt: '备注',
+                    show: true
+                }
             ],
             testDatas: [{
-                type: { content: '塔器', show: true },
-                internal: { content: '', show: true },
-                overseas: { content: '', show: true },
-                note: { content: '', show: true }
+                type: {
+                    content: '塔器',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
             }, {
-                type: { content: '冷换设备', show: true },
-                internal: { content: '', show: true },
-                overseas: { content: '', show: true },
-                note: { content: '', show: true }
-            },{
-                type: { content: '空冷器', show: true },
-                internal: { content: '', show: true },
-                overseas: { content: '', show: true },
-                note: { content: '', show: true }
-            },{
-                type: { content: '容器', show: true },
-                internal: { content: '', show: true },
-                overseas: { content: '', show: true },
-                note: { content: '', show: true }
-            },{
-                type: { content: '机泵', show: true },
-                internal: { content: '', show: true },
-                overseas: { content: '', show: true },
-                note: { content: '', show: true }
-            },{
-                type: { content: '其他机械设备', show: true },
-                internal: { content: '', show: true },
-                overseas: { content: '', show: true },
-                note: { content: '', show: true }
-            },{
-                type: { content: '加热炉', show: true },
-                internal: { content: '', show: true },
-                overseas: { content: '', show: true },
-                note: { content: '', show: true }
-            },{
-                type: { content: '热工设备', show: true },
-                internal: { content: '', show: true },
-                overseas: { content: '', show: true },
-                note: { content: '', show: true }
-            },{
-                type: { content: '压缩机', show: true },
-                internal: { content: '', show: true },
-                overseas: { content: '', show: true },
-                note: { content: '', show: true }
-            },{
-                type: { content: '电脱盐成套设备', show: true },
-                internal: { content: '', show: true },
-                overseas: { content: '', show: true },
-                note: { content: '', show: true }
-            },{
-                type: { content: '机械抽空器', show: true },
-                internal: { content: '', show: true },
-                overseas: { content: '', show: true },
-                note: { content: '', show: true }
-            },{
-                type: { content: '其它', show: true },
-                internal: { content: '', show: true },
-                overseas: { content: '', show: true },
-                note: { content: '', show: true }
+                type: {
+                    content: '冷换设备',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
+                    content: '空冷器',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
+                    content: '容器',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
+                    content: '机泵',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
+                    content: '其他机械设备',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
+                    content: '加热炉',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
+                    content: '热工设备',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
+                    content: '压缩机',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
+                    content: '电脱盐成套设备',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
+                    content: '机械抽空器',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
+                    content: '其它',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
             }],
             count_col: 0,
             showMenu: false,
@@ -119,6 +277,13 @@ export default {
         console.log("turn to system page");
     },
     methods: {
+        addToStore: function () {
+            this.$store.deviceInfo.tableCols = this.testCols;//表头
+            this.$store.deviceInfo.tableDatas = this.testDatas;//表内容
+            console.log('store deviceInfo to device');
+            console.log(this.$store.deviceInfo);
+        },
+
         colRightClick(column, event) {
             window.event.returnoverseas = false; //阻止浏览器自带的右键菜单弹出
             if (!column.index && column.index !== 0) return;
@@ -136,7 +301,10 @@ export default {
             this.showMenu = false
             var obj = {}
             this.testCols.map(p => {
-                obj[p.col] = { content: '', show: true }
+                obj[p.col] = {
+                    content: '',
+                    show: true
+                }
             })
             this.testDatas.push(obj)
         },
