@@ -41,6 +41,9 @@ def insert(dict):
         # 将数据插入system表
         sql, values = system(dict)
         cursor.execute(sql, values)
+        # 将数据插入investment表
+        sql, values = investment(dict)
+        cursor.execute(sql, values)
         # 提交sql更新
         db.commit()
     except Exception as err:
@@ -133,3 +136,10 @@ def system(dict):
               toint(dict['systemInfo[population]']),
               tofloat(dict['systemInfo[energy]'])]
     return sql, values
+
+# 生成将数据插入investment表的SQL语句
+def investment(dict):
+    # ToDO: 仿照project表完成即可
+
+
+
