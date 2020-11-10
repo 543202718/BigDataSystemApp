@@ -2,25 +2,24 @@
 <div>
     <el-radio-group v-model="radio1">
         <el-radio-button @click.native="toSystem" label="装置概况"></el-radio-button>
-        <el-radio-button label="原料性质"></el-radio-button>
-        <el-radio-button label="产品性质"></el-radio-button>
-        <el-radio-button label="物料平衡"></el-radio-button>
-        <el-radio-button label="操作条件"></el-radio-button>
+        <el-radio-button @click.native="toMaterial" label="原料性质"></el-radio-button>
+        <el-radio-button @click.native="toProduct" label="产品性质"></el-radio-button>
+        <el-radio-button @click.native="toBalance" label="物料平衡"></el-radio-button>
+        <el-radio-button @click.native="toOperationCondition" label="操作条件"></el-radio-button>
         <br>
-        <el-radio-button label="公用工程"></el-radio-button>
-        <el-radio-button label="装置投资"></el-radio-button>
-        <el-radio-button label="主要设备"></el-radio-button>
-        <el-radio-button label="三废排放"></el-radio-button>
-        <el-radio-button label="化学药剂"></el-radio-button>
-    </el-radio-group>  
-    
-          <el-button type="primary" @click="onSubmit">立即创建</el-button>
+        <el-radio-button @click.native="toPublicWork" label="公用工程"></el-radio-button>
+        <el-radio-button @click.native="toInvestment" label="装置投资"></el-radio-button>
+        <el-radio-button @click.native="toDevice" label="主要设备"></el-radio-button>
+        <el-radio-button @click.native="toWaste" label="三废排放"></el-radio-button>
+        <el-radio-button @click.native="toChemical" label="化学药剂"></el-radio-button>
+    </el-radio-group>
+
+    <el-button type="primary" @click="onSubmit">立即创建</el-button>
 
     <br>
 
- 
     <router-view></router-view>
-<!--
+    <!--
     <el-form v-if='false' ref="form" :model="systemInfo" label-width="100px" size="mini" style="margin-top: 20px">
         <el-form-item label="项目名称">
             <el-input v-model="systemInfo.project_name" placeholder="例：xx科技有限公司1000万吨/年的炼油化工一体项目"></el-input>
@@ -179,6 +178,42 @@ export default {
             console.log("turn to system page, from input");
             this.$router.push("/AVDU/system");
         },
+        toMaterial() {
+            console.log("turn to system page, from input");
+            this.$router.push("/AVDU/material");
+        },
+        toBalance() {
+            console.log("turn to system page, from input");
+            this.$router.push("/AVDU/balance");
+        },
+        toDevice() {
+            console.log("turn to system page, from input");
+            this.$router.push("/AVDU/device");
+        },
+        toChemical() {
+            console.log("turn to system page, from input");
+            this.$router.push("/AVDU/chemical");
+        },
+        toInvestment() {
+            console.log("turn to system page, from input");
+            this.$router.push("/AVDU/investment");
+        },
+        toOperationCondition() {
+            console.log("turn to system page, from input");
+            this.$router.push("/AVDU/operation_condition");
+        },
+        toProduct() {
+            console.log("turn to system page, from input");
+            this.$router.push("/AVDU/product");
+        },
+        toPublicWork() {
+            console.log("turn to system page, from input");
+            this.$router.push("/AVDU/public_work");
+        },
+        toWaste() {
+            console.log("turn to system page, from input");
+            this.$router.push("/AVDU/waste");
+        },
         dateFormat(fmt, date) {
             let ret;
             const opt = {
@@ -199,7 +234,7 @@ export default {
             return fmt;
         },
         onSubmit() {
-            
+
             this.systemInfo = this.$store.systemInfo;
             console.log(this.systemInfo);
             if (this.systemInfo.design_time instanceof Date) {

@@ -12,8 +12,8 @@
                         <span>常减压装置</span>
                     </template>
                     <el-menu-item-group>
-                        <el-menu-item index="1-1" v-on:click="inputTemplate1">输入</el-menu-item>
-                        <el-menu-item index="1-2">查询</el-menu-item>
+                        <el-menu-item index="1-1" @click="inputTemplate1('/AVDU/input')" >输入</el-menu-item>
+                        <el-menu-item index="1-2" @click="inputTemplate1('/AVDU/search')" >查询</el-menu-item>
                         <el-menu-item index="1-3">比对</el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
@@ -61,8 +61,8 @@ export default {
     },
 
     methods: {
-        inputTemplate1: function () {
-            this.$router.push("/AVDU/input");
+        inputTemplate1(path) {
+            this.$router.push(path);
         },
         handleOpen(key, keyPath) {
             console.log(key, keyPath);

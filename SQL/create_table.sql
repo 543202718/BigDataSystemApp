@@ -43,7 +43,7 @@ create table `material`(
     `density` float not null, -- 密度（20℃），单位kg/m^3
     `api` float, -- 比重指数API
     `solidifying` float, -- 凝点，单位℃
-    `acid` float, -- 酸值，单位mgKOH/g
+    `acid` float not null, -- 酸值，单位mgKOH/g
     `flash_open` float, -- 闪点（开口），单位℃
     `flash_close` float, -- 闪点（闭口），单位℃
     `ash` float, -- 灰分，单位%(m/m)
