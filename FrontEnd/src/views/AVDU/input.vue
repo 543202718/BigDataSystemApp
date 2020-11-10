@@ -244,7 +244,7 @@ export default {
             } else {
                 this.systemInfo.design_time = "";
             }
-            this.$http
+            this.$axios
                 .post('http://' + document.domain + ':5000/AVDU_import', {
                     systemInfo: systemInfo,
                     deviceInfo: deviceInfo,
