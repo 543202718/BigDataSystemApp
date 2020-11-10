@@ -278,10 +278,14 @@ export default {
     },
     methods: {
         addToStore: function () {
+            this.$store.deviceInfo={
+                tableCols:null,
+                tableDatas:null
+            };
             this.$store.deviceInfo.tableCols = this.testCols;//表头
             this.$store.deviceInfo.tableDatas = this.testDatas;//表内容
             console.log('store deviceInfo to device');
-            console.log(this.$store.deviceInfo);
+            console.log(this.$store.deviceInfo.tableCols);
         },
 
         colRightClick(column, event) {
