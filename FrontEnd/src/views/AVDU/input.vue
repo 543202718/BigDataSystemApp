@@ -235,16 +235,19 @@ export default {
         },
         onSubmit() {
 
-            this.systemInfo = this.$store.systemInfo;
+            var systemInfo = this.$store.systemInfo;
+            var deviceInfo = this.$store.deviceInfo;
+            console.log(deviceInfo);
             console.log(this.systemInfo);
             if (this.systemInfo.design_time instanceof Date) {
                 this.systemInfo.design_time = this.dateFormat("YYYY-mm-dd", this.systemInfo.design_time); //格式化日期，否则传到后端会出错
             } else {
                 this.systemInfo.design_time = "";
             }
-            this.$http
+            this.$axios
                 .post('http://' + document.domain + ':5000/AVDU_import', {
-                    systemInfo: this.systemInfo,
+                    systemInfo: systemInfo,
+                    deviceInfo: deviceInfo,
                     //发送给后端的信息，可以按照需求增加条目
                 }, {
                     emulateJSON: true //必需，否则可能会json解析出错
