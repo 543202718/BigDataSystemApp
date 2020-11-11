@@ -53,9 +53,26 @@ def insert(dict):
         for item in dict['deviceInfo']['tableDatas']:
             sql, values = device(item)
             cursor.execute(sql, values)
+        # 将数据插入operation_condition表
+        # print(dict['operation_conditionInfo'])
+        handle_operation_condition(dict['operation_conditionInfo'], cursor)
+
         # 将数据插入investment表
         # sql, values = investment(dict)
         # cursor.execute(sql, values)
+
+        # 将数据插入publicwork表
+        # sql, values = publicwork(dict)
+        # cursor.execute(sql, values)
+
+        # 将数据插入waste表
+        # sql, values = waste(dict)
+        # cursor.execute(sql, values)
+
+        # 将数据插入chemical表
+        # sql, values = chemical(dict)
+        # cursor.execute(sql, values)
+
         # 提交sql更新
         db.commit()
     except Exception as err:
@@ -66,6 +83,50 @@ def insert(dict):
     # 关闭数据库连接
     db.close()
     return code
+
+
+# 处理操作条件的输入
+def handle_operation_condition(dict, cursor):
+    map = {}
+    for item in dict['tableCols']:
+        if item['col'] == 'name' or item['col'] == 'unit':
+            continue
+        map[item['col']] = item['txt']
+    print(map)
+    # 处理原油进电脱盐温度
+    value = tofloat(dict['operation_conditionInfo']['CrudeOilToDesaltTemp'])
+    if value!=None:
+        sql = 'insert into `operation_condition`(`name`, `system_id`, `tower_name`, `unit`, `value`) \
+                values (%s, %s, %s, %s, %s)'
+        values = ['原油进电脱盐温度',system_id,'__common__','℃',value]
+        cursor.execute(sql, values)
+    # 处理闪底油进常压炉温度
+    value = tofloat(dict['operation_conditionInfo']['FlasBotmToAtmoFurnTemp'])
+    if value!=None:
+        sql = 'insert into `operation_condition`(`name`, `system_id`, `tower_name`, `unit`, `value`) \
+                values (%s, %s, %s, %s, %s)'
+        values = ['闪底油进常压炉温度',system_id,'__common__','℃',value]
+        cursor.execute(sql, values)
+    # 处理下方的表格
+    for item in dict['tableDatas']:
+        print(item)
+        name = item['name']['content']
+        unit = item['unit']['content']
+        for k, v in item.items():
+            value = tofloat(v['content'])
+            if k == 'name' or k == 'unit' or value == None:
+                continue
+            sql = 'insert into `operation_condition`(`name`, `system_id`, `tower_name`, `unit`, `value`) \
+                values (%s, %s, %s, %s, %s)'
+            values = [
+                name,
+                system_id,
+                tostring(map[k]),
+                unit,
+                value
+            ]
+            cursor.execute(sql, values)
+    return
 
 
 # 将输入字符串转化为int类型，如果无法转化就返回None
@@ -156,12 +217,6 @@ def system(dict):
     return sql, values
 
 
-# 生成将数据插入investment表的SQL语句
-def investment(dict):
-    # ToDO: 仿照project表完成即可
-    pass
-
-
 # 生成将数据插入device表的SQL语句
 def device(dict):
     sql = "insert into `device` (`type`, `system_id`, `internal`, `overseas`, `note`)  \
@@ -172,3 +227,27 @@ def device(dict):
               tointNotNone(dict['overseas']['content']),
               tostring(dict['note']['content'])]
     return sql, values
+
+
+# 生成将数据插入investment表的SQL语句
+def investment(dict):
+    # ToDO: 仿照project表完成即可
+    pass
+
+
+# 生成将数据插入publicwork表的SQL语句
+def publicwork(dict):
+    # ToDO: 仿照device表完成即可
+    pass
+
+
+# 生成将数据插入waste表的SQL语句
+def waste(dict):
+    # ToDO: 仿照device表完成即可
+    pass
+
+
+# 生成将数据插入chemical表的SQL语句
+def chemical(dict):
+    # ToDO: 仿照device表完成即可
+    pass
