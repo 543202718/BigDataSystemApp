@@ -56,6 +56,19 @@ def insert(dict):
         # 将数据插入investment表
         # sql, values = investment(dict)
         # cursor.execute(sql, values)
+
+        # 将数据插入publicwork表
+        # sql, values = publicwork(dict)
+        # cursor.execute(sql, values)
+
+        # 将数据插入waste表
+        # sql, values = waste(dict)
+        # cursor.execute(sql, values)
+
+        # 将数据插入chemical表
+        # sql, values = chemical(dict)
+        # cursor.execute(sql, values)
+
         # 提交sql更新
         db.commit()
     except Exception as err:
@@ -156,12 +169,6 @@ def system(dict):
     return sql, values
 
 
-# 生成将数据插入investment表的SQL语句
-def investment(dict):
-    # ToDO: 仿照project表完成即可
-    pass
-
-
 # 生成将数据插入device表的SQL语句
 def device(dict):
     sql = "insert into `device` (`type`, `system_id`, `internal`, `overseas`, `note`)  \
@@ -172,3 +179,27 @@ def device(dict):
               tointNotNone(dict['overseas']['content']),
               tostring(dict['note']['content'])]
     return sql, values
+
+
+# 生成将数据插入investment表的SQL语句
+def investment(dict):
+    # ToDO: 仿照project表完成即可
+    pass
+
+
+# 生成将数据插入publicwork表的SQL语句
+def publicwork(dict):
+    # ToDO: 仿照device表完成即可
+    pass
+
+
+# 生成将数据插入waste表的SQL语句
+def waste(dict):
+    # ToDO: 仿照device表完成即可
+    pass
+
+
+# 生成将数据插入chemical表的SQL语句
+def chemical(dict):
+    # ToDO: 仿照device表完成即可
+    pass

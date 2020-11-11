@@ -227,7 +227,9 @@ create table `balance`(
     `system_id` int, -- 装置号（外键）
     `cutting_range` varchar(30), -- 实沸点切割范围，单位℃
     `yield` float, -- 收率，单位m%
-    `flow` float, -- 流率，单位万吨/年
+    `flow1` float, -- 流率，单位公斤/时
+    `flow2` float, -- 流率，单位吨/天
+    `flow3` float, -- 流率，单位万吨/年
     `note` varchar(200), -- 备注
     foreign key (`item_id`) references `balance_item`(`id`),
     foreign key (`system_id`) references `system`(`id`),
