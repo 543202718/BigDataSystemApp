@@ -8,8 +8,8 @@ export default new Vuex.Store({
         isLoggedIn: false,
         account: '',
         deviceInfo: {
-            tableCols: null,
-            tableDatas: null,
+            tableCols: '',
+            tableDatas: '',
         },
         systemInfo: null,
 
