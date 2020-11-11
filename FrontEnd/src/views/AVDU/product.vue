@@ -1,118 +1,47 @@
 <template>
-<div>
-    <el-form ref="form" :model="deviceInfo" label-width="100px" size="mini" style="margin-top: 20px">
-        <el-form-item label="项目名称">
-            <el-input v-model="deviceInfo.project_name" placeholder="例：xx科技有限公司1000万吨/年的炼油化工一体项目"></el-input>
-        </el-form-item>
-        <el-form-item label="项目描述">
-            <el-input v-model="deviceInfo.description" placeholder="例：xx科技有限公司炼油化工一体项目100万吨/年常减压蒸馏装置">
-            </el-input>
-        </el-form-item>
-        <el-form-item label="项目号">
-            <el-input v-model="deviceInfo.id" placeholder="例：20200101"></el-input>
-        </el-form-item>
-        <el-form-item label="建设地点">
-            <el-input v-model="deviceInfo.place" placeholder="例：某地"></el-input>
-        </el-form-item>
-        <el-form-item label="业主单位">
-            <el-input v-model="deviceInfo.owner" placeholder="例：xx科技有限公司">
-            </el-input>
-        </el-form-item>
-        <el-form-item label="业主文件号">
-            <el-input v-model="deviceInfo.owner_doc_no"></el-input>
-        </el-form-item>
-        <el-form-item label="装置号">
-            <el-input v-model="deviceInfo.system_id"></el-input>
-        </el-form-item>
-        <el-form-item label="装置名称">
-            <el-input v-model="deviceInfo.system_name" placeholder="例：20200101"></el-input>
-        </el-form-item>
-        <el-form-item label="装置类别" style="text-align:left">
-            <el-select v-model="deviceInfo.system_type" filterable allow-create>
-                <el-option label="炼油装置（燃料油）" value="炼油装置（燃料油）"></el-option>
-                <el-option label="炼油装置（润滑油）" value="炼油装置（润滑油）"></el-option>
-                <el-option label="化工装置" value="化工装置"></el-option>
-                <el-option label="炼油化工一体化装置" value="炼油化工一体化装置"></el-option>
-            </el-select>
-        </el-form-item>
-        <el-form-item label="装置性质" style="text-align:left">
-            <el-radio-group v-model="deviceInfo.property">
-                <el-radio-button label="新建"></el-radio-button>
-                <el-radio-button label="改扩建"></el-radio-button>
-            </el-radio-group>
-        </el-form-item>
-        <el-form-item label="设计单位">
-            <el-input v-model="deviceInfo.designer" placeholder="例：SEI">
-            </el-input>
-        </el-form-item>
-        <el-form-item label="设计完成时间">
-            <el-col :span="11">
-                <el-date-picker type="date" placeholder="选择日期" v-model="deviceInfo.design_time" style="width: 100%;"></el-date-picker>
-            </el-col>
-        </el-form-item>
-        <el-form-item label="设计阶段" style="text-align:left">
-            <el-radio-group v-model="deviceInfo.design_stage">
-                <el-radio-button label="可行性研究"></el-radio-button>
-                <el-radio-button label="方案设计"></el-radio-button>
-                <el-radio-button label="基础设计"></el-radio-button>
-                <el-radio-button label="详细设计"></el-radio-button>
-            </el-radio-group>
-        </el-form-item>
-        <el-form-item label="装置规模">
-            <el-input v-model="deviceInfo.scale" placeholder="单位：万吨/年"></el-input>
-        </el-form-item>
-        <el-form-item label="装置系列" style="text-align:left">
-            <el-radio-group v-model="deviceInfo.set">
-                <el-radio-button label="1"></el-radio-button>
-                <el-radio-button label="2"></el-radio-button>
-                <el-radio-button label="3"></el-radio-button>
-                <el-radio-button label="4"></el-radio-button>
-            </el-radio-group>
-        </el-form-item>
-        <el-form-item label="年开工时">
-            <el-input v-model="deviceInfo.work_hour" placeholder="单位：小时"></el-input>
-        </el-form-item>
-        <el-form-item label="操作弹性">
-            <el-input v-model="deviceInfo.flexibility" placeholder="单位：%"></el-input>
-        </el-form-item>
-        <el-form-item label="工艺类型" style="text-align:left">
-            <el-select v-model="deviceInfo.process_type" filterable allow-create>
-                <el-option label="单常压装置" value="单常压装置"></el-option>
-                <el-option label="单减压装置" value="单减压装置"></el-option>
-                <el-option label="常减压装置" value="常减压装置"></el-option>
-                <el-option label="双减压装置" value="双减压装置"></el-option>
-            </el-select>
-        </el-form-item>
 
-        <el-form-item label="专利商">
-            <el-input v-model="deviceInfo.patentee"></el-input>
-        </el-form-item>
-        <el-form-item label="装置范围">
-            <el-input type="textarea" :rows="2" placeholder="本装置主要由原油电脱盐脱水部分、换热网络及加热炉部分、常压蒸馏部分、减压蒸馏部分等组成，装置内考虑防腐设置有塔顶注氨、注缓蚀剂、注水设施。
-" v-model="deviceInfo.field">
-            </el-input>
-        </el-form-item>
-        <el-form-item label="工艺技术路线">
-            <el-input type="textarea" :rows="2" placeholder="原油进料→电脱盐→闪蒸塔→常压塔→减压塔
-" v-model="deviceInfo.technical_route">
-            </el-input>
-        </el-form-item>
-        <el-form-item label="占地面积">
-            <el-input v-model="deviceInfo.area" placeholder="单位:m^2"></el-input>
-        </el-form-item>
-        <el-form-item label="装置定员">
-            <el-input v-model="deviceInfo.population" placeholder="单位:人"></el-input>
-        </el-form-item>
-        <el-form-item label="装置能耗">
-            <el-input v-model="deviceInfo.energy" placeholder="单位:MJ/t进料"></el-input>
-        </el-form-item>
-        <!--
-        <el-form-item size="large">
-            <el-button type="primary" @click="onSubmit">立即创建</el-button>
-            <el-button>取消</el-button>
-        </el-form-item>
--->
-    </el-form>
+
+<div id="hello">
+    
+    <div style="display: inline-block;float: right;">
+        <el-button size="mini" type="primary" @click="consoleDatas">打印数据</el-button>
+        <el-button size="mini" type="primary" @click="addRow">增加行</el-button>
+        <el-button @click="delLastRow" slot="reference" type="primary" size="mini">删除末行</el-button>
+        
+    </div>
+    <el-table :data="productDatas" border style="width: 100%;margin-top:10px" @header-contextmenu="colRightClick">
+        <el-table-column v-if="productCols.length > 0" type="index" :label="'编号'" :width="50"></el-table-column>
+        <el-table-column v-for="(column, idx) in productCols" :key="idx" :index="idx">
+            <!--label-->
+            <template slot="header" slot-scope="scope1">
+                <p v-show="column.show" @dblclick="column.show=false">
+                    {{column.txt}}
+                    <i class="el-icon-edit-outline" @click="column.show=false"></i>
+                </p>
+                <el-input size="mini" v-show="!column.show" v-model="column.txt" @blur="column.show=true">
+                </el-input>
+            </template>
+            <!--prop-->
+            <template slot-scope="scope">
+                <p v-show="scope.row[column.col].show" @dblclick="scope.row[column.col].show=false">
+                    {{scope.row[column.col].content}}
+                    <i class="el-icon-edit-outline" @click="scope.row[column.col].show=false"></i>
+                </p>
+                <el-input type="textarea" :autosize="{minRows:2,maxRows:4}" v-show="!scope.row[column.col].show" v-model="scope.row[column.col].content" @blur="scope.row[column.col].show=true">
+                </el-input>
+            </template>
+        </el-table-column>
+    </el-table>
+
+    <div v-show="showMenu" id="contextmenu">
+        <i class="el-icon-circle-close hideContextMenu" @click="showMenu=false"></i>
+        <el-button size="mini" type="primary" @click="addColumn(curColumn)">前方插入一列</el-button>
+        <el-button size="mini" type="primary" @click="addColumn(curColumn+1)">后方插入一列</el-button>
+       
+        <el-button @click="delColumn" slot="reference" type="primary" size="mini">删除当前列</el-button>
+
+    </div>
+
 </div>
 </template>
 
@@ -120,33 +49,794 @@
 export default {
     data() {
         return {
-            deviceInfo: {
-                id: '',
-                project_name: '',
-                description: '',
-                place: '',
-                owner: '',
-                owner_doc_no: '',
-                system_id: '',
-                system_name: '',
-                system_type: '炼油装置（燃料油）',
-                designer: '',
-                design_time: '',
-                property: '新建',
-                design_stage: '可行性研究',
-                scale: '',
-                set: '1',
-                work_hour: '',
-                flexibility: '',
-                process_type: '常减压装置',
-                patentee: '',
-                field: '',
-                technical_route: '',
-                area: '',
-                population: '',
-                energy: '',
-                file_path: '',
+
+            productCols: [
+                {
+                    col: "product_name",
+                    txt: '产品名称',
+                    show: true
+                },
+                {
+                    col: "density",
+                    txt: '密度 g/cm3(20℃)',
+                    show: true
+                },
+                {
+                    col: "API",
+                    txt: '比重指数(API)',
+                    show: true
+                },
+                {
+                    col: "molecular_weight",
+                    txt: '分子量(M)',
+                    show: true
+                },               
+                {
+                    col: "characteristic_factor",
+                    txt: '特性因数(K)',
+                    show: true
+                },
+                {
+                    col: "sulfur_content",
+                    txt: '含硫 wt/%',
+                    show: true
+                },
+                {
+                    col: "acid_value",
+                    txt: '酸值mgKOH/g',
+                    show: true
+                },
+                {
+                    col: "remarks",
+                    txt: '备注',
+                    show: true
+                }                
+
+            ],
+            productDatas: [
+            {
+
+                product_name: {
+                    content: '初顶气',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
             },
+            {
+
+                product_name: {
+                    content: '初顶油',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '常顶气',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '常顶油',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '常一线',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '常二线',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },            
+            {
+
+                product_name: {
+                    content: '常三线',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '常四线',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '常压渣油（常底油）',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '贫吸收油',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '(常压重油)',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '(过汽化油)',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '减顶气',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '减顶油',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '减一线',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '减二线',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '减三线',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '减四线',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '减五线',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+            {
+
+                product_name: {
+                    content: '减六线',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },            
+            {
+
+                product_name: {
+                    content: '减压渣油',
+                    show: true
+                },
+                density: {
+                    content: ' ',
+                    show: true
+                },
+                API: {
+                    content: ' ',
+                    show: true
+                },
+                molecular_weight: {
+                    content: ' ',
+                    show: true
+                },
+                characteristic_factor: {
+                    content: ' ',
+                    show: true
+                },
+                sulfur_content: {
+                    content: ' ',
+                    show: true
+                },
+                acid_value: {
+                    content: ' ',
+                    show: true
+                },
+                remarks: {
+                    content: ' ',
+                    show: true
+                }                                  
+            },
+
+            ],
+            count_col: 0,
+            showMenu: false,
+            curColumn: null,
+            //systemInfo:{s
+            //    .....
+            //}
         };
 
     },
@@ -154,7 +844,69 @@ export default {
     created: function () {
         console.log("turn to system page");
     },
-    methods: {},
+    methods: {
+        colRightClick(column, event) {
+            window.event.returnValue = false; //阻止浏览器自带的右键菜单弹出
+            if (!column.index && column.index !== 0) return;
+            this.curColumn = column.index
+            this.showMenu = true
+            var ele = document.getElementById('contextmenu')
+            ele.style.top = event.clientY + 'px';
+            ele.style.left = event.clientX + 'px';
+            if (window.innerWidth - 140 < event.clientX) {
+                ele.style.left = 'unset'
+                ele.style.right = 0
+            }
+        },
+        addRow() { // 新增行
+            this.showMenu = false
+            var obj = {}
+            this.productCols.map(p => {
+                obj[p.col] = {
+                    content: '',
+                    show: true
+                }
+            })
+            this.productDatas.push(obj)
+        },
+        // 当row中存在一“主键”可唯一标识row的下标时（如：编号放在productDatas内），可借此实现行的自由插入与删除
+        addColumn(idx) { // 新增列
+            this.showMenu = false
+            var obj = {
+                col: 'col_' + this.count_col++,
+                txt: '',
+                show: true
+            }
+            if (idx || idx === 0) this.productCols.splice(idx, 0, obj);
+            else this.productCols.push(obj);
+            var _this = this
+            this.productDatas.map(p => { // 新增的对象无法被vue监听到
+                _this.$set(p, obj.col, {
+                    content: '',
+                    show: true
+                })
+                //		p[obj.col] = {content: '', show: true}
+            })
+        },
+        delColumn() { // 删除列
+            this.showMenu = false
+            var colKey = this.productCols[this.curColumn].col;
+            this.productCols.splice(this.curColumn, 1);
+            this.productDatas.map(p => {
+                delete p[colKey];
+            });
+        },
+        delLastRow() { // 删除行
+            this.showMenu = false
+            var len = this.productDatas.length;
+            if (len > 0) this.productDatas.splice(len - 1, 1);
+            else this.$message.error('没有可删除行');
+        },
+        consoleDatas() {
+            console.log('表头', this.productCols);
+            console.log('数据', this.productDatas);
+        }
+    },
 
 }
 </script>
