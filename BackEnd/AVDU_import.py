@@ -9,7 +9,7 @@ from app import app
 @app.route('/AVDU_import', methods=['POST'])
 def AVDU_import():
     print("AVDU_import_ok")
-    dict = request.values.to_dict()
+    dict = request.get_json()
     print(dict)
     code = insert(dict)
     print("AVDU_import return code = %d" % (code))

@@ -244,31 +244,35 @@ export default {
             } else {
                 this.systemInfo.design_time = "";
             }
-            this.$axios
-                .post('http://' + document.domain + ':5000/AVDU_import', {
+            this.$axios({
+                method:"post",
+                url: 'http://' + document.domain + ':5000/AVDU_import',
+                data: {
                     systemInfo: systemInfo,
-                    deviceInfo: deviceInfo,
-                    //发送给后端的信息，可以按照需求增加条目
-                }, {
-                    emulateJSON: true //必需，否则可能会json解析出错
-                }).then(function (response) {
-                    //response.body是报文的主体内容
-                    if (parseInt(response.body.code) === 200) {
-                        this.$message({
-                            message: '创建成功',
-                            type: 'success',
-                            duration: 3000,
-                            showClose: true
-                        });
-                    } else {
-                        this.$message({
-                            message: '创建失败，请检查您的输入',
-                            type: 'error',
-                            duration: 3000,
-                            showClose: true
-                        });
-                    }
-                })
+                    deviceInfo: deviceInfo
+                },
+                //发送给后端的信息，可以按照需求增加条目
+                header: {
+                    'Content-Type': 'application/json' //如果写成contentType会报错
+                }
+            }).then(function (response) {
+                //response.body是报文的主体内容
+                if (parseInt(response.body.code) === 200) {
+                    this.$message({
+                        message: '创建成功',
+                        type: 'success',
+                        duration: 3000,
+                        showClose: true
+                    });
+                } else {
+                    this.$message({
+                        message: '创建失败，请检查您的输入',
+                        type: 'error',
+                        duration: 3000,
+                        showClose: true
+                    });
+                }
+            })
             console.log('submit!');
             this.$store.systemInfo = this.systemInfo;
             var T = this.$store.systemInfo;
