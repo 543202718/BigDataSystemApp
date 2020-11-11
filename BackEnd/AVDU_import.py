@@ -4,6 +4,7 @@ from flask import request
 from flask import jsonify
 from flask import make_response
 from app import app
+import json
 
 system_id = -1
 
@@ -11,8 +12,7 @@ system_id = -1
 @app.route('/AVDU_import', methods=['POST'])
 def AVDU_import():
     print("AVDU_import_ok")
-    dict = request.values.to_dict()
-    # print(dict)
+    dict = request.get_json()
     code = insert(dict)
     print("AVDU_import return code = %d" % (code))
     response = make_response(
@@ -38,17 +38,21 @@ def insert(dict):
     cursor = db.cursor()
     try:
         # 将数据插入project表
-        sql, values = project(dict)
+        sql, values = project(dict['systemInfo'])
         cursor.execute(sql, values)
         # 将数据插入system表
-        sql, values = system(dict)
+        sql, values = system(dict['systemInfo'])
         cursor.execute(sql, values)
         # 获取system_id并保存在全局变量中
         cursor.execute("select last_insert_id()")
         result = cursor.fetchone()
+        global system_id
         system_id = result['last_insert_id()']
+        print(system_id)
         # 将数据插入device表
-
+        for item in dict['deviceInfo']['tableDatas']:
+            sql, values = device(item)
+            cursor.execute(sql, values)
         # 将数据插入investment表
         # sql, values = investment(dict)
         # cursor.execute(sql, values)
@@ -63,9 +67,8 @@ def insert(dict):
     db.close()
     return code
 
+
 # 将输入字符串转化为int类型，如果无法转化就返回None
-
-
 def toint(s):
     try:
         x = int(s)
@@ -73,9 +76,17 @@ def toint(s):
         x = None
     return x
 
+
+# 将输入字符串转化为int类型，如果无法转化就返回0
+def tointNotNone(s):
+    try:
+        x = int(s)
+    except:
+        x = 0
+    return x
+
+
 # 将输入字符串转化为float类型，如果无法转化就返回None
-
-
 def tofloat(s):
     try:
         x = float(s)
@@ -83,9 +94,8 @@ def tofloat(s):
         x = None
     return x
 
+
 # 如果输入字符串是空串，就返回None
-
-
 def tostring(s):
     if s == "":
         return None
@@ -105,12 +115,12 @@ def tostring(s):
 def project(dict):
     sql = "insert into `project` (`id`, `name`, `description`, `place`, `owner`, `owner_doc_no`) \
         values (%s, %s, %s, %s, %s, %s)"
-    values = [tostring(dict['systemInfo[id]']),
-              tostring(dict['systemInfo[project_name]']),
-              tostring(dict['systemInfo[description]']),
-              tostring(dict['systemInfo[place]']),
-              tostring(dict['systemInfo[owner]']),
-              tostring(dict['systemInfo[owner_doc_no]'])]
+    values = [tostring(dict['id']),
+              tostring(dict['project_name']),
+              tostring(dict['description']),
+              tostring(dict['place']),
+              tostring(dict['owner']),
+              tostring(dict['owner_doc_no'])]
     return sql, values
 
 
@@ -124,26 +134,27 @@ def system(dict):
         %s, %s, %s, %s, %s, \
         %s, %s, %s, %s, %s, \
         %s, %s, %s, %s)"
-    values = [tostring(dict['systemInfo[id]']),
-              tostring(dict['systemInfo[system_id]']),
-              tostring(dict['systemInfo[system_type]']),
-              tostring(dict['systemInfo[designer]']),
-              tostring(dict['systemInfo[design_time]']),  # 第一行
-              tostring(dict['systemInfo[system_name]']),
-              tostring(dict['systemInfo[property]']),
-              tostring(dict['systemInfo[design_stage]']),
-              toint(dict['systemInfo[scale]']),
-              toint(dict['systemInfo[set]']),  # 第二行
-              toint(dict['systemInfo[work_hour]']),
-              tostring(dict['systemInfo[flexibility]']),
-              tostring(dict['systemInfo[process_type]']),
-              tostring(dict['systemInfo[patentee]']),
-              tostring(dict['systemInfo[field]']),  # 第三行
-              tostring(dict['systemInfo[technical_route]']),
-              toint(dict['systemInfo[area]']),
-              toint(dict['systemInfo[population]']),
-              tofloat(dict['systemInfo[energy]'])]
+    values = [tostring(dict['id']),
+              tostring(dict['system_id']),
+              tostring(dict['system_type']),
+              tostring(dict['designer']),
+              tostring(dict['design_time']),  # 第一行
+              tostring(dict['system_name']),
+              tostring(dict['property']),
+              tostring(dict['design_stage']),
+              toint(dict['scale']),
+              toint(dict['set']),  # 第二行
+              toint(dict['work_hour']),
+              tostring(dict['flexibility']),
+              tostring(dict['process_type']),
+              tostring(dict['patentee']),
+              tostring(dict['field']),  # 第三行
+              tostring(dict['technical_route']),
+              toint(dict['area']),
+              toint(dict['population']),
+              tofloat(dict['energy'])]
     return sql, values
+
 
 # 生成将数据插入investment表的SQL语句
 def investment(dict):
@@ -155,4 +166,9 @@ def investment(dict):
 def device(dict):
     sql = "insert into `device` (`type`, `system_id`, `internal`, `overseas`, `note`)  \
         values (%s, %s, %s, %s, %s)"
-    
+    values = [tostring(dict['type']['content']),
+              system_id,
+              tointNotNone(dict['internal']['content']),
+              tointNotNone(dict['overseas']['content']),
+              tostring(dict['note']['content'])]
+    return sql, values
