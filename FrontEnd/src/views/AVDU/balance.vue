@@ -1,15 +1,13 @@
 <template>
-
-
 <div id="hello">
-    
+
     <div style="display: inline-block;float: right;">
         <el-button size="mini" type="primary" @click="consoleDatas">打印数据</el-button>
         <el-button size="mini" type="primary" @click="addRow">增加行</el-button>
         <el-button @click="delLastRow" slot="reference" type="primary" size="mini">删除末行</el-button>
-        
+
     </div>
-    <el-table :data="balanceDatas" border style="width: 100%;margin-top:10px" @header-contextmenu="colRightClick">
+    <el-table :data="balanceDatas" border height=500 style="width: 100%;margin-top:10px" @header-contextmenu="colRightClick">
         <el-table-column v-if="balanceCols.length > 0" type="index" :label="'编号'" :width="50"></el-table-column>
         <el-table-column v-for="(column, idx) in balanceCols" :key="idx" :index="idx">
             <!--label-->
@@ -37,7 +35,7 @@
         <i class="el-icon-circle-close hideContextMenu" @click="showMenu=false"></i>
         <el-button size="mini" type="primary" @click="addColumn(curColumn)">前方插入一列</el-button>
         <el-button size="mini" type="primary" @click="addColumn(curColumn+1)">后方插入一列</el-button>
-       
+
         <el-button @click="delColumn" slot="reference" type="primary" size="mini">删除当前列</el-button>
 
     </div>
@@ -50,8 +48,7 @@ export default {
     data() {
         return {
 
-            balanceCols: [
-                {
+            balanceCols: [{
                     col: "inward_or_outward_name",
                     txt: '名称',
                     show: true
@@ -70,7 +67,7 @@ export default {
                     col: "flow_rate1",
                     txt: '流率（公斤/时）',
                     show: true
-                },               
+                },
                 {
                     col: "flow_rate2",
                     txt: '流率（吨/天）',
@@ -81,772 +78,765 @@ export default {
                     txt: '流率（万吨/年）',
                     show: true
                 },
-              
 
             ],
-            balanceDatas: [
-            {
+            balanceDatas: [{
 
-                inward_or_outward_name: {
-                    content: '原料油',
-                    show: true
-                },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                
-            },
-            {
+                    inward_or_outward_name: {
+                        content: '原料油',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
-                inward_or_outward_name: {
-                    content: '富吸收油',
-                    show: true
                 },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                
-            },
-            {
+                {
 
-                inward_or_outward_name: {
-                    content: '渣油加氢液态烃',
-                    show: true
-                },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                
-            },
-            {
+                    inward_or_outward_name: {
+                        content: '富吸收油',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
-                inward_or_outward_name: {
-                    content: '渣油加氢石脑油',
-                    show: true
                 },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                
-            },
-            {
+                {
 
-                inward_or_outward_name: {
-                    content: '蜡油加氢石脑油',
-                    show: true
-                },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                
-            },
-            {
+                    inward_or_outward_name: {
+                        content: '渣油加氢液态烃',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
-                inward_or_outward_name: {
-                    content: '柴油加氢石脑油',
-                    show: true
                 },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                
-            },
+                {
 
+                    inward_or_outward_name: {
+                        content: '渣油加氢石脑油',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
+                },
+                {
 
+                    inward_or_outward_name: {
+                        content: '蜡油加氢石脑油',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
+                },
+                {
 
+                    inward_or_outward_name: {
+                        content: '柴油加氢石脑油',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
-            {
+                },
 
-                inward_or_outward_name: {
-                    content: '初顶气',
-                    show: true
-                },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                
-            },
-            {
+                {
 
-                inward_or_outward_name: {
-                    content: '初顶油',
-                    show: true
-                },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                
-            },
-            {
+                    inward_or_outward_name: {
+                        content: '初顶气',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
-                inward_or_outward_name: {
-                    content: '常顶气',
-                    show: true
                 },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                 
-            },
-            {
+                {
 
-                inward_or_outward_name: {
-                    content: '常顶油',
-                    show: true
-                },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                 
-            },
-            {
+                    inward_or_outward_name: {
+                        content: '初顶油',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
-                inward_or_outward_name: {
-                    content: '常一线',
-                    show: true
                 },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                  
-            },
-            {
+                {
 
-                inward_or_outward_name: {
-                    content: '常二线',
-                    show: true
-                },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                
-            },            
-            {
+                    inward_or_outward_name: {
+                        content: '常顶气',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
-                inward_or_outward_name: {
-                    content: '常三线',
-                    show: true
                 },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                 
-            },
-            {
+                {
 
-                inward_or_outward_name: {
-                    content: '常四线',
-                    show: true
-                },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                
-            },
-            {
+                    inward_or_outward_name: {
+                        content: '常顶油',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
-                inward_or_outward_name: {
-                    content: '常压渣油（常底油）',
-                    show: true
                 },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                 
-            },
-            {
+                {
 
-                inward_or_outward_name: {
-                    content: '贫吸收油',
-                    show: true
-                },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                 
-            },
-            {
+                    inward_or_outward_name: {
+                        content: '常一线',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
-                inward_or_outward_name: {
-                    content: '(常压重油)',
-                    show: true
                 },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                 
-            },
-            {
+                {
 
-                inward_or_outward_name: {
-                    content: '(过汽化油)',
-                    show: true
-                },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                 
-            },
-            {
+                    inward_or_outward_name: {
+                        content: '常二线',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
-                inward_or_outward_name: {
-                    content: '减顶气',
-                    show: true
                 },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                
-            },
-            {
+                {
 
-                inward_or_outward_name: {
-                    content: '减顶油',
-                    show: true
-                },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                 
-            },
-            {
+                    inward_or_outward_name: {
+                        content: '常三线',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
-                inward_or_outward_name: {
-                    content: '减一线',
-                    show: true
                 },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                 
-            },
-            {
+                {
 
-                inward_or_outward_name: {
-                    content: '减二线',
-                    show: true
-                },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                 
-            },
-            {
+                    inward_or_outward_name: {
+                        content: '常四线',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
-                inward_or_outward_name: {
-                    content: '减三线',
-                    show: true
                 },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                 
-            },
-            {
+                {
 
-                inward_or_outward_name: {
-                    content: '减四线',
-                    show: true
-                },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                 
-            },
-            {
+                    inward_or_outward_name: {
+                        content: '常压渣油（常底油）',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
-                inward_or_outward_name: {
-                    content: '减五线',
-                    show: true
                 },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                 
-            },
-            {
+                {
 
-                inward_or_outward_name: {
-                    content: '减六线',
-                    show: true
-                },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
-                },
-                yield: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
-                },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
-                },
-                                 
-            },            
-            {
+                    inward_or_outward_name: {
+                        content: '贫吸收油',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
 
-                inward_or_outward_name: {
-                    content: '减压渣油',
-                    show: true
                 },
-                boiling_point_cutting_range: {
-                    content: ' ',
-                    show: true
+                {
+
+                    inward_or_outward_name: {
+                        content: '(常压重油)',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
+
                 },
-                yield: {
-                    content: ' ',
-                    show: true
+                {
+
+                    inward_or_outward_name: {
+                        content: '(过汽化油)',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
+
                 },
-                flow_rate1: {
-                    content: ' ',
-                    show: true
+                {
+
+                    inward_or_outward_name: {
+                        content: '减顶气',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
+
                 },
-                flow_rate2: {
-                    content: ' ',
-                    show: true
+                {
+
+                    inward_or_outward_name: {
+                        content: '减顶油',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
+
                 },
-                flow_rate3: {
-                    content: ' ',
-                    show: true
+                {
+
+                    inward_or_outward_name: {
+                        content: '减一线',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
+
                 },
-                                 
-            },
+                {
+
+                    inward_or_outward_name: {
+                        content: '减二线',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
+
+                },
+                {
+
+                    inward_or_outward_name: {
+                        content: '减三线',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
+
+                },
+                {
+
+                    inward_or_outward_name: {
+                        content: '减四线',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
+
+                },
+                {
+
+                    inward_or_outward_name: {
+                        content: '减五线',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
+
+                },
+                {
+
+                    inward_or_outward_name: {
+                        content: '减六线',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
+
+                },
+                {
+
+                    inward_or_outward_name: {
+                        content: '减压渣油',
+                        show: true
+                    },
+                    boiling_point_cutting_range: {
+                        content: ' ',
+                        show: true
+                    },
+                    yield: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate1: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate2: {
+                        content: ' ',
+                        show: true
+                    },
+                    flow_rate3: {
+                        content: ' ',
+                        show: true
+                    },
+
+             },
 
             ],
             count_col: 0,

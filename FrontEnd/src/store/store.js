@@ -12,7 +12,11 @@ export default new Vuex.Store({
             tableDatas: '',
         },
         systemInfo: null,
-
+        operation_conditionInfo: {
+            tableCols: null,
+            tableDatas: null,
+            operation_conditionInfo: null
+        },
     },
     /*
     mutations: {
