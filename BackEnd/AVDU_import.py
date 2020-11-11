@@ -5,12 +5,14 @@ from flask import jsonify
 from flask import make_response
 from app import app
 
+system_id = -1
+
 
 @app.route('/AVDU_import', methods=['POST'])
 def AVDU_import():
     print("AVDU_import_ok")
     dict = request.values.to_dict()
-    print(dict)
+    # print(dict)
     code = insert(dict)
     print("AVDU_import return code = %d" % (code))
     response = make_response(
@@ -41,9 +43,15 @@ def insert(dict):
         # 将数据插入system表
         sql, values = system(dict)
         cursor.execute(sql, values)
+        # 获取system_id并保存在全局变量中
+        cursor.execute("select last_insert_id()")
+        result = cursor.fetchone()
+        system_id = result['last_insert_id()']
+        # 将数据插入device表
+
         # 将数据插入investment表
-        sql, values = investment(dict)
-        cursor.execute(sql, values)
+        # sql, values = investment(dict)
+        # cursor.execute(sql, values)
         # 提交sql更新
         db.commit()
     except Exception as err:
@@ -140,6 +148,11 @@ def system(dict):
 # 生成将数据插入investment表的SQL语句
 def investment(dict):
     # ToDO: 仿照project表完成即可
+    pass
 
 
-
+# 生成将数据插入device表的SQL语句
+def device(dict):
+    sql = "insert into `device` (`type`, `system_id`, `internal`, `overseas`, `note`)  \
+        values (%s, %s, %s, %s, %s)"
+    
