@@ -244,6 +244,7 @@ export default {
             } else {
                 this.systemInfo.design_time = "";
             }
+            var Instance = this;
             this.$axios({
                 method:"post",
                 url: 'http://' + document.domain + ':5000/AVDU_import',
@@ -257,15 +258,16 @@ export default {
                 }
             }).then(function (response) {
                 //response.body是报文的主体内容
-                if (parseInt(response.body.code) === 200) {
-                    this.$message({
+                console.log(response);
+                if (parseInt(response.data.code) === 200) {
+                    Instance.$message({
                         message: '创建成功',
                         type: 'success',
                         duration: 3000,
                         showClose: true
                     });
                 } else {
-                    this.$message({
+                    Instance.$message({
                         message: '创建失败，请检查您的输入',
                         type: 'error',
                         duration: 3000,
