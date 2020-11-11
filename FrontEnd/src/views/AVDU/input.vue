@@ -237,8 +237,8 @@ export default {
 
             var systemInfo = this.$store.systemInfo;
             var deviceInfo = this.$store.deviceInfo;
-            console.log(deviceInfo);
-            console.log(this.systemInfo);
+            var operation_conditionInfo = this.$store.operation_conditionInfo;
+            console.log(operation_conditionInfo);
             if (this.systemInfo.design_time instanceof Date) {
                 this.systemInfo.design_time = this.dateFormat("YYYY-mm-dd", this.systemInfo.design_time); //格式化日期，否则传到后端会出错
             } else {
@@ -246,11 +246,12 @@ export default {
             }
             var Instance = this;
             this.$axios({
-                method:"post",
+                method: "post",
                 url: 'http://' + document.domain + ':5000/AVDU_import',
                 data: {
                     systemInfo: systemInfo,
-                    deviceInfo: deviceInfo
+                    deviceInfo: deviceInfo,
+                    operation_conditionInfo: operation_conditionInfo,
                 },
                 //发送给后端的信息，可以按照需求增加条目
                 header: {
@@ -276,9 +277,6 @@ export default {
                 }
             })
             console.log('submit!');
-            this.$store.systemInfo = this.systemInfo;
-            var T = this.$store.systemInfo;
-            console.log('Test', T);
         },
         changeFormShow(showFormID) {
             console.log('change showed form');

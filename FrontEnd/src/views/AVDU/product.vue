@@ -9,7 +9,7 @@
         <el-button @click="delLastRow" slot="reference" type="primary" size="mini">删除末行</el-button>
         
     </div>
-    <el-table :data="productDatas" border style="width: 100%;margin-top:10px" @header-contextmenu="colRightClick">
+    <el-table :data="productDatas" border height=500 style="width: 100%;margin-top:10px" @header-contextmenu="colRightClick">
         <el-table-column v-if="productCols.length > 0" type="index" :label="'编号'" :width="50"></el-table-column>
         <el-table-column v-for="(column, idx) in productCols" :key="idx" :index="idx">
             <!--label-->
