@@ -238,6 +238,7 @@ export default {
             var systemInfo = this.$store.systemInfo;
             var deviceInfo = this.$store.deviceInfo;
             var operation_conditionInfo = this.$store.operation_conditionInfo;
+            var materialInfo = this.$store.materialInfo;
             console.log(operation_conditionInfo);
             if (this.systemInfo.design_time instanceof Date) {
                 this.systemInfo.design_time = this.dateFormat("YYYY-mm-dd", this.systemInfo.design_time); //格式化日期，否则传到后端会出错
@@ -250,8 +251,9 @@ export default {
                 url: 'http://' + document.domain + ':5000/AVDU_import',
                 data: {
                     systemInfo: systemInfo,
-                    deviceInfo: deviceInfo,
-                    operation_conditionInfo: operation_conditionInfo,
+                    // deviceInfo: deviceInfo,
+                    // operation_conditionInfo: operation_conditionInfo,
+                    materialInfo: materialInfo,
                 },
                 //发送给后端的信息，可以按照需求增加条目
                 header: {

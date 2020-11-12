@@ -102,10 +102,6 @@ create table `material_detail`(
     `characteristic` float, -- 特质因数
     `related` float, -- 相关指数
     `api` float, -- 比重指数
-    `refraction_t1` float, -- 温度1，用于折射率，单位℃
-    `refraction_v1` float, -- 在温度1下的折射率
-    `refraction_t2` float, -- 温度2，用于折射率，单位℃
-    `refraction_v2` float, -- 在温度2下的折射率
     foreign key (`material_id`) references `material`(`id`),
     primary key (`material_id`,`boiling_range`)
 );
@@ -115,7 +111,17 @@ create table `viscosity_detail`(
     `material_id` int, -- 原料号（外键）
     `boiling_range` varchar(30), -- 沸点范围（外键）
     `tempature` float, -- 温度 
-    `value` float not null, -- 粘度值
+    `value` float not null, -- 粘度值，单位mm^2/s
+    foreign key (`material_id`,`boiling_range`) references `material_detail`(`material_id`,`boiling_range`),
+    primary key (`material_id`,`boiling_range`,`tempature`)
+);
+
+-- 原料折射率详表
+create table `refraction_detail`(
+    `material_id` int, -- 原料号（外键）
+    `boiling_range` varchar(30), -- 沸点范围（外键）
+    `tempature` float, -- 温度 
+    `value` float not null, -- 折射率值
     foreign key (`material_id`,`boiling_range`) references `material_detail`(`material_id`,`boiling_range`),
     primary key (`material_id`,`boiling_range`,`tempature`)
 );

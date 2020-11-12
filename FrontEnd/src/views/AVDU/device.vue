@@ -29,10 +29,9 @@
             </template>
         </el-table-column>
     </el-table>
-<el-button type="primary" @click="addToStore">暂存此页</el-button>
+    <el-button type="primary" @click="addToStore">暂存此页</el-button>
 
 </div>
-        
 </template>
 
 <script>
@@ -278,12 +277,12 @@ export default {
     },
     methods: {
         addToStore: function () {
-            this.$store.deviceInfo={
-                tableCols:null,
-                tableDatas:null
+            this.$store.deviceInfo = {
+                tableCols: null,
+                tableDatas: null
             };
-            this.$store.deviceInfo.tableCols = this.testCols;//表头
-            this.$store.deviceInfo.tableDatas = this.testDatas;//表内容
+            this.$store.deviceInfo.tableCols = this.testCols; //表头
+            this.$store.deviceInfo.tableDatas = this.testDatas; //表内容
             console.log('store deviceInfo to device');
             console.log(this.$store.deviceInfo.tableCols);
         },

@@ -10,6 +10,7 @@ drop table if exists `waste`;
 drop table if exists `chemical`;
 drop table if exists `operation_condition`;
 drop table if exists `viscosity_detail`;
+drop table if exists `refraction_detail`;
 drop table if exists `material_detail`;
 drop table if exists `hydrocarbon`;
 drop table if exists `viscosity_material`;
