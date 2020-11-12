@@ -7,6 +7,7 @@ from app import app
 import json
 
 system_id = -1
+material_id = -1
 
 
 @app.route('/AVDU_import', methods=['POST'])
@@ -40,22 +41,28 @@ def insert(dict):
         # 将数据插入project表
         sql, values = project(dict['systemInfo'])
         cursor.execute(sql, values)
+
         # 将数据插入system表
         sql, values = system(dict['systemInfo'])
         cursor.execute(sql, values)
+
         # 获取system_id并保存在全局变量中
         cursor.execute("select last_insert_id()")
         result = cursor.fetchone()
         global system_id
         system_id = result['last_insert_id()']
-        print(system_id)
+        # print(system_id)
+
         # 将数据插入device表
         for item in dict['deviceInfo']['tableDatas']:
             sql, values = device(item)
             cursor.execute(sql, values)
+
         # 将数据插入operation_condition表
-        # print(dict['operation_conditionInfo'])
         handle_operation_condition(dict['operation_conditionInfo'], cursor)
+
+        # 处理原料性质的输入
+        handle_material(dict['materialInfo'], cursor)
 
         # 将数据插入investment表
         # sql, values = investment(dict)
@@ -95,17 +102,17 @@ def handle_operation_condition(dict, cursor):
     print(map)
     # 处理原油进电脱盐温度
     value = tofloat(dict['operation_conditionInfo']['CrudeOilToDesaltTemp'])
-    if value!=None:
+    if value != None:
         sql = 'insert into `operation_condition`(`name`, `system_id`, `tower_name`, `unit`, `value`) \
                 values (%s, %s, %s, %s, %s)'
-        values = ['原油进电脱盐温度',system_id,'__common__','℃',value]
+        values = ['原油进电脱盐温度', system_id, '__common__', '℃', value]
         cursor.execute(sql, values)
     # 处理闪底油进常压炉温度
     value = tofloat(dict['operation_conditionInfo']['FlasBotmToAtmoFurnTemp'])
-    if value!=None:
+    if value != None:
         sql = 'insert into `operation_condition`(`name`, `system_id`, `tower_name`, `unit`, `value`) \
                 values (%s, %s, %s, %s, %s)'
-        values = ['闪底油进常压炉温度',system_id,'__common__','℃',value]
+        values = ['闪底油进常压炉温度', system_id, '__common__', '℃', value]
         cursor.execute(sql, values)
     # 处理下方的表格
     for item in dict['tableDatas']:
@@ -126,6 +133,125 @@ def handle_operation_condition(dict, cursor):
                 value
             ]
             cursor.execute(sql, values)
+    return
+
+
+# 处理原料性质的输入
+def handle_material(dict, cursor):
+    # print(dict)
+    # 将数据插入material表
+    sql, values = material(dict['mainInfo'])
+    cursor.execute(sql, values)
+    # 获取material_id并写入全局变量
+    cursor.execute("select last_insert_id()")
+    result = cursor.fetchone()
+    global material_id
+    material_id = result['last_insert_id()']
+    # print(material_id)
+    # 将数据插入element表
+    handle_element(dict['mainInfo'], cursor)
+    # 将数据插入hydrocarbon表
+    handle_hydrocarbon(dict['mainInfo'], cursor)
+    # 将数据插入viscosity_material表
+    handle_viscosity(dict, cursor)
+    # 处理原料窄馏分性质的输入
+    handle_material_detail(dict, cursor)
+    return
+
+
+# 处理轻烃组成
+def handle_hydrocarbon(dict, cursor):
+    map = {"methane": "甲烷", "ethane": "乙烷", "propane": "丙烷",
+           "n_butane": "正丁烷", "isobutane": "异丁烷", "n_pentane": "正戊烷",
+           "isopentane": "异戊烷", "cyclopentane": "环戊烷"}
+    for k, v in map.items():
+        value = tofloat(dict[k])
+        if value != None:
+            sql = "insert into `hydrocarbon` (`material_id`, `name`, `unit`, `value`) \
+                values (%s, %s, %s, %s)"
+            values = [material_id, v, "v%", value]
+            cursor.execute(sql, values)
+    return
+
+
+# 处理元素组成
+def handle_element(dict, cursor):
+    map = {"H": "w%", "C": "w%", "S": "w%", "N": "w%", "Ni": "μg/g",
+           "V": "μg/g", "Ca": "μg/g", "Fe": "μg/g", "Cu": "μg/g",
+           "Pb": "μg/g", "Mg": "μg/g", "Na": "μg/g"}
+    for k, v in map.items():
+        value = tofloat(dict[k])
+        if value != None:
+            sql = "insert into `element` (`material_id`, `symbol`, `unit`, `value`) \
+                values (%s, %s, %s, %s)"
+            values = [material_id, k, v, value]
+            cursor.execute(sql, values)
+    return
+
+
+# 处理原料粘度
+def handle_viscosity(dict, cursor):
+    for item in dict['viscosity']:
+        temp = tofloat(item['temp'])
+        value = tofloat(item['value'])
+        if temp != None and value != None:
+            sql = "insert into `viscosity_material` (`material_id`, `tempature`, `value`) \
+                values (%s, %s, %s)"
+            values = [material_id, temp, value]
+            cursor.execute(sql, values)
+    return
+
+
+# 处理原料窄馏分性质的输入
+def handle_material_detail(dict, cursor):
+    # 处理列
+    re_t = []
+    re_col = []
+    vis_t = []
+    vis_col = []
+    for i in range(len(dict['refract_t'])):
+        re_t.append(tofloat(dict['refract_t'][i]))
+        re_col.append('re'+tostring(dict['refract_t'][i]))
+    for i in range(len(dict['viscosity_t'])):
+        vis_t.append(tofloat(dict['viscosity_t'][i]))
+        vis_col.append('vis'+tostring(dict['viscosity_t'][i]))
+    # 处理表格中的数据
+    for item in dict['tableDatas']:
+        pk = tostring(item['boiling_point']['content'])
+        if pk != None:
+            # 将数据插入material_detail表
+            sql = "insert into `material_detail` (`material_id`, `boiling_range`, \
+                `yield_fraction`, `yield_total`, `density`, `solidifying`, `acidity`, `acid`, \
+                `characteristic`, `related`, `api`) \
+                values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            values = [material_id,
+                      pk,  # 第一行
+                      tofloat(item['yield']['content']),
+                      tofloat(item['yield_total']['content']),
+                      tofloat(item['density']['content']),
+                      tofloat(item['freezing_point']['content']),
+                      tofloat(item['acidity']['content']),
+                      tofloat(item['acid_value']['content']),  # 第二行
+                      tofloat(item['characteristic_index']['content']),
+                      tofloat(item['correlation_index']['content']),
+                      tofloat(item['API']['content'])]
+            cursor.execute(sql, values)
+            # 将数据插入viscosity_detail表
+            for i in range(len(vis_t)):
+                value = tofloat(item[vis_col[i]]['content'])
+                if value != None:
+                    sql = "insert into `viscosity_detail` (`material_id`, `boiling_range`, `tempature`, `value`) \
+                        values (%s, %s, %s, %s)"
+                    values = [material_id, pk, vis_t[i], value]
+                    cursor.execute(sql, values)
+            # 将数据插入refraction_detail表
+            for i in range(len(re_t)):
+                value = tofloat(item[re_col[i]]['content'])
+                if value != None:
+                    sql = "insert into `refraction_detail` (`material_id`, `boiling_range`, `tempature`, `value`) \
+                        values (%s, %s, %s, %s)"
+                    values = [material_id, pk, re_t[i], value]
+                    cursor.execute(sql, values)
     return
 
 
@@ -227,6 +353,40 @@ def device(dict):
               tointNotNone(dict['overseas']['content']),
               tostring(dict['note']['content'])]
     return sql, values
+
+
+# 生成将数据插入material表的SQL语句
+def material(dict):
+    sql = "insert into `material` (`system_id`, `name`,  `density`,  `solidifying`, `acid`, \
+        `flash_open`, `flash_close`, `ash`, `carbon`, `wax`, \
+        `salt`, `sulfur`, `water`, `precipitate`, `calorific`, \
+        `type`, `gum`, `asphaltene` ) \
+        values (%s, %s, %s, %s, %s, %s, %s, %s, %s, \
+        %s, %s, %s, %s, %s, %s, %s, %s, %s )"
+    values = [system_id,
+              tostring(dict['material_name']),
+              tofloat(dict['density']),
+              tofloat(dict['freezing_point']),
+              tofloat(dict['acid_value']),  # 第一行
+              tofloat(dict['flash_point_open']),
+              tofloat(dict['flash_point_close']),
+              tofloat(dict['ash']),
+              tofloat(dict['carbon_residual']),
+              tofloat(dict['wax_content']),  # 第二行
+              tofloat(dict['salt_content']),
+              tofloat(dict['mercaptan_sulfur']),
+              tofloat(dict['water']),
+              tofloat(dict['precipitate']),
+              tofloat(dict['heat_value']),  # 第三行
+              tostring(dict['type']),
+              tofloat(dict['colloid']),
+              tofloat(dict['asphalt'])]  # 第四行
+    return sql, values
+
+
+# 生成将数据插入material_detail表的SQL语句
+def material_detail(dict):
+    pass
 
 
 # 生成将数据插入investment表的SQL语句

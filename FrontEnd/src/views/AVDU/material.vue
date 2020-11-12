@@ -1,15 +1,12 @@
 <template>
 <div>
-    <el-form ref="form" :model="materialInfo" label-width="100px" size="mini" style="margin-top: 20px">
+    <el-form ref="form" :model="materialInfo" label-width="130px" size="mini" style="margin-top: 20px">
         <el-form-item label="原料名称">
             <el-input v-model="materialInfo.material_name" placeholder="例：沙轻和科威特混合原油"></el-input>
         </el-form-item>
         <el-form-item label="原料密度（20℃）">
             <el-input v-model="materialInfo.density" placeholder="单位：kg/m³">
             </el-input>
-        </el-form-item>
-        <el-form-item label="粘度">
-            <el-input v-model="materialInfo.viscosity" placeholder="单位：m㎡/s"></el-input>
         </el-form-item>
         <el-form-item label="凝点">
             <el-input v-model="materialInfo.freezing_point" placeholder="单位：℃"></el-input>
@@ -57,6 +54,19 @@
         <el-form-item label="沥青质">
             <el-input v-model="materialInfo.asphalt" placeholder="单位：%(m/m)"></el-input>
         </el-form-item>
+        <el-form-item label="不同温度下的粘度" align="left">
+            <el-button size="mini" type="primary" @click="addItem">增加一项</el-button>
+            <el-button size="mini" type="primary" @click="delLastItem">删除末项</el-button>
+        </el-form-item>
+        <div v-for="(item,idx) in viscosity">
+            <el-form-item :label=item.tempName>
+                <el-input v-model="item.temp" placeholder="单位：℃"></el-input>
+            </el-form-item>
+            <el-form-item :label=item.valueName>
+                <el-input v-model="item.value" placeholder="单位：m㎡/s"></el-input>
+            </el-form-item>
+        </div>
+
         <el-form-item label="元素组成">
         </el-form-item>
         <el-form-item label="H">
@@ -125,22 +135,33 @@
         <div id="hello">
             <h4 style="display: inline-block;margin:0;">原料窄馏分性质</h4>
             <div style="display: inline-block;float: right;">
-                <el-button size="mini" type="primary" @click="consoleDatas">打印数据</el-button>
-                <el-button size="mini" type="primary" @click="addRow">增加行</el-button>
-                <el-button @click="delLastRow" slot="reference" type="primary" size="mini">删除末行</el-button>
-
+                <el-button v-if="showTable" size="mini" type="primary" @click="consoleDatas">打印数据</el-button>
+                <el-button v-if="showTable" size="mini" type="primary" @click="addRow">增加行</el-button>
+                <el-button v-if="showTable" @click="delLastRow" slot="reference" type="primary" size="mini">删除末行</el-button>
             </div>
-            <el-table :data="narrowFractionDatas" border style="width: 100%;margin-top:10px" @header-contextmenu="colRightClick">
+            <br><br>
+            <div>
+                折射率温度点（℃）
+                <el-select v-model="refract_t" multiple filterable allow-create :disabled="showTable" placeholder="请选择温度">
+                    <el-option label="20" value=20></el-option>
+                    <el-option label="40" value=40></el-option>
+                </el-select>
+                粘度温度点（℃）
+                <el-select v-model="viscosity_t" multiple filterable allow-create :disabled="showTable" placeholder="请选择温度">
+                    <el-option label="20" value=20></el-option>
+                    <el-option label="40" value=40></el-option>
+                </el-select>
+                <el-button type="primary" @click="refreshTable">创建表格</el-button>
+            </div>
+            <el-table v-if="showTable" :data="narrowFractionDatas" border style="width: 100%;margin-top:10px" maxheight="500">
                 <el-table-column v-if="narrowFractionCols.length > 0" type="index" :label="'编号'" :width="50"></el-table-column>
-                <el-table-column v-for="(column, idx) in narrowFractionCols" :key="idx" :index="idx">
+                <!-- 固定列 -->
+                <el-table-column v-for="(column, idx) in narrowFractionCols" :key="idx" :index="idx" :width="120">
                     <!--label-->
                     <template slot="header" slot-scope="scope1">
-                        <p v-show="column.show" @dblclick="column.show=false">
+                        <p>
                             {{column.txt}}
-                            <i class="el-icon-edit-outline" @click="column.show=false"></i>
                         </p>
-                        <el-input size="mini" v-show="!column.show" v-model="column.txt" @blur="column.show=true">
-                        </el-input>
                     </template>
                     <!--prop-->
                     <template slot-scope="scope">
@@ -152,24 +173,50 @@
                         </el-input>
                     </template>
                 </el-table-column>
+                <!-- 折射率 -->
+                <el-table-column v-if="refract_t.length>0" label="折射率">
+                    <el-table-column v-for="(column, idx) in refract_t" :key="idx" :index="idx">
+                        <!--label-->
+                        <template slot="header" slot-scope="scope1">
+                            <p>
+                                {{column}}℃
+                            </p>
+                        </template>
+                        <template slot-scope="scope">
+                            <p v-show="scope.row['re'+column].show" @dblclick="scope.row['re'+column].show=false">
+                                {{scope.row['re'+column].content}}
+                                <i class="el-icon-edit-outline" @click="scope.row['re'+column].show=false"></i>
+                            </p>
+                            <el-input type="textarea" :autosize="{minRows:2,maxRows:4}" v-show="!scope.row['re'+column].show" v-model="scope.row['re'+column].content" @blur="scope.row['re'+column].show=true">
+                            </el-input>
+                        </template>
+                    </el-table-column>
+                </el-table-column>
+                <!-- 运动粘度 -->
+                <el-table-column v-if="viscosity_t.length>0" label="运动粘度（m㎡/s）">
+                    <el-table-column v-for="(column, idx) in viscosity_t" :key="idx" :index="idx">
+                        <!--label-->
+                        <template slot="header" slot-scope="scope1">
+                            <p>
+                                {{column}}℃
+                            </p>
+                        </template>
+                        <template slot-scope="scope">
+                            <p v-show="scope.row['vis'+column].show" @dblclick="scope.row['vis'+column].show=false">
+                                {{scope.row['vis'+column].content}}
+                                <i class="el-icon-edit-outline" @click="scope.row['vis'+column].show=false"></i>
+                            </p>
+                            <el-input type="textarea" :autosize="{minRows:2,maxRows:4}" v-show="!scope.row['vis'+column].show" v-model="scope.row['vis'+column].content" @blur="scope.row['vis'+column].show=true">
+                            </el-input>
+                        </template>
+                    </el-table-column>
+                </el-table-column>
+
             </el-table>
-
-            <div v-show="showMenu" id="contextmenu">
-                <i class="el-icon-circle-close hideContextMenu" @click="showMenu=false"></i>
-                <el-button size="mini" type="primary" @click="addColumn(curColumn)">前方插入一列</el-button>
-                <el-button size="mini" type="primary" @click="addColumn(curColumn+1)">后方插入一列</el-button>
-                <el-button @click="delColumn" slot="reference" type="primary" size="mini">删除当前列</el-button>
-
-            </div>
-
         </div>
-        <!--
-        <el-form-item size="large">
-            <el-button type="primary" @click="onSubmit">立即创建</el-button>
-            <el-button>取消</el-button>
-        </el-form-item>
--->
     </el-form>
+    <br>
+    <el-button type="primary" @click="addToStore">暂存此页</el-button>
 </div>
 </template>
 
@@ -177,55 +224,53 @@
 export default {
     data() {
         return {
+            viscosity: [
+                { temp: "", value: "", tempName: "温度1", valueName: "粘度1" },
+                { temp: "", value: "", tempName: "温度2", valueName: "粘度2" },
+            ],
+            refract_t: [],
+            viscosity_t: [],
             narrowFractionCols: [
-				{col: "boiling_point", txt: '沸点范围（℃）', show: true},
-                {col: "yield", txt: '收率（每馏分）', show: true},
-                {col: "yield_total", txt: '总收率', show: true},
-                {col: "density", txt: '密度（20℃）（kg/m³）', show: true},
-                {col: "freezing_point", txt: '凝点（℃）', show: true},
-                {col: "acidity", txt: '酸度（mgKOH/100ml）', show: true},
-                {col: "acid_value", txt: '酸值（mgKOH/g）', show: true},
-                {col: "refractive_index", txt: '折射率（温度：___℃）', show: true},
-                {col: "viscosity", txt: '运动粘度（温度：___℃）', show: true},
-                {col: "characteristic_index", txt: '特性因数', show: true},
-                {col: "correlation_index", txt: '相关指数', show: true},
-				{col: "API", txt: 'API', show: true}
-			],
-			narrowFractionDatas: [{
-                    boiling_point: {content: '<80', show: true},
-                    yield: {content: '', show: true},
-                    yield_total: {content: '', show: true},
-                    density: {content: '', show: true},
-                    freezing_point: {content: '', show: true},
-                    acidity: {content: '', show: true},
-                    acid_value: {content: '', show: true},
-                    refractive_index: {content: '', show: true},
-                    viscosity: {content: '', show: true},
-                    characteristic_index: {content: '', show: true},
-                    correlation_index: {content: '', show: true},
-                    API: {content: '', show: true},
-				},{
-					boiling_point: {content: '80-100', show: true},
-                    yield: {content: '', show: true},
-                    yield_total: {content: '', show: true},
-                    density: {content: '', show: true},
-                    freezing_point: {content: '', show: true},
-                    acidity: {content: '', show: true},
-                    acid_value: {content: '', show: true},
-                    refractive_index: {content: '', show: true},
-                    viscosity: {content: '', show: true},
-                    characteristic_index: {content: '', show: true},
-                    correlation_index: {content: '', show: true},
-                    API: {content: '', show: true},
-				}
-			],
-			count_col: 0,
-			showMenu: false,
-			curColumn: null,
+                { col: "boiling_point", txt: '沸点范围（℃）' },
+                { col: "yield", txt: '每馏分收率（m%）' },
+                { col: "yield_total", txt: '总收率（m%）' },
+                { col: "density", txt: '密度（20℃）（kg/m³）' },
+                { col: "freezing_point", txt: '凝点（℃）' },
+                { col: "acidity", txt: '酸度（mgKOH/100ml）' },
+                { col: "acid_value", txt: '酸值（mgKOH/g）' },
+                { col: "characteristic_index", txt: '特性因数' },
+                { col: "correlation_index", txt: '相关指数' },
+                { col: "API", txt: 'API' }
+            ],
+            narrowFractionDatas: [{
+                boiling_point: { content: '<80', show: true },
+                yield: { content: '', show: true },
+                yield_total: { content: '', show: true },
+                density: { content: '', show: true },
+                freezing_point: { content: '', show: true },
+                acidity: { content: '', show: true },
+                acid_value: { content: '', show: true },
+                characteristic_index: { content: '', show: true },
+                correlation_index: { content: '', show: true },
+                API: { content: '', show: true },
+            }, {
+                boiling_point: { content: '80-100', show: true },
+                yield: { content: '', show: true },
+                yield_total: { content: '', show: true },
+                density: { content: '', show: true },
+                freezing_point: { content: '', show: true },
+                acidity: { content: '', show: true },
+                acid_value: { content: '', show: true },
+                characteristic_index: { content: '', show: true },
+                correlation_index: { content: '', show: true },
+                API: { content: '', show: true },
+            }],
+            count_col: 0,
+            showTable: false,
+            curColumn: null,
             materialInfo: {
                 material_name: '',
                 density: '',
-                viscosity: '',
                 freezing_point: '',
                 acid_value: '',
                 flash_point_open: '',
@@ -269,56 +314,77 @@ export default {
         console.log("turn to system page");
     },
     methods: {
-        colRightClick(column,event) {
-			window.event.returnValue = false; //阻止浏览器自带的右键菜单弹出
-			if(!column.index && column.index !== 0) return;
-			this.curColumn = column.index
-			this.showMenu = true
-			var ele = document.getElementById('contextmenu')
-			ele.style.top = event.clientY + 'px';
-			ele.style.left = event.clientX + 'px';
-			if(window.innerWidth - 140 < event.clientX) {
-				ele.style.left = 'unset'
-				ele.style.right = 0
-			}
-		},
-		addRow() { // 新增行
-			this.showMenu = false
-			var obj = {}
-			this.narrowFractionCols.map(p => {
-				obj[p.col] = {content: '', show: true}
-			})
-			this.narrowFractionDatas.push(obj)
-		},
-		// 当row中存在一“主键”可唯一标识row的下标时（如：编号放在narrowFractionDatas内），可借此实现行的自由插入与删除
-		addColumn(idx) { // 新增列
-			this.showMenu = false
-			var obj = {col: 'col_' + this.count_col++, txt: '', show: true}
-			if(idx || idx === 0) this.narrowFractionCols.splice(idx, 0, obj);
-			else this.narrowFractionCols.push(obj);
-			var _this = this
-			this.narrowFractionDatas.map(p => { // 新增的对象无法被vue监听到
-				_this.$set(p, obj.col, {content: '', show: true})
-//				p[obj.col] = {content: '', show: true}
-			})
-		},
-		delColumn() { // 删除列
-			this.showMenu = false
-			var colKey = this.narrowFractionCols[this.curColumn].col;
-			this.narrowFractionCols.splice(this.curColumn, 1);
-			this.narrowFractionDatas.map(p => {
-				delete p[colKey];
-			});
-		},
-		delLastRow() { // 删除行
-			this.showMenu = false
-			var len = this.narrowFractionDatas.length;
-			if(len > 0) this.narrowFractionDatas.splice(len - 1, 1);
-			else this.$message.error('没有可删除行');
-		},
-		consoleDatas() {
-			console.log('表头',this.narrowFractionCols);
-			console.log('数据',this.narrowFractionDatas);
+        addToStore: function () {
+            this.$store.materialInfo = {
+                tableCols: null,
+                refract_t: null,
+                viscosity_t: null,
+                tableDatas: null,
+                mainInfo: null,
+                viscosity: null,
+            };
+            this.$store.materialInfo.tableCols = this.narrowFractionCols; //窄馏分表头
+            this.$store.materialInfo.refract_t = this.refract_t; //窄馏分折射率温度点
+            this.$store.materialInfo.viscosity_t = this.viscosity_t; //窄馏分粘度温度点
+            this.$store.materialInfo.tableDatas = this.narrowFractionDatas; //窄馏分表内容
+            this.$store.materialInfo.mainInfo = this.materialInfo; //原料性质主要内容
+            this.$store.materialInfo.viscosity = this.viscosity; //原料不同温度下的粘度
+
+            console.log('store materialInfo to device');
+            // console.log(this.$store.deviceInfo.tableCols);
+        },
+        refreshTable() { //根据设置的粘度和折射率刷新表格
+            for (var x in this.refract_t) {
+                var _this = this
+                this.narrowFractionDatas.map(p => { // 新增的对象无法被vue监听到
+                    _this.$set(p, "re" + this.refract_t[x], { content: '', show: true })
+                    //		p[obj.col] = {content: '', show: true}
+                })
+            }
+            for (var x in this.viscosity_t) {
+                var _this = this
+                this.narrowFractionDatas.map(p => { // 新增的对象无法被vue监听到
+                    _this.$set(p, "vis" + this.viscosity_t[x], { content: '', show: true })
+                    //		p[obj.col] = {content: '', show: true}
+                })
+            }
+            this.showTable = true
+        },
+        addRow() { // 新增行
+            var obj = {}
+            this.narrowFractionCols.map(p => {
+                obj[p.col] = { content: '', show: true }
+            })
+            this.refract_t.map(p => {
+                obj['re' + p] = { content: '', show: true }
+            })
+            this.viscosity_t.map(p => {
+                obj['vis' + p] = { content: '', show: true }
+            })
+            this.narrowFractionDatas.push(obj)
+        },
+        delLastRow() { // 删除行
+            var len = this.narrowFractionDatas.length;
+            if (len > 0) this.narrowFractionDatas.splice(len - 1, 1);
+            else this.$message.error('没有可删除行');
+        },
+        addItem() {
+            var n = this.viscosity.length + 1
+            this.viscosity.push({
+                temp: "",
+                value: "",
+                tempName: "温度" + n,
+                valueName: "粘度" + n
+            })
+        },
+        delLastItem() {
+            var len = this.viscosity.length;
+            if (len > 0) this.viscosity.splice(len - 1, 1);
+            else this.$message.error('没有可删除项目');
+        },
+        consoleDatas() {
+            console.log('表头', this.narrowFractionCols);
+            console.log('数据', this.narrowFractionDatas);
         }
     }
 }
