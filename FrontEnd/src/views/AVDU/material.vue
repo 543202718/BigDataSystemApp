@@ -329,7 +329,12 @@ export default {
             this.$store.materialInfo.tableDatas = this.narrowFractionDatas; //窄馏分表内容
             this.$store.materialInfo.mainInfo = this.materialInfo; //原料性质主要内容
             this.$store.materialInfo.viscosity = this.viscosity; //原料不同温度下的粘度
-
+            this.$message({
+                message: '暂存成功',
+                type: 'success',
+                duration: 3000,
+                showClose: true
+            });
             console.log('store materialInfo to device');
             // console.log(this.$store.deviceInfo.tableCols);
         },

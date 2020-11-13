@@ -1,43 +1,5 @@
 <template>
 <div>
-<!--    <el-form ref="form" :model="wasteInfo" label-width="100px" size="mini" style="margin-top: 20px">
-        <el-form-item label="项目名称">
-            <el-input v-model="wasteInfo.name" placeholder="例：xx科技有限公司1000万吨/年的炼油化工一体项目"></el-input>
-        </el-form-item>
-
-        <el-form-item label="装置类别" style="text-align:left">
-            <el-select v-model="wasteInfo.system_id" filterable allow-create>
-                <el-option label="炼油装置（燃料油）" value="炼油装置（燃料油）"></el-option>
-                <el-option label="炼油装置（润滑油）" value="炼油装置（润滑油）"></el-option>
-                <el-option label="化工装置" value="化工装置"></el-option>
-                <el-option label="炼油化工一体化装置" value="炼油化工一体化装置"></el-option>
-            </el-select>
-        </el-form-item>
-
-        <el-form-item label="装置性质" style="text-align:left">
-            <el-radio-group v-model="wasteInfo.tower_name">
-                <el-radio-button label="新建"></el-radio-button>
-                <el-radio-button label="改扩建"></el-radio-button>
-            </el-radio-group>
-        </el-form-item>
-
-        <el-form-item label="设计完成时间">
-            <el-col :span="11">
-                <el-date-picker type="date" placeholder="选择日期" v-model="wasteInfo.unit" style="width: 100%;"></el-date-picker>
-            </el-col>
-        </el-form-item>
-        <el-form-item label="装置范围">
-            <el-input type="textarea" :rows="2" placeholder="本装置主要由原油电脱盐脱水部分、换热网络及加热炉部分、常压蒸馏部分、减压蒸馏部分等组成，装置内考虑防腐设置有塔顶注氨、注缓蚀剂、注水设施。
-" v-model="wasteInfo.value">
-            </el-input>
-        </el-form-item>
-        <el-form-item size="large">
-            <el-button type="primary" @click="onSubmit">立即创建</el-button>
-            <el-button>取消</el-button>
-        </el-form-item>
-
-    </el-form>
--->
     <div id="ListA">
         <h4 style="display: inline-block;margin:0;"></h4>
         <div style="display: inline-block;float: right;">
@@ -46,16 +8,14 @@
             <el-button @click="delLastRow" slot="reference" type="primary" size="mini">删除末行</el-button>
 
         </div>
-        <el-table :data="testDatas" border style="width: 100%;margin-top:10px" @header-contextmenu="colRightClick">
+        <el-table :data="testDatas" border style="width: 100%;margin-top:10px" max-height="600">
             <el-table-column v-if="testCols.length > 0" type="index" :label="'编号'" :width="50"></el-table-column>
             <el-table-column v-for="(column, idx) in testCols" :key="idx" :index="idx">
                 <!--label-->
                 <template slot="header" slot-scope="scope1">
-                    <p v-show="column.show" @dblclick="column.show=false">
+                    <p>
                         {{column.txt}}
-                        <i class="el-icon-edit-outline" @click="column.show=false"></i>
                     </p>
-                    <el-input size="mini" v-show="!column.show" v-model="column.txt" @blur="column.show=true">
                     </el-input>
                 </template>
                 <!--prop-->
@@ -69,15 +29,7 @@
                 </template>
             </el-table-column>
         </el-table>
- <!--
-        <div v-show="showMenu" id="contextmenu">
-            <i class="el-icon-circle-close hideContextMenu" @click="showMenu=false"></i>
-            <el-button size="mini" type="primary" @click="addColumn(curColumn)">前方插入一列</el-button>
-            <el-button size="mini" type="primary" @click="addColumn(curColumn+1)">后方插入一列</el-button>
-            <el-button @click="delColumn" slot="reference" type="primary" size="mini">删除当前列</el-button>
-
-        </div>
--->
+        <el-button type="primary" @click="addToStore">暂存此页</el-button>
     </div>
 </div>
 </template>
@@ -86,119 +38,53 @@
 export default {
     data() {
         return {
-            wasteInfo: {},
             testCols: [{
                     col: "name",
-                    txt: '三废名称',
-                    show: true
+                    txt: '三废名称'
                 },
                 {
                     col: "unit",
-                    txt: '单位',
-                    show: true
+                    txt: '单位'
                 },
                 {
                     col: "value",
-                    txt: '排放量',
-                    show: true
+                    txt: '排放量'
                 },
                 {
                     col: "CONTvalue",
-                    txt: '排放量（间断量）',
-                    show: true
+                    txt: '排放量（间断量）'
                 }, {
                     col: "note",
-                    txt: '备注',
-                    show: true
+                    txt: '备注'
                 }
             ],
             testDatas: [{
-                    name: {
-                        content: '含油污水',
-                        show: true
-                    },
-                    unit: {
-                        content: 't/h',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    },
-                    CONTvalue: {
-                        content: '',
-                        show: true
-                    },
-                    note: {
-                        content: '',
-                        show: true
-                    }
+                    name: { content: '含油污水', show: true },
+                    unit: { content: 't/h', show: true },
+                    value: { content: '', show: true },
+                    CONTvalue: { content: '', show: true },
+                    note: { content: '', show: true }
                 },
                 {
-                    name: {
-                        content: '含硫污水',
-                        show: true
-                    },
-                    unit: {
-                        content: 't/h',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    },
-                    CONTvalue: {
-                        content: '',
-                        show: true
-                    },
-                    note: {
-                        content: '',
-                        show: true
-                    }
+                    name: { content: '含硫污水', show: true },
+                    unit: { content: 't/h', show: true },
+                    value: { content: '', show: true },
+                    CONTvalue: { content: '', show: true },
+                    note: { content: '', show: true }
                 },
                 {
-                    name: {
-                        content: '含盐污水',
-                        show: true
-                    },
-                    unit: {
-                        content: 't/h',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    },
-                    CONTvalue: {
-                        content: '',
-                        show: true
-                    },
-                    note: {
-                        content: '',
-                        show: true
-                    }
+                    name: { content: '含盐污水', show: true },
+                    unit: { content: 't/h', show: true },
+                    value: { content: '', show: true },
+                    CONTvalue: { content: '', show: true },
+                    note: { content: '', show: true }
                 },
                 {
-                    name: {
-                        content: '加热炉烟气',
-                        show: true
-                    },
-                    unit: {
-                        content: 'kg/h（或m3/h）',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    },
-                    CONTvalue: {
-                        content: '',
-                        show: true
-                    },
-                    note: {
-                        content: '',
-                        show: true
-                    }
+                    name: { content: '加热炉烟气', show: true },
+                    unit: { content: 'kg/h', show: true },
+                    value: { content: '', show: true },
+                    CONTvalue: { content: '', show: true },
+                    note: { content: '', show: true }
                 }
             ],
             count_col: 0,
@@ -212,18 +98,20 @@ export default {
         console.log("turn to system page");
     },
     methods: {
-        colRightClick(column, event) {
-            window.event.returnValue = false; //阻止浏览器自带的右键菜单弹出
-            if (!column.index && column.index !== 0) return;
-            this.curColumn = column.index
-            this.showMenu = true
-            var ele = document.getElementById('contextmenu')
-            ele.style.top = event.clientY + 'px';
-            ele.style.left = event.clientX + 'px';
-            if (window.innerWidth - 140 < event.clientX) {
-                ele.style.left = 'unset'
-                ele.style.right = 0
-            }
+        addToStore: function () {
+            this.$store.wasteInfo = {
+                tableCols: null,
+                tableDatas: null
+            };
+            this.$store.wasteInfo.tableCols = this.tableCols; //表头
+            this.$store.wasteInfo.tableDatas = this.tableDatas; //表格内容
+            this.$message({
+                        message: '暂存成功',
+                        type: 'success',
+                        duration: 3000,
+                        showClose: true
+                    });
+            console.log('store wasteInfo to device');
         },
         addRow() { // 新增行
             this.showMenu = false
@@ -235,33 +123,6 @@ export default {
                 }
             })
             this.testDatas.push(obj)
-        },
-        // 当row中存在一“主键”可唯一标识row的下标时（如：编号放在testDatas内），可借此实现行的自由插入与删除
-        addColumn(idx) { // 新增列
-            this.showMenu = false
-            var obj = {
-                col: 'col_' + this.count_col++,
-                txt: '',
-                show: true
-            }
-            if (idx || idx === 0) this.testCols.splice(idx, 0, obj);
-            else this.testCols.push(obj);
-            var _this = this
-            this.testDatas.map(p => { // 新增的对象无法被vue监听到
-                _this.$set(p, obj.col, {
-                    content: '',
-                    show: true
-                })
-                //		p[obj.col] = {content: '', show: true}
-            })
-        },
-        delColumn() { // 删除列
-            this.showMenu = false
-            var colKey = this.testCols[this.curColumn].col;
-            this.testCols.splice(this.curColumn, 1);
-            this.testDatas.map(p => {
-                delete p[colKey];
-            });
         },
         delLastRow() { // 删除行
             this.showMenu = false

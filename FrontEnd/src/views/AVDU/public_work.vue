@@ -7,16 +7,14 @@
         <el-button @click="delLastRow" slot="reference" type="primary" size="mini">删除末行</el-button>
 
     </div>
-    <el-table :data="testDatas" border height=500 style=" width: 100%;margin-top:10px" @header-contextmenu="colRightClick">
+    <el-table :data="testDatas" border style=" width: 100%;margin-top:10px" max-height="600">
         <el-table-column v-if="testCols.length > 0" type="index" :label="'编号'" :width="50"></el-table-column>
         <el-table-column v-for="(column, idx) in testCols" :key="idx" :index="idx">
             <!--label-->
             <template slot="header" slot-scope="scope1">
-                <p v-show="column.show" @dblclick="column.show=false">
+                <p>
                     {{column.txt}}
                 </p>
-                <el-input size="mini" v-show="!column.show" v-model="column.txt" @blur="column.show=true">
-                </el-input>
             </template>
             <!--prop-->
             <template slot-scope="scope">
@@ -29,8 +27,7 @@
             </template>
         </el-table-column>
     </el-table>
-
-
+    <el-button type="primary" @click="addToStore">暂存此页</el-button>
 </div>
 </template>
 
@@ -54,82 +51,82 @@ export default {
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '净化水', show: true },
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '新鲜水', show: true },
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '循环水', show: true },
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '净化水', show: true },
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '除盐水', show: true },
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '除氧水', show: true },
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '工艺凝结水', show: true },
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '透平凝结水', show: true },
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '污水', show: true },
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '3.5Mpa蒸汽', show: true },
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '1.0Mpa蒸汽', show: true },
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '0.4Mpa蒸汽', show: true },
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '净化风', show: true },
                 unit: { content: 'Nm^3/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '非净化风', show: true },
                 unit: { content: 'Nm^3/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '间隔用量', show: true }
-            },{
+            }, {
                 name: { content: '氨气', show: true },
                 unit: { content: 'Nm^3/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
-            },{
+            }, {
                 name: { content: '胺液', show: true },
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
@@ -138,27 +135,26 @@ export default {
             count_col: 0,
             showMenu: false,
             curColumn: null,
-            //systemInfo:{
-            //    .....
-            //}
         }
     },
     created: function () {
         console.log("turn to system page");
     },
     methods: {
-        colRightClick(column, event) {
-            window.event.returnValue = false; //阻止浏览器自带的右键菜单弹出
-            if (!column.index && column.index !== 0) return;
-            this.curColumn = column.index
-            this.showMenu = true
-            var ele = document.getElementById('contextmenu')
-            ele.style.top = event.clientY + 'px';
-            ele.style.left = event.clientX + 'px';
-            if (window.innerWidth - 140 < event.clientX) {
-                ele.style.left = 'unset'
-                ele.style.right = 0
-            }
+        addToStore: function () {
+            this.$store.publicworkInfo = {
+                tableCols: null,
+                tableDatas: null
+            };
+            this.$store.publicworkInfo.tableCols = this.tableCols; //表头
+            this.$store.publicworkInfo.tableDatas = this.tableDatas; //表格内容
+            this.$message({
+                message: '暂存成功',
+                type: 'success',
+                duration: 3000,
+                showClose: true
+            });
+            console.log('store publicworkInfo to device');
         },
         addRow() { // 新增行
             this.showMenu = false
