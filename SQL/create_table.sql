@@ -229,7 +229,8 @@ create table `balance_item`(
 
 -- 物料平衡表
 create table `balance`(
-	`item_id` int, -- 物料号（外键）
+	`name` varchar(30), -- 名称
+    `inout` enum('in','out'), -- 出入方
     `system_id` int, -- 装置号（外键）
     `cutting_range` varchar(30), -- 实沸点切割范围，单位℃
     `yield` float, -- 收率，单位m%
@@ -237,9 +238,8 @@ create table `balance`(
     `flow2` float, -- 流率，单位吨/天
     `flow3` float, -- 流率，单位万吨/年
     `note` varchar(200), -- 备注
-    foreign key (`item_id`) references `balance_item`(`id`),
     foreign key (`system_id`) references `system`(`id`),
-    primary key (`item_id`,`system_id`)
+    primary key (`name`,`inout`,`system_id`)
 );
 
 

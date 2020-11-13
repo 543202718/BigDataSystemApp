@@ -1,6 +1,5 @@
 use bigdata;
 drop table if exists `balance`;
-drop table if exists `balance_item`;
 drop table if exists `viscosity_product`;
 drop table if exists `product`;
 drop table if exists `device`;
