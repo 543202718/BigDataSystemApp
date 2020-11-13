@@ -108,7 +108,7 @@
         </el-form-item>
         <el-form-item size="large">
             <el-button type="primary" @click="addToStore">暂存此页</el-button>
-        
+
         </el-form-item>
     </el-form>
 </div>
@@ -153,8 +153,14 @@ export default {
         console.log("turn to system page");
     },
     methods: {
-        addToStore: function(){
+        addToStore: function () {
             this.$store.systemInfo = this.systemInfo;
+            this.$message({
+                message: '暂存成功',
+                type: 'success',
+                duration: 3000,
+                showClose: true
+            });
             console.log('store systemInfo to device');
         }
     },

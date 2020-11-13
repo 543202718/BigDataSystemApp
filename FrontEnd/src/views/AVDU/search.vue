@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-form inline label-width="100px">
+        <el-form inline label-width="180px">
             <!-- 装置类别 -->
             <el-form-item label="装置类别" style="text-align:left">
                 <el-select
@@ -45,7 +45,7 @@
             </el-form-item>
             <br />
             <!-- 原料密度 -->
-            <el-form-item label="原料密度">
+            <el-form-item label="原料密度（kg/m³）">
                 <el-form-item>
                     <el-input
                         placeholder="密度下界"
@@ -66,7 +66,7 @@
             </el-form-item>
             <br />
             <!-- 原料酸值     -->
-            <el-form-item label="原料酸值">
+            <el-form-item label="原料酸值（mgKOH/g）">
                 <el-form-item>
                     <el-input placeholder="酸值下界" v-model="acid_l" clearable>
                     </el-input>
@@ -79,7 +79,7 @@
             </el-form-item>
             <br />
             <!-- 原料含硫率     -->
-            <el-form-item label="原料含硫率">
+            <el-form-item label="原料含硫率（w%）">
                 <el-form-item>
                     <el-input placeholder="含硫率下界" v-model="s_l" clearable>
                     </el-input>
@@ -96,7 +96,7 @@
             </el-form-item>
         </el-form>
 
-        <el-table :data="tableData" border style="width: 100%">
+        <el-table :data="tableData" border style="width: 100%" max-height="600">
             <el-table-column fixed="left" prop="id" label="序号" width="50">
             </el-table-column>
             <el-table-column prop="name" label="装置名称" width="300">

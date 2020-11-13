@@ -7,16 +7,14 @@
         <el-button @click="delLastRow" slot="reference" type="primary" size="mini">删除末行</el-button>
 
     </div>
-    <el-table :data="testDatas" border style="width: 100%;margin-top:10px" @header-contextmenu="colRightClick">
+    <el-table :data="testDatas" border style="width: 100%;margin-top:10px" max-height="600">
         <el-table-column v-if="testCols.length > 0" type="index" :label="'编号'" :width="50"></el-table-column>
         <el-table-column v-for="(column, idx) in testCols" :key="idx" :index="idx">
             <!--label-->
             <template slot="header" slot-scope="scope1">
-                <p v-show="column.show" @dblclick="column.show=false">
+                <p>
                     {{column.txt}}
                 </p>
-                <el-input size="mini" v-show="!column.show" v-model="column.txt" @blur="column.show=true">
-                </el-input>
             </template>
             <!--prop-->
             <template slot-scope="scope">
@@ -29,10 +27,8 @@
             </template>
         </el-table-column>
     </el-table>
-<el-button type="primary" @click="addToStore">暂存此页</el-button>
-
+    <el-button type="primary" @click="addToStore">暂存此页</el-button>
 </div>
-        
 </template>
 
 <script>
@@ -278,28 +274,19 @@ export default {
     },
     methods: {
         addToStore: function () {
-            this.$store.deviceInfo={
-                tableCols:null,
-                tableDatas:null
+            this.$store.deviceInfo = {
+                tableCols: null,
+                tableDatas: null
             };
-            this.$store.deviceInfo.tableCols = this.testCols;//表头
-            this.$store.deviceInfo.tableDatas = this.testDatas;//表内容
+            this.$store.deviceInfo.tableCols = this.testCols; //表头
+            this.$store.deviceInfo.tableDatas = this.testDatas; //表内容
+            this.$message({
+                message: '暂存成功',
+                type: 'success',
+                duration: 3000,
+                showClose: true
+            });
             console.log('store deviceInfo to device');
-            console.log(this.$store.deviceInfo.tableCols);
-        },
-
-        colRightClick(column, event) {
-            window.event.returnoverseas = false; //阻止浏览器自带的右键菜单弹出
-            if (!column.index && column.index !== 0) return;
-            this.curColumn = column.index
-            this.showMenu = true
-            var ele = document.getElementById('contextmenu')
-            ele.style.top = event.clientY + 'px';
-            ele.style.left = event.clientX + 'px';
-            if (window.innerWidth - 140 < event.clientX) {
-                ele.style.left = 'unset'
-                ele.style.right = 0
-            }
         },
         addRow() { // 新增行
             this.showMenu = false
