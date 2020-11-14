@@ -7,7 +7,16 @@ export default new Vuex.Store({
     state: {
         isLoggedIn: false,
         account: '',
-        deviceInfo: null,
+        deviceInfo: {
+            tableCols: '',
+            tableDatas: '',
+        },
+        systemInfo: null,
+        operation_conditionInfo: {
+            tableCols: null,
+            tableDatas: null,
+            operation_conditionInfo: null
+        },
     },
     /*
     mutations: {
