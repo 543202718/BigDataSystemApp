@@ -16,17 +16,14 @@ import public_work from "@/views/AVDU/public_work.vue";
 import waste from "@/views/AVDU/waste.vue";
 import search from "@/views/AVDU/search.vue";
 
-const routers = [
-    {
+const routers = [{
         path: "/",
         name: "Index",
         component: index,
-        children: [
-            {
+        children: [{
                 path: "/AVDU/input",
                 component: input,
-                children: [
-                    {
+                children: [{
                         path: "/AVDU/system",
                         component: system
                     },
@@ -71,9 +68,73 @@ const routers = [
             {
                 path: "/AVDU/search",
                 component: search
-            }
+            },
+            {
+                path: "/CR/input",
+                component: () =>
+                    import ("@/views/CR/input.vue"),
+                children: [{
+                        path: "/CR/system",
+                        component: () =>
+                            import ("@/views/CR/system.vue"),
+                    },
+                    {
+                        path: "/CR/material",
+                        component: () =>
+                            import ("@/views/CR/material.vue"),
+
+                    },
+                    {
+                        path: "/CR/balance",
+                        component: () =>
+                            import ("@/views/CR/balance.vue"),
+                    },
+                    {
+                        path: "/CR/chemical",
+                        component: () =>
+                            import ("@/views/CR/chemical.vue"),
+                    },
+                    {
+                        path: "/CR/device",
+                        component: () =>
+                            import ("@/views/CR/device.vue"),
+                    },
+                    {
+                        path: "/CR/investment",
+                        component: () =>
+                            import ("@/views/CR/investment.vue"),
+                    },
+                    {
+                        path: "/CR/operation_condition",
+                        component: () =>
+                            import ("@/views/CR/operation_condition.vue"),
+                    },
+                    {
+                        path: "/CR/product",
+                        component: () =>
+                            import ("@/views/CR/product.vue"),
+                    },
+                    {
+                        path: "/CR/public_work",
+                        component: () =>
+                            import ("@/views/CR/public_work.vue"),
+                    },
+                    {
+                        path: "/CR/waste",
+                        component: () =>
+                            import ("@/views/CR/waste.vue"),
+                    }
+                ]
+
+            },
+            {
+                path: "/CR/search",
+                component: () =>
+                    import ("@/views/CR/search.vue")
+            },
         ]
     },
+
     {
         path: "/author",
         name: "Author",
