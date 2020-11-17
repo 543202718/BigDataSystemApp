@@ -60,43 +60,43 @@ export default {
     methods: {
         toSystem() {
             console.log("turn to system page, from input");
-            this.$router.push("/AVDU/system");
+            this.$router.push("/CR/system");
         },
         toMaterial() {
             console.log("turn to system page, from input");
-            this.$router.push("/AVDU/material");
+            this.$router.push("/CR/material");
         },
         toBalance() {
             console.log("turn to system page, from input");
-            this.$router.push("/AVDU/balance");
+            this.$router.push("/CR/balance");
         },
         toDevice() {
             console.log("turn to system page, from input");
-            this.$router.push("/AVDU/device");
+            this.$router.push("/CR/device");
         },
         toChemical() {
             console.log("turn to system page, from input");
-            this.$router.push("/AVDU/chemical");
+            this.$router.push("/CR/chemical");
         },
         toInvestment() {
             console.log("turn to system page, from input");
-            this.$router.push("/AVDU/investment");
+            this.$router.push("/CR/investment");
         },
         toOperationCondition() {
             console.log("turn to system page, from input");
-            this.$router.push("/AVDU/operation_condition");
+            this.$router.push("/CR/operation_condition");
         },
         toProduct() {
             console.log("turn to system page, from input");
-            this.$router.push("/AVDU/product");
+            this.$router.push("/CR/product");
         },
         toPublicWork() {
             console.log("turn to system page, from input");
-            this.$router.push("/AVDU/public_work");
+            this.$router.push("/CR/public_work");
         },
         toWaste() {
             console.log("turn to system page, from input");
-            this.$router.push("/AVDU/waste");
+            this.$router.push("/CR/waste");
         },
         dateFormat(fmt, date) {
             let ret;
@@ -138,7 +138,7 @@ export default {
             var Instance = this;
             this.$axios({
                 method: "post",
-                url: 'http://' + document.domain + ':5000/AVDU_import',
+                url: 'http://' + document.domain + ':5000/CR_import',
                 data: {
                     systemInfo: systemInfo,
                     deviceInfo: deviceInfo,

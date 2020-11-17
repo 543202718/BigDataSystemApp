@@ -15,7 +15,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './store/store.js'
+import axios from 'axios'
 
+Vue.prototype.$axios = axios
 Vue.use(VueElementExtends)
 Vue.use(Elements)
 Vue.use(VueRouter)
@@ -23,6 +25,13 @@ Vue.use(VueResource)
 Vue.use(VCharts)
 Vue.use(ElementUI);
 Vue.use(store)
+
+//const originalPush = VueRouter.prototype.push;
+
+//VueRouter.prototype.push = function push(location) {
+//    return originalPush.call(this, location).catch(err => err);
+//};
+
 
 const router = new VueRouter({
     mode: 'history',
