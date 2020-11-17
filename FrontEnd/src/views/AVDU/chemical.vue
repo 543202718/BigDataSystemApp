@@ -398,8 +398,8 @@ export default {
                 tableCols: null,
                 tableDatas: null
             };
-            this.$store.chemicalInfo.tableCols = this.tableCols; //表头
-            this.$store.chemicalInfo.tableDatas = this.tableDatas; //表格内容
+            this.$store.chemicalInfo.tableCols = this.testCols; //表头
+            this.$store.chemicalInfo.tableDatas = this.testDatas; //表格内容
             this.$message({
                 message: '暂存成功',
                 type: 'success',

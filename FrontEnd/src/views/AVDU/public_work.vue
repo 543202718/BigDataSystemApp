@@ -146,8 +146,8 @@ export default {
                 tableCols: null,
                 tableDatas: null
             };
-            this.$store.publicworkInfo.tableCols = this.tableCols; //表头
-            this.$store.publicworkInfo.tableDatas = this.tableDatas; //表格内容
+            this.$store.publicworkInfo.tableCols = this.testCols; //表头
+            this.$store.publicworkInfo.tableDatas = this.testDatas; //表格内容
             this.$message({
                 message: '暂存成功',
                 type: 'success',

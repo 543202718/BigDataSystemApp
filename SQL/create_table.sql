@@ -208,16 +208,17 @@ create table `product`(
     `characteristic` float, -- 特质因数
     `acid` float, -- 酸值，单位mgKOH/g
     `sulfur_content` float, -- 硫含量，单位wt/%
+    `note` varchar(100), --备注
     foreign key (`system_id`) references `system`(`id`)
 );
 
 -- 产品粘度表
 create table `viscosity_product`(
     `product_id` int, -- 原料号（外键）
-    `tempature` float, -- 温度 
+    `temperature` float, -- 温度 
     `value` float not null, -- 粘度值
     foreign key (`product_id`) references `product`(`id`),
-    primary key (`product_id`,`tempature`)
+    primary key (`product_id`,`temperature`)
 );
 
 -- 物料表
@@ -241,7 +242,6 @@ create table `balance`(
     foreign key (`system_id`) references `system`(`id`),
     primary key (`name`,`inout`,`system_id`)
 );
-
 
 
 
