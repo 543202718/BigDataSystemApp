@@ -139,6 +139,10 @@ export default {
     },
     created: function () {
         console.log("turn to system page");
+        if ('publicworkInfo' in this.$store) {
+            this.testCols = this.$store.publicworkInfo.tableCols;
+            this.testDatas = this.$store.publicworkInfo.tableDatas;
+        }
     },
     methods: {
         addToStore: function () {

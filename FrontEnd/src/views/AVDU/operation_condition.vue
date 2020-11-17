@@ -19,7 +19,7 @@
         <br><br>
         <div>
             设备
-            <el-select v-model="tower" multiple filterable allow-create :disabled="showTable"  placeholder="请选择设备">
+            <el-select v-model="tower" multiple filterable allow-create :disabled="showTable" placeholder="请选择设备">
                 <el-option label="闪蒸塔" value="闪蒸塔"></el-option>
                 <el-option label="初馏塔" value="初馏塔"></el-option>
                 <el-option label="常压塔" value="常压塔"></el-option>
@@ -59,7 +59,7 @@ export default {
     data() {
         return {
             showTable: false,
-            tower: ["闪蒸塔","初馏塔","常压塔","减压塔"],
+            tower: ["闪蒸塔", "初馏塔", "常压塔", "减压塔"],
             operation_conditionInfo: {
                 CrudeOilToDesaltTemp: '',
                 FlasBotmToAtmoFurnTemp: '',
@@ -257,6 +257,12 @@ export default {
 
     created: function () {
         console.log("turn to system page");
+        if ('operation_conditionInfo' in this.$store) {
+            this.testCols = this.$store.operation_conditionInfo.tableCols;
+            this.testDatas = this.$store.operation_conditionInfo.tableDatas;
+            this.operation_conditionInfo = this.$store.operation_conditionInfo.operation_conditionInfo;
+            this.showTable = true;
+        }
     },
     methods: {
         addToStore: function () {
@@ -281,7 +287,7 @@ export default {
             for (var x in this.tower) {
                 var _this = this
                 this.testCols.push({
-                    col: "tower"+x,
+                    col: "tower" + x,
                     txt: this.tower[x]
                 });
                 this.testDatas.map(p => { // 新增的对象无法被vue监听到

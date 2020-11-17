@@ -151,6 +151,9 @@ export default {
 
     created: function () {
         console.log("turn to system page");
+        if ('systemInfo' in this.$store){
+            this.systemInfo = this.$store.systemInfo;
+        }
     },
     methods: {
         addToStore: function () {

@@ -33,51 +33,49 @@ def AVDU_import():
 def insert(dict):
     code = 200
     # 打开数据库连接
-    
+
     db = pymysql.connect(host="localhost", user="root",
-                         password="@liudf57489sql", db="bigdata",
+                         password="123456", db="bigdata",
                          charset='utf8', cursorclass=pymysql.cursors.DictCursor)
     print("open the database!!!")
     # 使用 cursor() 方法创建一个游标对象 cursor
-    flag=0
     cursor = db.cursor()
     try:
         # 处理装置概况的输入
         handle_system(dict['systemInfo'], cursor)
-        flag=flag+1
+        print("SystemInfo Done")
         # 处理原料性质的输入
         handle_material(dict['materialInfo'], cursor)
-        flag=flag+1
+        print("MaterialInfo Done")
         # 处理产品性质的输入
         handle_product(dict['productInfo'], cursor)
-        flag=flag+1
+        print("ProductInfo Done")
         # 处理物料平衡的输入
         handle_balance(dict['balanceInfo'], cursor)
-        flag=flag+1
+        print("BalanceInfo Done")
         # 处理操作条件的输入
         handle_operation_condition(dict['operation_conditionInfo'], cursor)
-        flag=flag+1
+        print("Operation_ConditionInfo Done")
         # 处理公用工程的输入
         handle_publicwork(dict['publicworkInfo'], cursor)
-        flag=flag+1
+        print("PublicworkInfo Done")
         # 处理装置投资的输入
         handle_investment(dict['investmentInfo'], cursor)
-        flag=flag+1
+        print("InvestmentInfo Done")
         # 处理主要设备的输入
         handle_device(dict['deviceInfo'], cursor)
-        flag=flag+1
+        print("DeviceInfo Done")
         # 处理三废排放的输入
         handle_waste(dict['wasteInfo'], cursor)
-        flag=flag+1
+        print("WasteInfo Done")
         # 处理化学药剂的输入
         handle_chemical(dict['chemicalInfo'], cursor)
-        flag=flag+1
+        print("ChemicalInfo Done")
         # 提交sql更新
         db.commit()
     except Exception as err:
         # 发生错误时回滚
         print(err)
-        print(flag)
         db.rollback()
         code = 400
     # 关闭数据库连接
@@ -117,6 +115,7 @@ def project(dict):
 
 # 生成将数据插入system表的SQL语句
 def system(dict):
+    # print(dict)
     sql = "insert into `system` (`project_id`, `system_id`, `type`, `designer`, `design_time`, \
         `name`, `property`, `design_stage`, `scale`, `set`, \
         `work_hour`, `flexibility`, `process_type`, `patentee`, `field`, \
@@ -339,7 +338,7 @@ def processCol(s, dict):
 
 # 处理产品性质的输入
 def handle_product(dict, cursor):
-    for item in dict['tableDatas']: #tableDatas中的item就是对应的每一行
+    for item in dict['tableDatas']:  # tableDatas中的item就是对应的每一行
         sql = " insert into `product` (`system_id`, `name`, `density`, \
             `api`, `m_weight`, `characteristic`, `acid`, `sulfur_content`, `note`) values \
             (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -352,35 +351,27 @@ def handle_product(dict, cursor):
                   tofloat(item['acid_value']['content']),
                   tofloat(item['sulfur_content']['content']),
                   tostring(item['remarks']['content'])
-        ]
+                  ]
         cursor.execute(sql, values)
-
-        #下面需要设置下product_id
+        # 下面需要设置下product_id
         cursor.execute("select last_insert_id()")
         result = cursor.fetchone()
         product_id = result['last_insert_id()']
         visc = dict['viscosity_t']
-        print("visc:",visc)
-        
+        # print("visc:",visc)
         for i in range(len(visc)):
-            value = item['vis' + visc[i]]['content']
-            value = tostring(value)
-            
+            value = tostring(item['vis' + visc[i]]['content'])
             if value != None:
-                
                 sql = "insert into `viscosity_product`(`product_id`, `temperature`, `value`) values\
                     (%s, %s, %s)"
-                values = [product_id,
-                        visc[i],
-                        value
-                ]
+                values = [product_id, visc[i], value]
                 cursor.execute(sql, values)
     return
 
 
 # 处理物料平衡的输入
 def handle_balance(dict, cursor):
-    print(dict)
+    # print(dict)
     sql = "insert into `balance` (`inout`, `name`, `system_id`, `cutting_range`, `yield`, \
         `flow1`, `flow2`, `flow3`, `note` ) values  "
     values = []
@@ -410,7 +401,7 @@ def handle_operation_condition(dict, cursor):
         if item['col'] == 'name' or item['col'] == 'unit':
             continue
         map[item['col']] = item['txt']
-    print(map)
+    # print(map)
     # 处理原油进电脱盐温度
     value = tofloat(dict['operation_conditionInfo']['CrudeOilToDesaltTemp'])
     if value != None:
@@ -427,7 +418,7 @@ def handle_operation_condition(dict, cursor):
         cursor.execute(sql, values)
     # 处理下方的表格
     for item in dict['tableDatas']:
-        print(item)
+        # print(item)
         name = item['name']['content']
         unit = item['unit']['content']
         for k, v in item.items():
@@ -449,8 +440,8 @@ def handle_operation_condition(dict, cursor):
 
 # 处理公用工程的输入 关注公用工程的 Note
 def handle_publicwork(dict, cursor):
-    print(dict)
-    # publicwork表的SQL和数据    
+    # print(dict)
+    # publicwork表的SQL和数据
     sql = "insert into `publicwork` (`name`,`system_id`,`unit`,`value`,`note`)\
         values "
     values = []
@@ -470,13 +461,13 @@ def handle_publicwork(dict, cursor):
 
 
 # 处理装置投资的输入
-#装置投资 经检查 Front and Back :名称一致
+# 装置投资 经检查 Front and Back :名称一致
 def handle_investment(dict, cursor):
     # investment表的SQL和数据
     sql = "insert into `investment` (`system_id`,`total`,`con_invest`,`project_cost`,\
         `equipment_fee`,`installation_fee`,`construction_fee`,`else`) \
             values (%s, %s, %s, %s, %s, %s, %s, %s)"
-    values = [system_id,            
+    values = [system_id,
               tofloat(dict['total']),
               tofloat(dict['con_invest']),
               tofloat(dict['project_cost']),
@@ -484,7 +475,7 @@ def handle_investment(dict, cursor):
               tofloat(dict['installation_fee']),
               tofloat(dict['construction_fee']),
               tofloat(dict['else'])
-    ]
+              ]
     cursor.execute(sql, values)
     return
 
@@ -518,10 +509,10 @@ def handle_waste(dict, cursor):
         values = values + [
             tostring(item['name']['content']),
             system_id,
-            tostring(item['unit']['content']),         
-            tofloat(item['value']['content']),            
-            tofloat(item['CONTvalue']['content']),         
-            tostring(item['note']['content'])       
+            tostring(item['unit']['content']),
+            tofloat(item['value']['content']),
+            tofloat(item['CONTvalue']['content']),
+            tostring(item['note']['content'])
         ]
     if len(values) > 0:
         sql = sql.rstrip(",")
@@ -532,28 +523,28 @@ def handle_waste(dict, cursor):
 # 处理化学药剂的输入
 # 化学药剂 经检查 Front and Back 名称一致:
 def handle_chemical(dict, cursor):
-    print(dict)
+    # print(dict)
     sql = "insert into `chemical` (`name`, `system_id`, `unit`, `value`, `type`,\
         `pattern`, `transport`, `note`) values "
     values = []
     for item in dict['tableDatas']:
         value = tofloat(item['value']['content'])
-        if value !=None: 
+        if value != None:
             sql = sql + "(%s, %s, %s, %s, %s, %s, %s, %s),"
             values = values + [
-                tostring(item['name']['content']),                      
+                tostring(item['name']['content']),
                 system_id,
                 tostring(item['unit']['content']),
                 value,
                 tostring(item['type']['content']),
                 tostring(item['pattern']['content']),
                 tostring(item['transport']['content']),
-                tostring(item['note']['content'])     
+                tostring(item['note']['content'])
             ]
     if len(values) > 0:
         sql = sql.rstrip(",")
         cursor.execute(sql, values)
-    return 
+    return
 
 
 # 将输入字符串转化为int类型，如果无法转化就返回None

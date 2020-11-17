@@ -96,6 +96,10 @@ export default {
 
     created: function () {
         console.log("turn to system page");
+        if ('wasteInfo' in this.$store) {
+            this.testCols = this.$store.wasteInfo.tableCols;
+            this.testDatas = this.$store.wasteInfo.tableDatas;
+        }
     },
     methods: {
         addToStore: function () {

@@ -312,6 +312,15 @@ export default {
 
     created: function () {
         console.log("turn to system page");
+        if ('materialInfo' in this.$store) {
+            this.narrowFractionCols = this.$store.materialInfo.tableCols; //窄馏分表头
+            this.refract_t = this.$store.materialInfo.refract_t; //窄馏分折射率温度点
+            this.viscosity_t = this.$store.materialInfo.viscosity_t; //窄馏分粘度温度点
+            this.narrowFractionDatas = this.$store.materialInfo.tableDatas; //窄馏分表内容
+            this.materialInfo = this.$store.materialInfo.mainInfo; //原料性质主要内容
+            this.viscosity = this.$store.materialInfo.viscosity; //原料不同温度下的粘度
+            this.showTable = true;
+        }
     },
     methods: {
         addToStore: function () {

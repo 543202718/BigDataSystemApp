@@ -37,34 +37,13 @@
 export default {
     data() {
         return {
-            testCols: [{
-                    col: "name",
-                    txt: '药剂名称'
-                },
-                {
-                    col: "value",
-                    txt: '用量单位'
-                },
-                {
-                    col: "unit",
-                    txt: '用量数值'
-                },
-                {
-                    col: "type",
-                    txt: '类别'
-                },
-                {
-                    col: "pattern",
-                    txt: '型号或规格'
-                },
-                {
-                    col: "transport",
-                    txt: '运输方式'
-                },
-                {
-                    col: "note",
-                    txt: '备注'
-                }
+            testCols: [{ col: "name", txt: '药剂名称' },
+                { col: "value", txt: '用量数值' },
+                { col: "unit", txt: '用量单位' },
+                { col: "type", txt: '类别' },
+                { col: "pattern", txt: '型号或规格' },
+                { col: "transport", txt: '运输方式' },
+                { col: "note", txt: '备注' }
             ],
             testDatas: [{
                     name: { content: '破乳剂', show: true },
@@ -391,6 +370,10 @@ export default {
 
     created: function () {
         console.log("turn to system page");
+        if ('chemicalInfo' in this.$store) {
+            this.testCols = this.$store.chemicalInfo.tableCols;
+            this.testDatas = this.$store.chemicalInfo.tableDatas;
+        }
     },
     methods: {
         addToStore: function () {

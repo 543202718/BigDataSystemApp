@@ -86,13 +86,20 @@ export default {
 
     created: function () {
         console.log("turn to system page");
-        var items = ["初顶气", "初顶油", "常顶气", "常顶油", "常一线", "常二线", "常三线", "常四线", "常压渣油（常底油）",
-            "贫吸收油", "常压重油", "过汽化油", "减顶气", "减顶油", "减一线", "减二线", "减三线", "减四线", "减五线",
-            "减六线", "减压渣油"
-        ];
-        for (var item in items) {
-            this.addRow();
-            this.productDatas[this.productDatas.length - 1].product_name.content = items[item];
+        if ('productInfo' in this.$store) {
+            this.productCols = this.$store.productInfo.tableCols;
+            this.viscosity_t = this.$store.productInfo.viscosity_t;
+            this.productDatas = this.$store.productInfo.tableDatas;
+            this.showTable = true;
+        } else {
+            var items = ["初顶气", "初顶油", "常顶气", "常顶油", "常一线", "常二线", "常三线", "常四线", "常压渣油（常底油）",
+                "贫吸收油", "常压重油", "过汽化油", "减顶气", "减顶油", "减一线", "减二线", "减三线", "减四线", "减五线",
+                "减六线", "减压渣油"
+            ];
+            for (var item in items) {
+                this.addRow();
+                this.productDatas[this.productDatas.length - 1].product_name.content = items[item];
+            }
         }
     },
     methods: {
