@@ -49,6 +49,9 @@ export default {
 
     created: function () {
         console.log("turn to system page");
+        if ('investmentInfo' in this.$store){
+            this.investmentInfo = this.$store.investmentInfo;
+        }
     },
     methods: {
         addToStore: function () {

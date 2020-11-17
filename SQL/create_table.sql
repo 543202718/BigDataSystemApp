@@ -145,7 +145,7 @@ create table `chemical`(
     `value` float not null, -- 值
     `type` varchar(30), -- 类别
     `pattern` varchar(30), -- 型号或规格
-    `transport` enum('barrel','pipe'), -- 运输方式，桶装或管道
+    `transport` varchar(30), -- 运输方式
     `note` varchar(100), -- 备注
     foreign key (`system_id`) references `system`(`id`),
     primary key (`name`,`system_id`)
@@ -208,23 +208,17 @@ create table `product`(
     `characteristic` float, -- 特质因数
     `acid` float, -- 酸值，单位mgKOH/g
     `sulfur_content` float, -- 硫含量，单位wt/%
+    `note` varchar(100), -- 备注
     foreign key (`system_id`) references `system`(`id`)
 );
 
 -- 产品粘度表
 create table `viscosity_product`(
     `product_id` int, -- 原料号（外键）
-    `tempature` float, -- 温度 
+    `temperature` float, -- 温度 
     `value` float not null, -- 粘度值
     foreign key (`product_id`) references `product`(`id`),
-    primary key (`product_id`,`tempature`)
-);
-
--- 物料表
-create table `balance_item`(
-	`id` int auto_increment primary key, -- 物料号
-    `name` varchar(30) not null, -- 名称
-    `inout` enum('出方','入方') not null -- 出入方
+    primary key (`product_id`,`temperature`)
 );
 
 -- 物料平衡表
@@ -241,7 +235,6 @@ create table `balance`(
     foreign key (`system_id`) references `system`(`id`),
     primary key (`name`,`inout`,`system_id`)
 );
-
 
 
 

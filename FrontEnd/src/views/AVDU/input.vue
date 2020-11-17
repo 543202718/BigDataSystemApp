@@ -118,7 +118,6 @@ export default {
             return fmt;
         },
         onSubmit() {
-
             var systemInfo = this.$store.systemInfo;
             var deviceInfo = this.$store.deviceInfo;
             var operation_conditionInfo = this.$store.operation_conditionInfo;
@@ -129,11 +128,11 @@ export default {
             var publicworkInfo = this.$store.publicworkInfo;
             var productInfo = this.$store.productInfo;
             var balanceInfo = this.$store.balanceInfo;
-            console.log(operation_conditionInfo);
-            if (this.systemInfo.design_time instanceof Date) {
-                this.systemInfo.design_time = this.dateFormat("YYYY-mm-dd", this.systemInfo.design_time); //格式化日期，否则传到后端会出错
+            var design_time = systemInfo.design_time;
+            if (systemInfo.design_time instanceof Date) {
+                systemInfo.design_time = this.dateFormat("YYYY-mm-dd", systemInfo.design_time); //格式化日期，否则传到后端会出错
             } else {
-                this.systemInfo.design_time = "";
+                systemInfo.design_time = "";
             }
             var Instance = this;
             this.$axios({
@@ -174,6 +173,7 @@ export default {
                     });
                 }
             })
+            systemInfo.design_time = design_time;
             console.log('submit!');
         },
         changeFormShow(showFormID) {

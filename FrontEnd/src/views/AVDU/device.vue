@@ -271,6 +271,10 @@ export default {
     },
     created: function () {
         console.log("turn to system page");
+        if ('deviceInfo' in this.$store) {
+            this.testCols = this.$store.deviceInfo.tableCols;
+            this.testDatas = this.$store.deviceInfo.tableDatas;
+        }
     },
     methods: {
         addToStore: function () {
