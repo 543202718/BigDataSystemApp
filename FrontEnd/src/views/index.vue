@@ -5,18 +5,30 @@
 
     <el-row style="height: 85%; background-color: white">
         <el-col :span="4" style="height: 100%; background-color: white; overflow: auto; text-align: left">
-            <el-menu style="height: 100%" default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"   active-text-color="#ffd04b">
+            <el-menu style="height: 100%" default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" active-text-color="#ffd04b">
                 <el-submenu index="1">
                     <template slot="title">
                         <i class="el-icon-menu"></i>
                         <span>常减压装置</span>
                     </template>
                     <el-menu-item-group>
-                        <el-menu-item index="1-1" @click="inputTemplate1('/AVDU/input')" >输入</el-menu-item>
-                        <el-menu-item index="1-2" @click="inputTemplate1('/AVDU/search')" >查询</el-menu-item>
+                        <el-menu-item index="1-1" @click="inputTemplate('/AVDU/input')">输入</el-menu-item>
+                        <el-menu-item index="1-2" @click="inputTemplate('/AVDU/search')">查询</el-menu-item>
                         <el-menu-item index="1-3">比对</el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
+                <el-submenu index="2">
+                    <template slot="title">
+                        <i class="el-icon-menu"></i>
+                        <span>重整装置</span>
+                    </template>
+                    <el-menu-item-group>
+                        <el-menu-item index="2-1" @click="inputTemplate('/CR/input')">输入</el-menu-item>
+                        <el-menu-item index="2-2" @click="inputTemplate('/CR/search')">查询</el-menu-item>
+                        <el-menu-item index="2-3">比对</el-menu-item>
+                    </el-menu-item-group>
+                </el-submenu>
+
                 <el-menu-item index="2">
                     <i class="el-icon-menu"></i>
                     <span slot="title">重整装置</span>
@@ -35,7 +47,7 @@
                 </el-menu-item>
             </el-menu>
         </el-col>
-    <el-col :span="20" style="height: 100%; background-color: white; overflow: auto;">
+        <el-col :span="20" style="height: 100%; background-color: white; overflow: auto;">
             <el-main>
                 <router-view>
                     //嵌套子路由
@@ -47,7 +59,7 @@
     <el-footer style="height: 5%">
         <br>
         清华大学 软件学院<br />
-   </el-footer>
+    </el-footer>
 
 </div>
 </template>
@@ -61,7 +73,7 @@ export default {
     },
 
     methods: {
-        inputTemplate1(path) {
+        inputTemplate(path) {
             this.$router.push(path);
         },
         handleOpen(key, keyPath) {
@@ -76,13 +88,11 @@ export default {
 
 <style>
 .el-header {
-height: 10%;
+    height: 10%;
     text-align: left;
     padding: 13px;
-    color:white;
+    color: white;
 }
-
-
 
 .el-submenu .el-menu-item {
     min-width: 100px;
