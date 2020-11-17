@@ -130,10 +130,10 @@ export default {
             var productInfo = this.$store.productInfo;
             var balanceInfo = this.$store.balanceInfo;
             console.log(operation_conditionInfo);
-            if (this.systemInfo.design_time instanceof Date) {
-                this.systemInfo.design_time = this.dateFormat("YYYY-mm-dd", this.systemInfo.design_time); //格式化日期，否则传到后端会出错
+            if (systemInfo.design_time instanceof Date) {
+                systemInfo.design_time = this.dateFormat("YYYY-mm-dd", systemInfo.design_time); //格式化日期，否则传到后端会出错
             } else {
-                this.systemInfo.design_time = "";
+                systemInfo.design_time = "";
             }
             var Instance = this;
             this.$axios({
