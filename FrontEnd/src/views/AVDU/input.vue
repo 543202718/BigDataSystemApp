@@ -235,37 +235,46 @@ export default {
         },
         onSubmit() {
 
-            this.systemInfo = this.$store.systemInfo;
+            var systemInfo = this.$store.systemInfo;
+            var deviceInfo = this.$store.deviceInfo;
+            console.log(deviceInfo);
             console.log(this.systemInfo);
             if (this.systemInfo.design_time instanceof Date) {
                 this.systemInfo.design_time = this.dateFormat("YYYY-mm-dd", this.systemInfo.design_time); //格式化日期，否则传到后端会出错
             } else {
                 this.systemInfo.design_time = "";
             }
-            this.$http
-                .post('http://' + document.domain + ':5000/AVDU_import', {
-                    systemInfo: this.systemInfo,
-                    //发送给后端的信息，可以按照需求增加条目
-                }, {
-                    emulateJSON: true //必需，否则可能会json解析出错
-                }).then(function (response) {
-                    //response.body是报文的主体内容
-                    if (parseInt(response.body.code) === 200) {
-                        this.$message({
-                            message: '创建成功',
-                            type: 'success',
-                            duration: 3000,
-                            showClose: true
-                        });
-                    } else {
-                        this.$message({
-                            message: '创建失败，请检查您的输入',
-                            type: 'error',
-                            duration: 3000,
-                            showClose: true
-                        });
-                    }
-                })
+            var Instance = this;
+            this.$axios({
+                method:"post",
+                url: 'http://' + document.domain + ':5000/AVDU_import',
+                data: {
+                    systemInfo: systemInfo,
+                    deviceInfo: deviceInfo
+                },
+                //发送给后端的信息，可以按照需求增加条目
+                header: {
+                    'Content-Type': 'application/json' //如果写成contentType会报错
+                }
+            }).then(function (response) {
+                //response.body是报文的主体内容
+                console.log(response);
+                if (parseInt(response.data.code) === 200) {
+                    Instance.$message({
+                        message: '创建成功',
+                        type: 'success',
+                        duration: 3000,
+                        showClose: true
+                    });
+                } else {
+                    Instance.$message({
+                        message: '创建失败，请检查您的输入',
+                        type: 'error',
+                        duration: 3000,
+                        showClose: true
+                    });
+                }
+            })
             console.log('submit!');
             this.$store.systemInfo = this.systemInfo;
             var T = this.$store.systemInfo;
