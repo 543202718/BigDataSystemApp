@@ -119,25 +119,25 @@ export default {
         },
         onSubmit() {
             var systemInfo = this.$store.systemInfo;
-            this.showErrorMessage(systemInfo, '装置概况');
+            if (this.showErrorMessage(systemInfo, '装置概况')) return;
             var deviceInfo = this.$store.deviceInfo;
-            this.showErrorMessage(deviceInfo, '主要设备');
+            if (this.showErrorMessage(deviceInfo, '主要设备')) return;
             var operation_conditionInfo = this.$store.operation_conditionInfo;
-            this.showErrorMessage(operation_conditionInfo, '操作条件');
+            if (this.showErrorMessage(operation_conditionInfo, '操作条件')) return;
             var materialInfo = this.$store.materialInfo;
-            this.showErrorMessage(materialInfo, '原料性质');
+            if (this.showErrorMessage(materialInfo, '原料性质')) return;
             var wasteInfo = this.$store.wasteInfo;
-            this.showErrorMessage(wasteInfo, '三废排放');
+            if (this.showErrorMessage(wasteInfo, '三废排放')) return;
             var chemicalInfo = this.$store.chemicalInfo;
-            this.showErrorMessage(chemicalInfo, '化学药剂');
+            if (this.showErrorMessage(chemicalInfo, '化学药剂')) return;
             var investmentInfo = this.$store.investmentInfo;
-            this.showErrorMessage(investmentInfo, '装置投资');
+            if (this.showErrorMessage(investmentInfo, '装置投资')) return;
             var publicworkInfo = this.$store.publicworkInfo;
-            this.showErrorMessage(publicworkInfo, '公用工程');
+            if (this.showErrorMessage(publicworkInfo, '公用工程')) return;
             var productInfo = this.$store.productInfo;
-            this.showErrorMessage(productInfo, '产品性质');
+            if (this.showErrorMessage(productInfo, '产品性质')) return;
             var balanceInfo = this.$store.balanceInfo;
-            this.showErrorMessage(balanceInfo, '物料平衡');
+            if (this.showErrorMessage(balanceInfo, '物料平衡')) return;
             var design_time = systemInfo.design_time;
             if (systemInfo.design_time instanceof Date) {
                 systemInfo.design_time = this.dateFormat("YYYY-mm-dd", systemInfo.design_time); //格式化日期，否则传到后端会出错
@@ -194,6 +194,9 @@ export default {
                     duration: 3000,
                     showClose: true
                 });
+                return true;
+            } else {
+                return false;
             }
         },
         changeFormShow(showFormID) {
