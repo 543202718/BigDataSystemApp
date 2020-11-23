@@ -116,7 +116,7 @@ def project(dict):
 # 生成将数据插入system表的SQL语句
 def system(dict):
     # print(dict)
-    sql = "insert into `system` (`project_id`, `system_id`, `type`, `designer`, `design_time`, \
+    sql = "insert into `system` (`project_id`, `system_no`, `type`, `designer`, `design_time`, \
         `name`, `property`, `design_stage`, `scale`, `set`, \
         `work_hour`, `flexibility`, `process_type`, `patentee`, `field`, \
         `technical_route`, `area`, `population`, `energy`) \
@@ -125,7 +125,7 @@ def system(dict):
         %s, %s, %s, %s, %s, \
         %s, %s, %s, %s)"
     values = [tostring(dict['id']),
-              tostring(dict['system_id']),
+              tostring(dict['system_no']),
               tostring(dict['system_type']),
               tostring(dict['designer']),
               tostring(dict['design_time']),  # 第一行

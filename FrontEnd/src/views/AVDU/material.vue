@@ -151,9 +151,10 @@
                     <el-option label="20" value=20></el-option>
                     <el-option label="40" value=40></el-option>
                 </el-select>
-                <el-button type="primary" @click="refreshTable">创建表格</el-button>
+                <el-button type="primary" @click="createTable" v-if="!showTable">生成表格</el-button>
+                <el-button type="primary" @click="refreshTable" v-if="showTable">重建表格</el-button>
             </div>
-            <el-table v-if="showTable" :data="narrowFractionDatas" border style="width: 100%;margin-top:10px" maxheight="500">
+            <el-table v-if="showTable" :data="narrowFractionDatas" border style="width: 100%;margin-top:10px" max-height="500">
                 <el-table-column v-if="narrowFractionCols.length > 0" type="index" :label="'编号'" :width="50"></el-table-column>
                 <!-- 固定列 -->
                 <el-table-column v-for="(column, idx) in narrowFractionCols" :key="idx" :index="idx" :width="120">
@@ -319,7 +320,7 @@ export default {
             this.narrowFractionDatas = this.$store.materialInfo.tableDatas; //窄馏分表内容
             this.materialInfo = this.$store.materialInfo.mainInfo; //原料性质主要内容
             this.viscosity = this.$store.materialInfo.viscosity; //原料不同温度下的粘度
-            this.showTable = true;
+            this.showTable = this.$store.materialInfo.showTable;
         }
     },
     methods: {
@@ -331,6 +332,7 @@ export default {
                 tableDatas: null,
                 mainInfo: null,
                 viscosity: null,
+                showTable: null,
             };
             this.$store.materialInfo.tableCols = this.narrowFractionCols; //窄馏分表头
             this.$store.materialInfo.refract_t = this.refract_t; //窄馏分折射率温度点
@@ -338,6 +340,7 @@ export default {
             this.$store.materialInfo.tableDatas = this.narrowFractionDatas; //窄馏分表内容
             this.$store.materialInfo.mainInfo = this.materialInfo; //原料性质主要内容
             this.$store.materialInfo.viscosity = this.viscosity; //原料不同温度下的粘度
+            this.$store.materialInfo.showTable = this.showTable;
             this.$message({
                 message: '暂存成功',
                 type: 'success',
@@ -347,22 +350,35 @@ export default {
             console.log('store materialInfo to device');
             // console.log(this.$store.deviceInfo.tableCols);
         },
-        refreshTable() { //根据设置的粘度和折射率刷新表格
-            for (var x in this.refract_t) {
-                var _this = this
-                this.narrowFractionDatas.map(p => { // 新增的对象无法被vue监听到
-                    _this.$set(p, "re" + this.refract_t[x], { content: '', show: true })
-                    //		p[obj.col] = {content: '', show: true}
-                })
-            }
-            for (var x in this.viscosity_t) {
-                var _this = this
-                this.narrowFractionDatas.map(p => { // 新增的对象无法被vue监听到
-                    _this.$set(p, "vis" + this.viscosity_t[x], { content: '', show: true })
-                    //		p[obj.col] = {content: '', show: true}
-                })
-            }
+        createTable() { //根据设置的粘度和折射率创建表格
+            this.viscosity_t.sort(function(a, b){return a - b}); 
+            this.createTableForCol(this.viscosity_t, this.narrowFractionDatas, "vis");
+            this.refract_t.sort(function(a, b){return a - b}); 
+            this.createTableForCol(this.refract_t, this.narrowFractionDatas, "re");
             this.showTable = true
+        },
+        createTableForCol(t, data, s) {
+            var cols = [];
+            for (var x in t) {
+                var _this = this;
+                var col = s + t[x];
+                cols.push(col);
+                data.map(p => {
+                    if (!(col in p)) { //已有对象不会重复生成，防止已输入的数据被清空
+                        _this.$set(p, col, { content: '', show: true })
+                    }
+                })
+            }
+            data.map(p => { //删除已经不存在的可变属性
+                for (var k in p) {
+                    if (k.substr(0, s.length) == s && cols.indexOf(k) < 0) {
+                        delete p[k];
+                    }
+                }
+            })
+        },
+        refreshTable() {
+            this.showTable = false;
         },
         addRow() { // 新增行
             var obj = {}

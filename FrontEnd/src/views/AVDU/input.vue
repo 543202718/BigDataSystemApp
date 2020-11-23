@@ -14,7 +14,7 @@
         <el-radio-button @click.native="toChemical" label="化学药剂"></el-radio-button>
     </el-radio-group>
 
-    <el-button type="primary" @click="onSubmit">立即创建</el-button>
+    <el-button type="primary" @click="onSubmit">提交</el-button>
     <br>
     <router-view></router-view>
 </div>
@@ -119,15 +119,25 @@ export default {
         },
         onSubmit() {
             var systemInfo = this.$store.systemInfo;
+            this.showErrorMessage(systemInfo, '装置概况');
             var deviceInfo = this.$store.deviceInfo;
+            this.showErrorMessage(deviceInfo, '主要设备');
             var operation_conditionInfo = this.$store.operation_conditionInfo;
+            this.showErrorMessage(operation_conditionInfo, '操作条件');
             var materialInfo = this.$store.materialInfo;
+            this.showErrorMessage(materialInfo, '原料性质');
             var wasteInfo = this.$store.wasteInfo;
+            this.showErrorMessage(wasteInfo, '三废排放');
             var chemicalInfo = this.$store.chemicalInfo;
+            this.showErrorMessage(chemicalInfo, '化学药剂');
             var investmentInfo = this.$store.investmentInfo;
+            this.showErrorMessage(investmentInfo, '装置投资');
             var publicworkInfo = this.$store.publicworkInfo;
+            this.showErrorMessage(publicworkInfo, '公用工程');
             var productInfo = this.$store.productInfo;
+            this.showErrorMessage(productInfo, '产品性质');
             var balanceInfo = this.$store.balanceInfo;
+            this.showErrorMessage(balanceInfo, '物料平衡');
             var design_time = systemInfo.design_time;
             if (systemInfo.design_time instanceof Date) {
                 systemInfo.design_time = this.dateFormat("YYYY-mm-dd", systemInfo.design_time); //格式化日期，否则传到后端会出错
@@ -159,14 +169,14 @@ export default {
                 console.log(response);
                 if (parseInt(response.data.code) === 200) {
                     Instance.$message({
-                        message: '创建成功',
+                        message: '提交成功',
                         type: 'success',
                         duration: 3000,
                         showClose: true
                     });
                 } else {
                     Instance.$message({
-                        message: '创建失败，请检查您的输入',
+                        message: '提交失败，请检查您的输入',
                         type: 'error',
                         duration: 3000,
                         showClose: true
@@ -175,6 +185,16 @@ export default {
             })
             systemInfo.design_time = design_time;
             console.log('submit!');
+        },
+        showErrorMessage(v, s) {
+            if (typeof v === "undefined") {
+                this.$message({
+                    message: '提交失败，未保存' + s,
+                    type: 'error',
+                    duration: 3000,
+                    showClose: true
+                });
+            }
         },
         changeFormShow(showFormID) {
             console.log('change showed form');
