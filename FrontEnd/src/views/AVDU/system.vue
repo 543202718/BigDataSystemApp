@@ -22,7 +22,7 @@
             <el-input v-model="systemInfo.owner_doc_no"></el-input>
         </el-form-item>
         <el-form-item label="装置号">
-            <el-input v-model="systemInfo.system_id"></el-input>
+            <el-input v-model="systemInfo.system_no"></el-input>
         </el-form-item>
         <el-form-item label="装置名称">
             <el-input v-model="systemInfo.system_name" placeholder="例：20200101"></el-input>
@@ -125,7 +125,7 @@ export default {
                 place: '',
                 owner: '',
                 owner_doc_no: '',
-                system_id: '',
+                system_no: '',
                 system_name: '',
                 system_type: '炼油装置（燃料油）',
                 designer: '',

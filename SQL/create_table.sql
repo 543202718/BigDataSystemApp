@@ -13,7 +13,7 @@ create table `project`(
 create table `system`(
     `id` int auto_increment primary key, -- 自增的内部id
     `project_id` varchar(50) , -- 项目号（外键）
-    `system_id` varchar(50), -- 装置号
+    `system_no` varchar(50), -- 装置号
     `type` varchar(30) not null, -- 装置类型
     `designer` varchar(50), -- 设计单位
     `design_time` date, -- 设计完成时间
