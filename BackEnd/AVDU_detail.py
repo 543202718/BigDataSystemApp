@@ -12,7 +12,8 @@ system_id = -1
 @app.route('/AVDU_detail', methods=['POST'])
 def AVDU_detail():
     print("AVDU_detail_ok")
-    dict = request.get_json()
+    dict = request.values.to_dict()
+    print(dict)
     global system_id
     system_id = dict['id']
     db = pymysql.connect(host="localhost", user="root",

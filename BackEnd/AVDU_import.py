@@ -446,14 +446,16 @@ def handle_publicwork(dict, cursor):
         values "
     values = []
     for item in dict['tableDatas']:
-        sql = sql + "(%s, %s, %s, %s, %s),"
-        values = values + [
-            tostring(item['name']['content']),
-            system_id,
-            tostring(item['unit']['content']),
-            tofloat(item['value']['content']),
-            tostring(item['note']['content'])
-        ]
+        pk = tofloat(item['value']['content'])
+        if pk !=None :
+            sql = sql + "(%s, %s, %s, %s, %s),"
+            values = values + [
+                tostring(item['name']['content']),
+                system_id,
+                tostring(item['unit']['content']),
+                tofloat(item['value']['content']),
+                tostring(item['note']['content'])
+            ]
     if len(values) > 0:
         sql = sql.rstrip(",")
         cursor.execute(sql, values)
