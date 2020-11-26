@@ -58,6 +58,23 @@ export default {
             ],
             testDatas: [{
                 type: {
+                    content: '反应器及再生器',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
                     content: '塔器',
                     show: true
                 },
@@ -75,75 +92,7 @@ export default {
                 }
             }, {
                 type: {
-                    content: '冷换设备',
-                    show: true
-                },
-                internal: {
-                    content: '',
-                    show: true
-                },
-                overseas: {
-                    content: '',
-                    show: true
-                },
-                note: {
-                    content: '',
-                    show: true
-                }
-            }, {
-                type: {
-                    content: '空冷器',
-                    show: true
-                },
-                internal: {
-                    content: '',
-                    show: true
-                },
-                overseas: {
-                    content: '',
-                    show: true
-                },
-                note: {
-                    content: '',
-                    show: true
-                }
-            }, {
-                type: {
-                    content: '容器',
-                    show: true
-                },
-                internal: {
-                    content: '',
-                    show: true
-                },
-                overseas: {
-                    content: '',
-                    show: true
-                },
-                note: {
-                    content: '',
-                    show: true
-                }
-            }, {
-                type: {
-                    content: '机泵',
-                    show: true
-                },
-                internal: {
-                    content: '',
-                    show: true
-                },
-                overseas: {
-                    content: '',
-                    show: true
-                },
-                note: {
-                    content: '',
-                    show: true
-                }
-            }, {
-                type: {
-                    content: '其他机械设备',
+                    content: '电加热器',
                     show: true
                 },
                 internal: {
@@ -177,7 +126,7 @@ export default {
                 }
             }, {
                 type: {
-                    content: '热工设备',
+                    content: '容器及贮罐',
                     show: true
                 },
                 internal: {
@@ -194,7 +143,7 @@ export default {
                 }
             }, {
                 type: {
-                    content: '压缩机',
+                    content: '换热器',
                     show: true
                 },
                 internal: {
@@ -211,7 +160,7 @@ export default {
                 }
             }, {
                 type: {
-                    content: '电脱盐成套设备',
+                    content: '空冷器',
                     show: true
                 },
                 internal: {
@@ -228,7 +177,7 @@ export default {
                 }
             }, {
                 type: {
-                    content: '机械抽空器',
+                    content: '机泵',
                     show: true
                 },
                 internal: {
@@ -245,7 +194,75 @@ export default {
                 }
             }, {
                 type: {
-                    content: '其它',
+                    content: '压缩机及鼓风机',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
+                    content: '废热锅炉',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
+                    content: '氨冷冻系统',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
+                    content: '余热回收系统',
+                    show: true
+                },
+                internal: {
+                    content: '',
+                    show: true
+                },
+                overseas: {
+                    content: '',
+                    show: true
+                },
+                note: {
+                    content: '',
+                    show: true
+                }
+            }, {
+                type: {
+                    content: '其它小型设备',
                     show: true
                 },
                 internal: {
