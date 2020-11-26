@@ -85,18 +85,24 @@ export default {
 
     created: function () {
         console.log("turn to system page");
-        var inItems = ["原料油", "富吸收油", "渣油加氢液态烃", "渣油加氢石脑油", "蜡油加氢石脑油", "柴油加氢石脑油", "合计"];
-        var outItems = ["初顶气", "初顶油", "常顶气", "常顶油", "常一线", "常二线", "常三线", "常四线", "常压渣油（常底油）",
-            "贫吸收油", "常压重油", "过汽化油", "减顶气", "减顶油", "减一线", "减二线", "减三线", "减四线", "减五线",
-            "减六线", "减压渣油", "常压拔出率", "减压拔出率", "合计"
-        ];
-        for (var item in inItems) {
-            this.addRow(this.inDatas);
-            this.inDatas[this.inDatas.length - 1].inward_or_outward_name.content = inItems[item];
-        }
-        for (var item in outItems) {
-            this.addRow(this.outDatas);
-            this.outDatas[this.outDatas.length - 1].inward_or_outward_name.content = outItems[item];
+        if ('balanceInfo' in this.$store) {
+            this.balanceCols = this.$store.balanceInfo.tableCols;
+            this.inDatas = this.$store.balanceInfo.inDatas;
+            this.outDatas = this.$store.balanceInfo.outDatas;
+        } else {
+            var inItems = ["原料油", "富吸收油", "渣油加氢液态烃", "渣油加氢石脑油", "蜡油加氢石脑油", "柴油加氢石脑油", "合计"];
+            var outItems = ["初顶气", "初顶油", "常顶气", "常顶油", "常一线", "常二线", "常三线", "常四线", "常压渣油（常底油）",
+                "贫吸收油", "常压重油", "过汽化油", "减顶气", "减顶油", "减一线", "减二线", "减三线", "减四线", "减五线",
+                "减六线", "减压渣油", "常压拔出率", "减压拔出率", "合计"
+            ];
+            for (var item in inItems) {
+                this.addRow(this.inDatas);
+                this.inDatas[this.inDatas.length - 1].inward_or_outward_name.content = inItems[item];
+            }
+            for (var item in outItems) {
+                this.addRow(this.outDatas);
+                this.outDatas[this.outDatas.length - 1].inward_or_outward_name.content = outItems[item];
+            }
         }
     },
     methods: {

@@ -96,6 +96,10 @@ export default {
 
     created: function () {
         console.log("turn to system page");
+        if ('wasteInfo' in this.$store) {
+            this.testCols = this.$store.wasteInfo.tableCols;
+            this.testDatas = this.$store.wasteInfo.tableDatas;
+        }
     },
     methods: {
         addToStore: function () {
@@ -103,8 +107,8 @@ export default {
                 tableCols: null,
                 tableDatas: null
             };
-            this.$store.wasteInfo.tableCols = this.tableCols; //表头
-            this.$store.wasteInfo.tableDatas = this.tableDatas; //表格内容
+            this.$store.wasteInfo.tableCols = this.testCols; //表头
+            this.$store.wasteInfo.tableDatas = this.testDatas; //表格内容
             this.$message({
                         message: '暂存成功',
                         type: 'success',

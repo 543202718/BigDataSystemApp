@@ -14,7 +14,8 @@
                 <el-option label="20" value=20></el-option>
                 <el-option label="40" value=40></el-option>
             </el-select>
-            <el-button type="primary" @click="refreshTable">创建表格</el-button>
+            <el-button type="primary" @click="createTable" v-if="!showTable">生成表格</el-button>
+            <el-button type="primary" @click="refreshTable" v-if="showTable">重建表格</el-button>
         </div>
         <el-table v-if="showTable" :data="productDatas" border style="width: 100%;margin-top:10px" max-height="500">
             <el-table-column v-if="productCols.length > 0" type="index" :label="'编号'" :width="50"></el-table-column>
@@ -78,21 +79,26 @@ export default {
                 { col: "remarks", txt: '备注' }
             ],
             productDatas: [],
-            count_col: 0,
-            curColumn: null,
         };
 
     },
 
     created: function () {
         console.log("turn to system page");
-        var items = ["初顶气", "初顶油", "常顶气", "常顶油", "常一线", "常二线", "常三线", "常四线", "常压渣油（常底油）",
-            "贫吸收油", "常压重油", "过汽化油", "减顶气", "减顶油", "减一线", "减二线", "减三线", "减四线", "减五线",
-            "减六线", "减压渣油"
-        ];
-        for (var item in items) {
-            this.addRow();
-            this.productDatas[this.productDatas.length - 1].product_name.content = items[item];
+        if ('productInfo' in this.$store) {
+            this.productCols = this.$store.productInfo.tableCols;
+            this.viscosity_t = this.$store.productInfo.viscosity_t;
+            this.productDatas = this.$store.productInfo.tableDatas;
+            this.showTable = this.$store.productInfo.showTable;
+        } else {
+            var items = ["初顶气", "初顶油", "常顶气", "常顶油", "常一线", "常二线", "常三线", "常四线", "常压渣油（常底油）",
+                "贫吸收油", "常压重油", "过汽化油", "减顶气", "减顶油", "减一线", "减二线", "减三线", "减四线", "减五线",
+                "减六线", "减压渣油"
+            ];
+            for (var item in items) {
+                this.addRow();
+                this.productDatas[this.productDatas.length - 1].product_name.content = items[item];
+            }
         }
     },
     methods: {
@@ -101,10 +107,12 @@ export default {
                 tableCols: null,
                 viscosity_t: null,
                 tableDatas: null,
+                showTable: null,
             };
             this.$store.productInfo.tableCols = this.productCols; //产品性质表头
             this.$store.productInfo.viscosity_t = this.viscosity_t; //产品粘度温度点
             this.$store.productInfo.tableDatas = this.productDatas; //产品性质表内容
+            this.$store.productInfo.showTable = this.showTable;
             this.$message({
                 message: '暂存成功',
                 type: 'success',
@@ -114,15 +122,30 @@ export default {
             console.log('store productInfo to device');
             // console.log(this.$store.deviceInfo.tableCols);
         },
-        refreshTable() { //根据设置的粘度创建表格
+        createTable() { //根据设置的粘度创建表格
+            this.viscosity_t.sort(function (a, b) { return a - b });
+            var cols = [];
             for (var x in this.viscosity_t) {
-                var _this = this
-                this.productDatas.map(p => { // 新增的对象无法被vue监听到
-                    _this.$set(p, "vis" + this.viscosity_t[x], { content: '', show: true })
-                    //		p[obj.col] = {content: '', show: true}
+                var _this = this;
+                var col = "vis" + this.viscosity_t[x];
+                cols.push(col);
+                this.productDatas.map(p => {
+                    if (!(col in p)) { //已有对象不会重复生成，防止已输入的数据被清空
+                        _this.$set(p, col, { content: '', show: true })
+                    }
                 })
             }
-            this.showTable = true
+            this.productDatas.map(p => { //删除已经不存在的可变属性
+                for (var k in p) {
+                    if (k.substr(0, 3) == "vis" && cols.indexOf(k) < 0) {
+                        delete p[k];
+                    }
+                }
+            })
+            this.showTable = true;
+        },
+        refreshTable() {
+            this.showTable = false;
         },
         addRow() { // 新增行
             this.showMenu = false

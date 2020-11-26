@@ -114,7 +114,7 @@ def genSQL(dict):
         values.append(density_u)
 
     if density_l is not None:
-        sql = sql + "and `material`.`densigy`>= %s "
+        sql = sql + "and `material`.`density`>= %s "
         values.append(density_l)
 
     if acid_u is not None:
