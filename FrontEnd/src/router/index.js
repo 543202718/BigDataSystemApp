@@ -14,7 +14,7 @@ import operation_condition from "@/views/AVDU/operation_condition.vue";
 import product from "@/views/AVDU/product.vue";
 import public_work from "@/views/AVDU/public_work.vue";
 import waste from "@/views/AVDU/waste.vue";
-import search from "@/views/AVDU/search.vue";
+import search from "@/views/AVDU/Search/search.vue";
 
 const routers = [{
         path: "/",
@@ -67,7 +67,8 @@ const routers = [{
             },
             {
                 path: "/AVDU/search",
-                component: search
+                component: search,
+
             },
             {
                 path: "/CR/input",
@@ -134,7 +135,17 @@ const routers = [{
             },
         ]
     },
-
+    {
+        path:"/AVDU/search/bar",
+        name:"search_bar",
+        component:() => 
+        import("@/views/AVDU/Search/search_bar.vue"),
+        children:[{
+            path:"/AVDU/search/bar/system",
+            component:() =>
+            import("@/views/AVDU/Search/search_system.vue"),
+        }]
+    },
     {
         path: "/author",
         name: "Author",
