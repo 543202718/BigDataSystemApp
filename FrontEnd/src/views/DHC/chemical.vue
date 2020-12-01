@@ -42,6 +42,10 @@ export default {
                     txt: '药剂名称'
                 },
                 {
+                    col: "pattern",
+                    txt: '型号或规格'
+                },
+                {
                     col: "value",
                     txt: '用量数值'
                 },
@@ -54,187 +58,296 @@ export default {
                     txt: '寿命/年'
                 },
                 {
-                    col: "pattern",
-                    txt: '类别'
-                },
+                    col: "note",
+                    txt: '备注'
+                }
             ],
             testDatas: [{
                     name: {
-                        content: '预加氢催化剂',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    },
-                    unit: {
-                        content: '吨 / 一次装入量',
-                        show: true
-                    },
-                    lifetime: {
-                        content: '寿命：四年',
+                        content: '催化剂',
                         show: true
                     },
                     pattern: {
-                        content: '拟采用XX石油化工科学研究院（RXPP）研究开发的RS-X催化剂或者与其相当的其它催化剂',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '预加氢脱氯剂',
+                        content: '保护剂',
                         show: true
                     },
                     value: {
-                        content: '',
-                        show: true
-                    },
-                    unit: {
-                        content: '吨 / 一次装入量',
-                        show: true
-                    },
-                    lifetime: {
-                        content: '寿命：二年',
-                        show: true
-                    },
-                    pattern: {
-                        content: '用于脱除预加氢生成油的氯化氢，拟采用XXPP研究开发的XXL-A 高温脱氯剂或性能相当的国内其它类似产品',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整催化剂',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    },
-                    unit: {
-                        content: '吨 / 一次装入量',
-                        show: true
-                    },
-                    lifetime: {
-                        content: '寿命：六年',
-                        show: true
-                    },
-                    pattern: {
-                        content: '采用国产PS-XX连续重整催化剂',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整氢气脱氯剂',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    },
-                    unit: {
-                        content: '吨 / 一次装入量',
-                        show: true
-                    },
-                    lifetime: {
-                        content: '寿命：一年',
-                        show: true
-                    },
-                    pattern: {
-                        content: '用于脱去重整产氢气体中的氯化物，拟采用XX化工研究院研制的T-40X活性氧化铝脱氯剂或性能相当的类似产品。',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整油脱氯剂',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    },
-                    unit: {
-                        content: '吨 / 一次装入量',
-                        show: true
-                    },
-                    lifetime: {
-                        content: '寿命：一年',
-                        show: true
-                    },
-                    pattern: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '脱砷剂',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    },
-                    unit: {
-                        content: '吨 / 一次装入量',
-                        show: true
-                    },
-                    lifetime: {
-                        content: '寿命：一年',
-                        show: true
-                    },
-                    pattern: {
-                        content: '脱砷剂拟采用国产RAs-X',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '二甲基二硫(DMDS)',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    },
-                    unit: {
                         content: ' / ',
                         show: true
                     },
-                    lifetime: {
-                        content: '-',
+                    unit: {
+                        content: '吨/一次装入量',
                         show: true
                     },
-                    pattern: {
+                    lifetime: {
+                        content: '寿命4年',
+                        show: true
+                    },
+                    note: {
                         content: '',
                         show: true
                     }
                 },
                 {
                     name: {
-                        content: '全氯乙烯',
+                        content: '催化剂',
+                        show: true
+                    },
+                    pattern: {
+                        content: '精制剂',
                         show: true
                     },
                     value: {
-                        content: '',
-                        show: true
-                    },
-                    unit: {
                         content: ' / ',
                         show: true
                     },
+                    unit: {
+                        content: '吨/一次装入量',
+                        show: true
+                    },
                     lifetime: {
-                        content: '-',
+                        content: '寿命7年',
+                        show: true
+                    },
+                    note: {
+                        content: '',
+                        show: true
+                    }
+                },
+                {
+                    name: {
+                        content: '催化剂',
+                        show: true
+                    },
+                    pattern: {
+                        content: '裂化剂',
+                        show: true
+                    },
+                    value: {
+                        content: ' / ',
+                        show: true
+                    },
+                    unit: {
+                        content: '吨/一次装入量',
+                        show: true
+                    },
+                    lifetime: {
+                        content: '寿命7年',
+                        show: true
+                    },
+                    note: {
+                        content: '',
+                        show: true
+                    }
+                },
+                {
+                    name: {
+                        content: '硫化剂',
+                        show: true
+                    },
+                    pattern: {
+                        content: 'DMDS',
+                        show: true
+                    },
+                    value: {
+                        content: ' / ',
+                        show: true
+                    },
+                    unit: {
+                        content: '吨/一次装入量',
+                        show: true
+                    },
+                    lifetime: {
+                        content: '4年用1次',
+                        show: true
+                    },
+                    note: {
+                        content: '',
+                        show: true
+                    }
+                },
+                {
+                    name: {
+                        content: '液氨',
+                        show: true
+                    },
+                    pattern: {
+                        content: 'NH3',
+                        show: true
+                    },
+                    value: {
+                        content: ' / ',
+                        show: true
+                    },
+                    unit: {
+                        content: '吨/一次装入量',
+                        show: true
+                    },
+                    lifetime: {
+                        content: '4年用1次',
+                        show: true
+                    },
+                    note: {
+                        content: '',
+                        show: true
+                    }
+                },
+                {
+                    name: {
+                        content: '缓蚀剂',
                         show: true
                     },
                     pattern: {
                         content: '',
                         show: true
+                    },
+                    value: {
+                        content: ' / ',
+                        show: true
+                    },
+                    unit: {
+                        content: 't/年',
+                        show: true
+                    },
+                    lifetime: {
+                        content: '',
+                        show: true
+                    },
+                    note: {
+                        content: '',
+                        show: true
                     }
                 },
-
+                {
+                    name: {
+                        content: '多硫化物',
+                        show: true
+                    },
+                    pattern: {
+                        content: '',
+                        show: true
+                    },
+                    value: {
+                        content: ' / ',
+                        show: true
+                    },
+                    unit: {
+                        content: 't/年',
+                        show: true
+                    },
+                    lifetime: {
+                        content: '',
+                        show: true
+                    },
+                    note: {
+                        content: '',
+                        show: true
+                    }
+                },
+                {
+                    name: {
+                        content: '阻垢剂',
+                        show: true
+                    },
+                    pattern: {
+                        content: '',
+                        show: true
+                    },
+                    value: {
+                        content: ' / ',
+                        show: true
+                    },
+                    unit: {
+                        content: 't/年',
+                        show: true
+                    },
+                    lifetime: {
+                        content: '',
+                        show: true
+                    },
+                    note: {
+                        content: '',
+                        show: true
+                    }
+                },
+                {
+                    name: {
+                        content: '磷酸三钠',
+                        show: true
+                    },
+                    pattern: {
+                        content: '',
+                        show: true
+                    },
+                    value: {
+                        content: '1 / 5',
+                        show: true
+                    },
+                    unit: {
+                        content: 't/年',
+                        show: true
+                    },
+                    lifetime: {
+                        content: '',
+                        show: true
+                    },
+                    note: {
+                        content: '',
+                        show: true
+                    }
+                },
+                {
+                    name: {
+                        content: '抗氧剂',
+                        show: true
+                    },
+                    pattern: {
+                        content: '',
+                        show: true
+                    },
+                    value: {
+                        content: ' / ',
+                        show: true
+                    },
+                    unit: {
+                        content: 't/年',
+                        show: true
+                    },
+                    lifetime: {
+                        content: '',
+                        show: true
+                    },
+                    note: {
+                        content: '',
+                        show: true
+                    }
+                },
+                {
+                    name: {
+                        content: '脱硫剂',
+                        show: true
+                    },
+                    pattern: {
+                        content: 'ZnO',
+                        show: true
+                    },
+                    value: {
+                        content: ' / ',
+                        show: true
+                    },
+                    unit: {
+                        content: '吨/一次装入量',
+                        show: true
+                    },
+                    lifetime: {
+                        content: '寿命4年',
+                        show: true
+                    },
+                    note: {
+                        content: '',
+                        show: true
+                    }
+                }
             ],
             count_col: 0,
             showMenu: false,
@@ -245,6 +358,10 @@ export default {
 
     created: function () {
         console.log("turn to system page");
+        if ('chemicalInfo' in this.$store) {
+            this.testCols = this.$store.chemicalInfo.tableCols;
+            this.testDatas = this.$store.chemicalInfo.tableDatas;
+        }
     },
     methods: {
         addToStore: function () {
@@ -252,8 +369,8 @@ export default {
                 tableCols: null,
                 tableDatas: null
             };
-            this.$store.chemicalInfo.tableCols = this.tableCols; //表头
-            this.$store.chemicalInfo.tableDatas = this.tableDatas; //表格内容
+            this.$store.chemicalInfo.tableCols = this.testCols; //表头
+            this.$store.chemicalInfo.tableDatas = this.testDatas; //表格内容
             this.$message({
                 message: '暂存成功',
                 type: 'success',
