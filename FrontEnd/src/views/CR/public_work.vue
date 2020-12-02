@@ -46,6 +46,11 @@ export default {
                 unit: { content: 'kW', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }
+            },{
+                name: { content: '电(6000V)', show: true },
+                unit: { content: 'kW', show: true },
+                value: { content: '', show: true },
+                note: { content: '', show: true }
             }, {
                 name: { content: '标准燃料', show: true },
                 unit: { content: 't/h', show: true },
@@ -128,6 +133,11 @@ export default {
                 note: { content: '', show: true }
             }, {
                 name: { content: '胺液', show: true },
+                unit: { content: 't/h', show: true },
+                value: { content: '', show: true },
+                note: { content: '', show: true }
+            }, {
+                name: { content: '燃料液', show: true },
                 unit: { content: 't/h', show: true },
                 value: { content: '', show: true },
                 note: { content: '', show: true }

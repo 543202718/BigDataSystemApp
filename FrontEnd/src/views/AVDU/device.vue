@@ -35,16 +35,9 @@
 export default {
     data() {
         return {
-            testCols: [{
-                    col: "type",
-                    txt: '项目',
-                    show: true
-                },
-                {
-                    col: "internal",
-                    txt: '国内订货/台数',
-                    show: true
-                },
+            testCols: [
+                {col: "type",txt: '项目',show: true},
+                {col: "internal",txt: '国内订货/台数',show: true},
                 {
                     col: "overseas",
                     txt: '国外订货/台数',
