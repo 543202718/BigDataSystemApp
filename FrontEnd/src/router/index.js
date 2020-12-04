@@ -144,7 +144,53 @@ const routers = [{
             path:"/AVDU/search/bar/system",
             component:() =>
             import("@/views/AVDU/Search/search_system.vue"),
-        }]
+        },
+        {
+            path:"/AVDU/search/bar/material",
+            component:() =>
+            import("@/views/AVDU/Search/search_material.vue"),
+        },
+        {
+            path:"/AVDU/search/bar/product",
+            component:() =>
+            import("@/views/AVDU/Search/search_product.vue"),
+        },
+        {
+            path:"/AVDU/search/bar/balance",
+            component:() =>
+            import("@/views/AVDU/Search/search_balance.vue"),
+        },
+        {
+            path:"/AVDU/search/bar/operation_condition",
+            component:() =>
+            import("@/views/AVDU/Search/search_operation_condition.vue"),
+        },
+        {
+            path:"/AVDU/search/bar/public_work",
+            component:() =>
+            import("@/views/AVDU/Search/search_public_work.vue"),
+        },
+        {
+            path:"/AVDU/search/bar/investment",
+            component:() =>
+            import("@/views/AVDU/Search/search_investment.vue"),
+        },
+        {
+            path:"/AVDU/search/bar/device",
+            component:() =>
+            import("@/views/AVDU/Search/search_device.vue"),
+        },
+        {
+            path:"/AVDU/search/bar/waste",
+            component:() =>
+            import("@/views/AVDU/Search/search_waste.vue"),
+        },
+        {
+            path:"/AVDU/search/bar/chemical",
+            component:() =>
+            import("@/views/AVDU/Search/search_chemical.vue"),
+        }
+    ]
     },
     {
         path: "/author",
