@@ -1,27 +1,62 @@
 <template>
 <div>
+    <table border="1" align="center">
+        <caption>
+            <h4>原料基本性质</h4>
+        </caption>
+        <tr>
+            <td colspan="1"><b>原料名称</b></td>
+            <td colspan="3">{{materialInfo.material_name}}</td>
+        </tr>
+        <tr>
+            <td><b>密度(20℃)(kg/m³)</b></td>
+            <td>{{materialInfo.density}}</td>
+            <td><b>凝点(℃)</b></td>
+            <td>{{materialInfo.freezing_point}}</td>
+        </tr>
+        <tr>
+            <td><b>闪点开口(℃)</b></td>
+            <td>{{materialInfo.flash_point_open}}</td>
+            <td><b>闪点闭口(℃)</b></td>
+            <td>{{materialInfo.flash_point_close}}</td>
+        </tr>
+        <!-- 类似的做完剩下的属性 -->
+        <tr>
+            <td colspan="4"><b>不同温度下的粘度</b></td>
+        </tr>
+        <tr v-for="(item,idx) in viscosity">
+            <td><b>温度(℃)</b></td>
+            <td>{{item.tempature}}</td>
+            <td><b>粘度(m㎡/s)</b></td>
+            <td>{{item.value}}</td>
+        </tr>
 
+        <tr>
+            <td colspan="4"><b>元素组成</b></td>
+        </tr>
+        <tr>
+            <td><b>S(w%)</b></td>
+            <td>{{materialInfo.S}}</td>
+            <td><b>C(w%)</b></td>
+            <td>{{materialInfo.C}}</td>
+        </tr>
+        <!-- 类似的做完剩下的属性 -->
+        <tr>
+            <td colspan="4"><b>轻烃组成</b></td>
+        </tr>
+        <tr>
+            <td><b>甲烷(v%)</b></td>
+            <td>{{materialInfo.methane}}</td>
+            <td><b>乙烷(v%)</b></td>
+            <td>{{materialInfo.ethane}}</td>
+        </tr>
+        <!-- 类似的做完剩下的属性 -->
+    </table>
 
     <el-form ref="form" :model="materialInfo" label-width="130px" size="mini" style="margin-top: 20px">
-        <el-form-item label="原料名称">
-            <el-input v-model="materialInfo.material_name" placeholder="例：沙轻和科威特混合原油"></el-input>
-        </el-form-item>
-        <el-form-item label="原料密度（20℃）">
-            <el-input v-model="materialInfo.density" placeholder="单位：kg/m³">
-            </el-input>
-        </el-form-item>
-        <el-form-item label="凝点">
-            <el-input v-model="materialInfo.freezing_point" placeholder="单位：℃"></el-input>
-        </el-form-item>
         <el-form-item label="酸值">
             <el-input v-model="materialInfo.acid_value" placeholder="单位：mg KOH/g">
             </el-input>
-        </el-form-item>
-        <el-form-item label="闪点（开口）">
-            <el-input v-model="materialInfo.flash_point_open" placeholder="单位：℃"></el-input>
-        </el-form-item>
-        <el-form-item label="闪点（闭口）">
-            <el-input v-model="materialInfo.flash_point_close" placeholder="单位：℃"></el-input>
         </el-form-item>
         <el-form-item label="原油热值">
             <el-input v-model="materialInfo.heat_value" placeholder="单位：kJ/kg"></el-input>
@@ -57,7 +92,7 @@
             <el-input v-model="materialInfo.asphalt" placeholder="单位：%(m/m)"></el-input>
         </el-form-item>
         <el-form-item label="不同温度下的粘度" align="left">
-           
+
         </el-form-item>
         <div v-for="(item,idx) in viscosity">
             <el-form-item label="温度">
@@ -68,14 +103,7 @@
             </el-form-item>
         </div>
 
-        <el-form-item label="元素组成">
-        </el-form-item>
-        <el-form-item label="H">
-            <el-input v-model="materialInfo.H" placeholder="单位：w%"></el-input>
-        </el-form-item>
-        <el-form-item label="C">
-            <el-input v-model="materialInfo.C" placeholder="单位：w%"></el-input>
-        </el-form-item>
+        <el-form-item label="元素组成"></el-form-item>
         <el-form-item label="S">
             <el-input v-model="materialInfo.S" placeholder="单位：w%"></el-input>
         </el-form-item>
@@ -147,10 +175,10 @@
                     </template>
                     <!--prop-->
                     <template slot-scope="scope">
-                        <p >
-                            {{scope.row[column.col]}}                    
+                        <p>
+                            {{scope.row[column.col]}}
                         </p>
-         
+
                     </template>
                 </el-table-column>
                 <!-- 折射率 -->
@@ -163,9 +191,9 @@
                             </p>
                         </template>
                         <template slot-scope="scope">
-                            <p  >
-                                {{scope.row['re'+column]}}                                
-                            </p>                            
+                            <p>
+                                {{scope.row['re'+column]}}
+                            </p>
                         </template>
                     </el-table-column>
                 </el-table-column>
@@ -179,10 +207,10 @@
                             </p>
                         </template>
                         <template slot-scope="scope">
-                            <p  >
+                            <p>
                                 {{scope.row['vis'+column]}}
-                           </p>
-                
+                            </p>
+
                         </template>
                     </el-table-column>
                 </el-table-column>
@@ -262,7 +290,7 @@ export default {
     },
 
     created: function () {
-        console.log("turn to system page");   
+        console.log("turn to system page");
         console.log(this.$store.search_materialInfo)
         this.refract_t = this.$store.search_materialInfo.refract_t; //窄馏分折射率温度点
         this.viscosity_t = this.$store.search_materialInfo.viscosity_t; //窄馏分粘度温度点
@@ -298,9 +326,9 @@ export default {
             // console.log(this.$store.deviceInfo.tableCols);
         },
         createTable() { //根据设置的粘度和折射率创建表格
-            this.viscosity_t.sort(function(a, b){return a - b}); 
+            this.viscosity_t.sort(function (a, b) { return a - b });
             this.createTableForCol(this.viscosity_t, this.narrowFractionDatas, "vis");
-            this.refract_t.sort(function(a, b){return a - b}); 
+            this.refract_t.sort(function (a, b) { return a - b });
             this.createTableForCol(this.refract_t, this.narrowFractionDatas, "re");
             this.showTable = true
         },
