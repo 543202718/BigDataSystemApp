@@ -25,7 +25,7 @@ export default {
 
     data() {
         return {
-
+            radio1:""
         };
     },
 
@@ -53,8 +53,17 @@ export default {
                         })
                         console.log(response.body.systemInfo)
                         console.log(response.body.materialInfo)
-                        this.$store.search_systemInfo = response.body.systemInfo
-                        this.$store.search_materialInfo = response.body.materialInfo
+                        console.log(response.body.balanceInfo)
+                        this.$store.search_systemInfo = response.body.systemInfo;
+                        this.$store.search_materialInfo = response.body.materialInfo;
+                        this.$store.search_productInfo = response.body.productInfo
+                        this.$store.search_balanceInfo = response.body.balanceInfo;
+                        this.$store.search_operation_conditionInfo = response.body.operation_conditionInfo
+                        this.$store.search_public_workInfo = response.body.public_workInfo
+                        this.$store.search_deviceInfo = response.body.deviceInfo
+                        this.$store.search_investmentInfo = response.body.investmentInfo
+                        this.$store.search_wasteInfo = response.body.wasteInfo
+                        this.$store.search_chemicalInfo = response.body.chemicalInfo
                     } else {
                         this.$message({
                             message: "查询失败",

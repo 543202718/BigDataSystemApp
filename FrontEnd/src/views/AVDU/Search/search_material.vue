@@ -52,7 +52,7 @@
         </tr>
         <!-- 类似的做完剩下的属性 -->
     </table>
-
+    <!-- 删掉下面的输入框 -->
     <el-form ref="form" :model="materialInfo" label-width="130px" size="mini" style="margin-top: 20px">
         <el-form-item label="酸值">
             <el-input v-model="materialInfo.acid_value" placeholder="单位：mg KOH/g">
