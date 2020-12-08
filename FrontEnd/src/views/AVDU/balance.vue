@@ -2,7 +2,7 @@
 <div id="hello">
 
     <div>
-        <h4>入方物料平衡表</h4>
+        <h4>物料平衡表-入方</h4>
         <div style="display: inline-block;float: right;">
             <el-button size="mini" type="primary" @click="consoleDatas()">打印数据</el-button>
             <el-button size="mini" type="primary" @click="addRow(inDatas)">增加行</el-button>
@@ -30,7 +30,7 @@
         </el-table>
     </div>
     <div>
-        <h4>出方物料平衡表</h4>
+        <h4>物料平衡表-出方</h4>
         <div style="display: inline-block;float: right;">
             <el-button size="mini" type="primary" @click="consoleDatas">打印数据</el-button>
             <el-button size="mini" type="primary" @click="addRow(outDatas)">增加行</el-button>

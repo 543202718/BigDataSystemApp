@@ -1,10 +1,9 @@
 <template>
 <div>
+    <br> 
     <table border="1" align="center">
-        <caption>
-            <h4>温度</h4>
-        </caption>
-                      
+
+                    
         <!-- 类似的做完剩下的属性 -->
         <tr>
             <td colspan="4"><b>温度说明</b></td>
