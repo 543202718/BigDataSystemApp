@@ -2,7 +2,7 @@
 <div id="hello">
 
     <div>
-        <h4>入方物料平衡表</h4>
+        <h4>物料平衡表-入方</h4>
         <div style="display: inline-block;float: right;">
             <el-button size="mini" type="primary" @click="consoleDatas()">打印数据</el-button>
             <el-button size="mini" type="primary" @click="addRow(inDatas)">增加行</el-button>
@@ -30,7 +30,7 @@
         </el-table>
     </div>
     <div>
-        <h4>出方物料平衡表</h4>
+        <h4>物料平衡表-出方</h4>
         <div style="display: inline-block;float: right;">
             <el-button size="mini" type="primary" @click="consoleDatas">打印数据</el-button>
             <el-button size="mini" type="primary" @click="addRow(outDatas)">增加行</el-button>
@@ -67,8 +67,8 @@ export default {
         return {
             balanceCols: [
                 { col: "inward_or_outward_name", txt: '名称' },
-                { col: "boiling_point_cutting_range", txt: '实沸点切割范围/℃' },
-                { col: "yield", txt: '收率m%' },
+                { col: "boiling_point_cutting_range", txt: '实沸点切割范围（℃）' },
+                { col: "yield", txt: '收率（m%）' },
                 { col: "flow_rate1", txt: '流率（公斤/时）' },
                 { col: "flow_rate2", txt: '流率（吨/天）' },
                 { col: "flow_rate3", txt: '流率（万吨/年）' },

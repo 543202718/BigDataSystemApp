@@ -1,5 +1,23 @@
 <template>
 <div>
+    <br> 
+    <table border="1" align="center">
+
+                    
+        <!-- 类似的做完剩下的属性 -->
+        <tr>
+            <td colspan="4"><b>温度说明</b></td>
+        </tr>
+        <tr>
+            <td><b>原油进电脱盐温度（℃）</b></td>
+            <td>{{operation_conditionInfo.CrudeOilToDesaltTemp}}</td>
+            <td><b>闪底油进常压炉温度（℃）</b></td>
+            <td>{{operation_conditionInfo.FlasBotmToAtmoFurnTemp}}</td>
+        </tr>
+
+        <!-- 类似的做完剩下的属性 -->
+    </table>
+    <!--
     <el-form ref="form" :model="operation_conditionInfo" label-width="200px" size="mini" style="margin-top: 20px">
         <el-form-item label="原油进电脱盐温度（℃）">
             <el-input v-model="operation_conditionInfo.CrudeOilToDesaltTemp" placeholder="例：140"></el-input>
@@ -8,7 +26,7 @@
             <el-input v-model="operation_conditionInfo.FlasBotmToAtmoFurnTemp" placeholder="例：300"></el-input>
         </el-form-item>
     </el-form>
-
+    -->
     <div id="ListA">
         <h4 style="display: inline-block;margin:0;">不同设备中的操作条件</h4>
         <el-table :data="testDatas" border max-height="500" style="width: 100%;margin-top:10px">
