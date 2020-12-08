@@ -20,6 +20,43 @@
             <td><b>闪点闭口(℃)</b></td>
             <td>{{materialInfo.flash_point_close}}</td>
         </tr>
+        <tr>
+            <td><b>酸值(mg KOH/g)</b></td>
+            <td>{{materialInfo.acid_value}}</td>
+            <td><b>原油热值(kJ/kg)</b></td>
+            <td>{{materialInfo.heat_value}}</td>
+        </tr>
+        <tr>
+            <td><b>原油类别</b></td>
+            <td>{{materialInfo.type}}</td>
+            <td><b>灰分(%(m/m))</b></td>
+            <td>{{materialInfo.ash}}</td>
+        </tr>
+        <tr>
+            <td><b>残炭(%(m/m))</b></td>
+            <td>{{materialInfo.carbon_residual}}</td>
+            <td><b>含蜡量(%(m/m))</b></td>
+            <td>{{materialInfo.wax_content}}</td>
+        </tr>
+        <tr>
+            <td><b>盐含量(mg/L)</b></td>
+            <td>{{materialInfo.salt_content}}</td>
+            <td><b>硫醇硫(ppm)</b></td>
+            <td>{{materialInfo.mercaptan_sulfur}}</td>
+        </tr>
+        <tr>
+            <td><b>水分(%(m/m))</b></td>
+            <td>{{materialInfo.water}}</td>
+            <td><b>沉淀物(%(m/m))</b></td>
+            <td>{{materialInfo.precipitate}}</td>
+        </tr>
+        <tr>
+            <td><b>胶质(%(m/m))</b></td>
+            <td>{{materialInfo.colloid}}</td>
+            <td><b>沥青质(%(m/m))</b></td>
+            <td>{{materialInfo.asphalt}}</td>
+        </tr>
+
         <!-- 类似的做完剩下的属性 -->
         <tr>
             <td colspan="4"><b>不同温度下的粘度</b></td>
@@ -40,6 +77,40 @@
             <td><b>C(w%)</b></td>
             <td>{{materialInfo.C}}</td>
         </tr>
+        <tr>
+            <td><b>N(w%)</b></td>
+            <td>{{materialInfo.N}}</td>
+            <td><b>H(w%)</b></td>
+            <td>{{materialInfo.H}}</td>
+        </tr>
+        <tr>
+            <td><b>Ni(μg/g)</b></td>
+            <td>{{materialInfo.Ni}}</td>
+            <td><b>V(μg/g)</b></td>
+            <td>{{materialInfo.V}}</td>
+        </tr>
+        <tr>
+            <td><b>Ca(μg/g)</b></td>
+            <td>{{materialInfo.Ca}}</td>
+            <td><b>Fe(μg/g)</b></td>
+            <td>{{materialInfo.Fe}}</td>
+
+        </tr>
+        <tr>
+            <td><b>Cu(μg/g)</b></td>
+            <td>{{materialInfo.Cu}}</td>
+            <td><b>Pb(μg/g)</b></td>
+            <td>{{materialInfo.Pb}}</td>
+
+        </tr>
+        <tr>
+            <td><b>Mg(μg/g)</b></td>
+            <td>{{materialInfo.Mg}}</td>
+            <td><b>Na(μg/g)</b></td>
+            <td>{{materialInfo.Na}}</td>
+
+        </tr>
+                
         <!-- 类似的做完剩下的属性 -->
         <tr>
             <td colspan="4"><b>轻烃组成</b></td>
@@ -50,117 +121,30 @@
             <td><b>乙烷(v%)</b></td>
             <td>{{materialInfo.ethane}}</td>
         </tr>
+        <tr>
+            <td><b>丙烷(v%)</b></td>
+            <td>{{materialInfo.propane}}</td>
+            <td><b>正丁烷(v%)</b></td>
+            <td>{{materialInfo.n_butane}}</td>
+        </tr>
+        <tr>
+            <td><b>异丁烷(v%)</b></td>
+            <td>{{materialInfo.isobutane}}</td>
+            <td><b>正戊烷(v%)</b></td>
+            <td>{{materialInfo.n_pentane}}</td>
+        </tr>
+        <tr>
+            <td><b>异戊烷(v%)</b></td>
+            <td>{{materialInfo.isopentane}}</td>
+            <td><b>环戊烷(v%)</b></td>
+            <td>{{materialInfo.cyclopentane}}</td>
+        </tr>
+
         <!-- 类似的做完剩下的属性 -->
     </table>
     <!-- 删掉下面的输入框 -->
     <el-form ref="form" :model="materialInfo" label-width="130px" size="mini" style="margin-top: 20px">
-        <el-form-item label="酸值">
-            <el-input v-model="materialInfo.acid_value" placeholder="单位：mg KOH/g">
-            </el-input>
-        </el-form-item>
-        <el-form-item label="原油热值">
-            <el-input v-model="materialInfo.heat_value" placeholder="单位：kJ/kg"></el-input>
-        </el-form-item>
-        <el-form-item label="原油类别">
-            <el-input v-model="materialInfo.type" placeholder="例：低硫环烷中间基"></el-input>
-        </el-form-item>
-        <el-form-item label="灰分">
-            <el-input v-model="materialInfo.ash" placeholder="单位：%(m/m)"></el-input>
-        </el-form-item>
-        <el-form-item label="残炭">
-            <el-input v-model="materialInfo.carbon_residual" placeholder="单位：%(m/m)"></el-input>
-        </el-form-item>
-        <el-form-item label="含蜡量">
-            <el-input v-model="materialInfo.wax_content" placeholder="单位：%(m/m)"></el-input>
-        </el-form-item>
-        <el-form-item label="盐含量">
-            <el-input v-model="materialInfo.salt_content" placeholder="单位：mg/L"></el-input>
-        </el-form-item>
-        <el-form-item label="硫醇硫">
-            <el-input v-model="materialInfo.mercaptan_sulfur" placeholder="单位：ppm"></el-input>
-        </el-form-item>
-        <el-form-item label="水分">
-            <el-input v-model="materialInfo.water" placeholder="单位：%(m/m)"></el-input>
-        </el-form-item>
-        <el-form-item label="沉淀物">
-            <el-input v-model="materialInfo.precipitate" placeholder="单位：%(m/m)"></el-input>
-        </el-form-item>
-        <el-form-item label="胶质">
-            <el-input v-model="materialInfo.colloid" placeholder="单位：%(m/m)"></el-input>
-        </el-form-item>
-        <el-form-item label="沥青质">
-            <el-input v-model="materialInfo.asphalt" placeholder="单位：%(m/m)"></el-input>
-        </el-form-item>
-        <el-form-item label="不同温度下的粘度" align="left">
-
-        </el-form-item>
-        <div v-for="(item,idx) in viscosity">
-            <el-form-item label="温度">
-                <el-input v-model="item.tempature" placeholder="单位：℃"></el-input>
-            </el-form-item>
-            <el-form-item label="粘度">
-                <el-input v-model="item.value" placeholder="单位：m㎡/s"></el-input>
-            </el-form-item>
-        </div>
-
-        <el-form-item label="元素组成"></el-form-item>
-        <el-form-item label="S">
-            <el-input v-model="materialInfo.S" placeholder="单位：w%"></el-input>
-        </el-form-item>
-        <el-form-item label="N">
-            <el-input v-model="materialInfo.N" placeholder="单位：w%"></el-input>
-        </el-form-item>
-        <el-form-item label="Ni">
-            <el-input v-model="materialInfo.Ni" placeholder="单位：μg/g"></el-input>
-        </el-form-item>
-        <el-form-item label="V">
-            <el-input v-model="materialInfo.V" placeholder="单位：μg/g"></el-input>
-        </el-form-item>
-        <el-form-item label="Ca">
-            <el-input v-model="materialInfo.Ca" placeholder="单位：μg/g"></el-input>
-        </el-form-item>
-        <el-form-item label="Fe">
-            <el-input v-model="materialInfo.Fe" placeholder="单位：μg/g"></el-input>
-        </el-form-item>
-        <el-form-item label="Cu">
-            <el-input v-model="materialInfo.Cu" placeholder="单位：μg/g"></el-input>
-        </el-form-item>
-        <el-form-item label="Pb">
-            <el-input v-model="materialInfo.Pb" placeholder="单位：μg/g"></el-input>
-        </el-form-item>
-        <el-form-item label="Mg">
-            <el-input v-model="materialInfo.Mg" placeholder="单位：μg/g"></el-input>
-        </el-form-item>
-        <el-form-item label="Na">
-            <el-input v-model="materialInfo.Na" placeholder="单位：μg/g"></el-input>
-        </el-form-item>
-        <el-form-item label="轻烃组成">
-        </el-form-item>
-        <el-form-item label="甲烷">
-            <el-input v-model="materialInfo.methane" placeholder="单位：v%"></el-input>
-        </el-form-item>
-        <el-form-item label="乙烷">
-            <el-input v-model="materialInfo.ethane" placeholder="单位：v%"></el-input>
-        </el-form-item>
-        <el-form-item label="丙烷">
-            <el-input v-model="materialInfo.propane" placeholder="单位：v%"></el-input>
-        </el-form-item>
-        <el-form-item label="正丁烷">
-            <el-input v-model="materialInfo.n_butane" placeholder="单位：v%"></el-input>
-        </el-form-item>
-        <el-form-item label="异丁烷">
-            <el-input v-model="materialInfo.isobutane" placeholder="单位：v%"></el-input>
-        </el-form-item>
-        <el-form-item label="正戊烷">
-            <el-input v-model="materialInfo.n_pentane" placeholder="单位：v%"></el-input>
-        </el-form-item>
-        <el-form-item label="异戊烷">
-            <el-input v-model="materialInfo.isopentane" placeholder="单位：v%"></el-input>
-        </el-form-item>
-        <el-form-item label="环戊烷">
-            <el-input v-model="materialInfo.cyclopentane" placeholder="单位：v%"></el-input>
-        </el-form-item>
-
+        
         <div id="hello">
             <h4 style="display: inline-block;margin:0;">原料窄馏分性质</h4>
             <el-table :data="narrowFractionDatas" border style="width: 100%;margin-top:10px" max-height="500">

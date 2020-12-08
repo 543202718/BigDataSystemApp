@@ -67,8 +67,8 @@ export default {
         return {
             balanceCols: [
                 { col: "inward_or_outward_name", txt: '名称' },
-                { col: "boiling_point_cutting_range", txt: '实沸点切割范围/℃' },
-                { col: "yield", txt: '收率m%' },
+                { col: "boiling_point_cutting_range", txt: '实沸点切割范围（℃）' },
+                { col: "yield", txt: '收率（m%）' },
                 { col: "flow_rate1", txt: '流率（公斤/时）' },
                 { col: "flow_rate2", txt: '流率（吨/天）' },
                 { col: "flow_rate3", txt: '流率（万吨/年）' },
