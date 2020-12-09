@@ -1,83 +1,81 @@
 <template>
 <div>
-    <table border="1" align="center">
+    <table border="1" align="center" class="gridtable">
         <caption>
             <h4>原料基本性质</h4>
         </caption>
         <tr>
             <td colspan="1"><b>原料名称</b></td>
-            <td colspan="3">{{materialInfo.material_name}}</td>
+            <td colspan="7">{{materialInfo.material_name}}</td>
         </tr>
         <tr>
             <td><b>密度(20℃)(kg/m³)</b></td>
             <td>{{materialInfo.density}}</td>
             <td><b>凝点(℃)</b></td>
             <td>{{materialInfo.freezing_point}}</td>
-        </tr>
-        <tr>
+            <!-- </tr>
+        <tr> -->
             <td><b>闪点开口(℃)</b></td>
             <td>{{materialInfo.flash_point_open}}</td>
             <td><b>闪点闭口(℃)</b></td>
             <td>{{materialInfo.flash_point_close}}</td>
         </tr>
         <tr>
-            <td><b>酸值(mg KOH/g)</b></td>
-            <td>{{materialInfo.acid_value}}</td>
-            <td><b>原油热值(kJ/kg)</b></td>
-            <td>{{materialInfo.heat_value}}</td>
-        </tr>
-        <tr>
             <td><b>原油类别</b></td>
             <td>{{materialInfo.type}}</td>
+            <td><b>原油热值(kJ/kg)</b></td>
+            <td>{{materialInfo.calorific}}</td>
+            <!-- </tr>
+        <tr> -->
+            <td><b>酸值(mg KOH/g)</b></td>
+            <td>{{materialInfo.acid_value}}</td>
             <td><b>灰分(%(m/m))</b></td>
             <td>{{materialInfo.ash}}</td>
         </tr>
         <tr>
             <td><b>残炭(%(m/m))</b></td>
-            <td>{{materialInfo.carbon_residual}}</td>
+            <td>{{materialInfo.carbon}}</td>
             <td><b>含蜡量(%(m/m))</b></td>
-            <td>{{materialInfo.wax_content}}</td>
-        </tr>
-        <tr>
+            <td>{{materialInfo.wax}}</td>
+            <!-- </tr>
+        <tr> -->
             <td><b>盐含量(mg/L)</b></td>
-            <td>{{materialInfo.salt_content}}</td>
+            <td>{{materialInfo.salt}}</td>
             <td><b>硫醇硫(ppm)</b></td>
-            <td>{{materialInfo.mercaptan_sulfur}}</td>
+            <td>{{materialInfo.sulfur}}</td>
         </tr>
         <tr>
             <td><b>水分(%(m/m))</b></td>
             <td>{{materialInfo.water}}</td>
             <td><b>沉淀物(%(m/m))</b></td>
             <td>{{materialInfo.precipitate}}</td>
-        </tr>
-        <tr>
+            <!-- </tr>
+        <tr> -->
             <td><b>胶质(%(m/m))</b></td>
-            <td>{{materialInfo.colloid}}</td>
+            <td>{{materialInfo.gum}}</td>
             <td><b>沥青质(%(m/m))</b></td>
-            <td>{{materialInfo.asphalt}}</td>
+            <td>{{materialInfo.asphaltene}}</td>
         </tr>
-
-        <!-- 类似的做完剩下的属性 -->
         <tr>
-            <td colspan="4"><b>不同温度下的粘度</b></td>
+            <td colspan="8"><b>不同温度下的粘度</b></td>
         </tr>
         <tr v-for="(item,idx) in viscosity">
-            <td><b>温度(℃)</b></td>
-            <td>{{item.tempature}}</td>
-            <td><b>粘度(m㎡/s)</b></td>
-            <td>{{item.value}}</td>
+            <!-- <td colspan="2"><b>温度点{{idx+1}}</b></td> -->
+            <td colspan="2"><b>温度(℃)</b></td>
+            <td colspan="2">{{viscosity[idx].tempature}}</td>
+            <td colspan="2"><b>粘度(m㎡/s)</b></td>
+            <td colspan="2">{{viscosity[idx].value}}</td>
         </tr>
-
         <tr>
-            <td colspan="4"><b>元素组成</b></td>
+            <td colspan="8"><b>元素组成</b></td>
         </tr>
         <tr>
             <td><b>S(w%)</b></td>
             <td>{{materialInfo.S}}</td>
             <td><b>C(w%)</b></td>
             <td>{{materialInfo.C}}</td>
-        </tr>
-        <tr>
+            <!-- </tr>
+        <tr> -->
             <td><b>N(w%)</b></td>
             <td>{{materialInfo.N}}</td>
             <td><b>H(w%)</b></td>
@@ -88,8 +86,8 @@
             <td>{{materialInfo.Ni}}</td>
             <td><b>V(μg/g)</b></td>
             <td>{{materialInfo.V}}</td>
-        </tr>
-        <tr>
+            <!-- </tr>
+        <tr> -->
             <td><b>Ca(μg/g)</b></td>
             <td>{{materialInfo.Ca}}</td>
             <td><b>Fe(μg/g)</b></td>
@@ -101,27 +99,24 @@
             <td>{{materialInfo.Cu}}</td>
             <td><b>Pb(μg/g)</b></td>
             <td>{{materialInfo.Pb}}</td>
-
-        </tr>
-        <tr>
+            <!-- </tr>
+        <tr> -->
             <td><b>Mg(μg/g)</b></td>
             <td>{{materialInfo.Mg}}</td>
             <td><b>Na(μg/g)</b></td>
             <td>{{materialInfo.Na}}</td>
 
         </tr>
-                
-        <!-- 类似的做完剩下的属性 -->
         <tr>
-            <td colspan="4"><b>轻烃组成</b></td>
+            <td colspan="8"><b>轻烃组成</b></td>
         </tr>
         <tr>
             <td><b>甲烷(v%)</b></td>
             <td>{{materialInfo.methane}}</td>
             <td><b>乙烷(v%)</b></td>
             <td>{{materialInfo.ethane}}</td>
-        </tr>
-        <tr>
+            <!-- </tr>
+        <tr> -->
             <td><b>丙烷(v%)</b></td>
             <td>{{materialInfo.propane}}</td>
             <td><b>正丁烷(v%)</b></td>
@@ -132,19 +127,15 @@
             <td>{{materialInfo.isobutane}}</td>
             <td><b>正戊烷(v%)</b></td>
             <td>{{materialInfo.n_pentane}}</td>
-        </tr>
-        <tr>
+            <!-- </tr>
+        <tr> -->
             <td><b>异戊烷(v%)</b></td>
             <td>{{materialInfo.isopentane}}</td>
             <td><b>环戊烷(v%)</b></td>
             <td>{{materialInfo.cyclopentane}}</td>
         </tr>
-
-        <!-- 类似的做完剩下的属性 -->
     </table>
-    <!-- 删掉下面的输入框 -->
     <el-form ref="form" :model="materialInfo" label-width="130px" size="mini" style="margin-top: 20px">
-        
         <div id="hello">
             <h4 style="display: inline-block;margin:0;">原料窄馏分性质</h4>
             <el-table :data="narrowFractionDatas" border style="width: 100%;margin-top:10px" max-height="500">
@@ -378,3 +369,31 @@ export default {
     }
 }
 </script>
+
+<style>
+/* table.gridtable {
+    font-family: verdana, arial, sans-serif;
+    font-size: 11px;
+    color: #333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+}
+
+table.gridtable th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+} */
+
+table.gridtable td {
+    /* border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff; */
+    width: 150px;
+}
+</style>

@@ -30,7 +30,8 @@ def AVDU_detail():
                     'materialInfo': materialInfo(cursor),
                     'productInfo': productInfo(cursor),
                     'balanceInfo': balanceInfo(cursor),
-                    'operation_conditionInfo': operation_conditionInfo(cursor)
+                    'operation_conditionInfo': operation_conditionInfo(cursor),
+                    'public_workInfo': public_workInfo(cursor)
                 }
             )
         )
@@ -208,6 +209,15 @@ def insertIntoList(list, cell, key):
             item[key] = cell['value']
             return
     list.append({'name': cell['name'], 'unit': cell['unit'], key: cell['value']})
+
+
+def public_workInfo(cursor):
+    dict = {}
+    sql = "select `name`, `unit`, `value`, `note` from `publicwork` where `system_id`=%s"
+    cursor.execute(sql, [system_id])
+    dict['tableDatas'] = cursor.fetchall()
+    # print("public work info: \n", dict)
+    return dict
 
 
 # 测试代码
