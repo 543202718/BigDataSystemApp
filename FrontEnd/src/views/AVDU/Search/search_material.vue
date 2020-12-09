@@ -2,7 +2,7 @@
 <div>
     <table border="1" align="center" class="gridtable">
         <caption>
-            <h4>原料基本性质</h4>
+            <h4>原料基本性质表</h4>
         </caption>
         <tr>
             <td colspan="1"><b>原料名称</b></td>
@@ -13,8 +13,6 @@
             <td>{{materialInfo.density}}</td>
             <td><b>凝点(℃)</b></td>
             <td>{{materialInfo.freezing_point}}</td>
-            <!-- </tr>
-        <tr> -->
             <td><b>闪点开口(℃)</b></td>
             <td>{{materialInfo.flash_point_open}}</td>
             <td><b>闪点闭口(℃)</b></td>
@@ -25,8 +23,6 @@
             <td>{{materialInfo.type}}</td>
             <td><b>原油热值(kJ/kg)</b></td>
             <td>{{materialInfo.calorific}}</td>
-            <!-- </tr>
-        <tr> -->
             <td><b>酸值(mg KOH/g)</b></td>
             <td>{{materialInfo.acid_value}}</td>
             <td><b>灰分(%(m/m))</b></td>
@@ -37,8 +33,6 @@
             <td>{{materialInfo.carbon}}</td>
             <td><b>含蜡量(%(m/m))</b></td>
             <td>{{materialInfo.wax}}</td>
-            <!-- </tr>
-        <tr> -->
             <td><b>盐含量(mg/L)</b></td>
             <td>{{materialInfo.salt}}</td>
             <td><b>硫醇硫(ppm)</b></td>
@@ -49,8 +43,6 @@
             <td>{{materialInfo.water}}</td>
             <td><b>沉淀物(%(m/m))</b></td>
             <td>{{materialInfo.precipitate}}</td>
-            <!-- </tr>
-        <tr> -->
             <td><b>胶质(%(m/m))</b></td>
             <td>{{materialInfo.gum}}</td>
             <td><b>沥青质(%(m/m))</b></td>
@@ -60,7 +52,6 @@
             <td colspan="8"><b>不同温度下的粘度</b></td>
         </tr>
         <tr v-for="(item,idx) in viscosity">
-            <!-- <td colspan="2"><b>温度点{{idx+1}}</b></td> -->
             <td colspan="2"><b>温度(℃)</b></td>
             <td colspan="2">{{viscosity[idx].tempature}}</td>
             <td colspan="2"><b>粘度(m㎡/s)</b></td>
@@ -74,8 +65,6 @@
             <td>{{materialInfo.S}}</td>
             <td><b>C(w%)</b></td>
             <td>{{materialInfo.C}}</td>
-            <!-- </tr>
-        <tr> -->
             <td><b>N(w%)</b></td>
             <td>{{materialInfo.N}}</td>
             <td><b>H(w%)</b></td>
@@ -86,8 +75,6 @@
             <td>{{materialInfo.Ni}}</td>
             <td><b>V(μg/g)</b></td>
             <td>{{materialInfo.V}}</td>
-            <!-- </tr>
-        <tr> -->
             <td><b>Ca(μg/g)</b></td>
             <td>{{materialInfo.Ca}}</td>
             <td><b>Fe(μg/g)</b></td>
@@ -99,8 +86,6 @@
             <td>{{materialInfo.Cu}}</td>
             <td><b>Pb(μg/g)</b></td>
             <td>{{materialInfo.Pb}}</td>
-            <!-- </tr>
-        <tr> -->
             <td><b>Mg(μg/g)</b></td>
             <td>{{materialInfo.Mg}}</td>
             <td><b>Na(μg/g)</b></td>
@@ -115,8 +100,6 @@
             <td>{{materialInfo.methane}}</td>
             <td><b>乙烷(v%)</b></td>
             <td>{{materialInfo.ethane}}</td>
-            <!-- </tr>
-        <tr> -->
             <td><b>丙烷(v%)</b></td>
             <td>{{materialInfo.propane}}</td>
             <td><b>正丁烷(v%)</b></td>
@@ -127,72 +110,68 @@
             <td>{{materialInfo.isobutane}}</td>
             <td><b>正戊烷(v%)</b></td>
             <td>{{materialInfo.n_pentane}}</td>
-            <!-- </tr>
-        <tr> -->
             <td><b>异戊烷(v%)</b></td>
             <td>{{materialInfo.isopentane}}</td>
             <td><b>环戊烷(v%)</b></td>
             <td>{{materialInfo.cyclopentane}}</td>
         </tr>
     </table>
-    <el-form ref="form" :model="materialInfo" label-width="130px" size="mini" style="margin-top: 20px">
-        <div id="hello">
-            <h4 style="display: inline-block;margin:0;">原料窄馏分性质</h4>
-            <el-table :data="narrowFractionDatas" border style="width: 100%;margin-top:10px" max-height="500">
-                <el-table-column v-if="narrowFractionCols.length > 0" type="index" :label="'编号'" :width="50"></el-table-column>
-                <!-- 固定列 -->
-                <el-table-column v-for="(column, idx) in narrowFractionCols" :key="idx" :index="idx" :width="120">
+    <br>
+    <div id="hello">
+        <h4 style="display: inline-block;margin:0;">原料窄馏分性质表</h4>
+        <el-table :data="narrowFractionDatas" border style="width: 100%;margin-top:10px" max-height="500">
+            <el-table-column v-if="narrowFractionCols.length > 0" type="index" :label="'编号'" :width="50"></el-table-column>
+            <!-- 固定列 -->
+            <el-table-column v-for="(column, idx) in narrowFractionCols" :key="idx" :index="idx" :width="120">
+                <!--label-->
+                <template slot="header" slot-scope="scope1">
+                    <p>
+                        {{column.txt}}
+                    </p>
+                </template>
+                <!--prop-->
+                <template slot-scope="scope">
+                    <p>
+                        {{scope.row[column.col]}}
+                    </p>
+
+                </template>
+            </el-table-column>
+            <!-- 折射率 -->
+            <el-table-column v-if="refract_t.length>0" label="折射率">
+                <el-table-column v-for="(column, idx) in refract_t" :key="idx" :index="idx">
                     <!--label-->
                     <template slot="header" slot-scope="scope1">
                         <p>
-                            {{column.txt}}
+                            {{column}}℃
                         </p>
                     </template>
-                    <!--prop-->
                     <template slot-scope="scope">
                         <p>
-                            {{scope.row[column.col]}}
+                            {{scope.row['re'+column]}}
+                        </p>
+                    </template>
+                </el-table-column>
+            </el-table-column>
+            <!-- 运动粘度 -->
+            <el-table-column v-if="viscosity_t.length>0" label="运动粘度（m㎡/s）">
+                <el-table-column v-for="(column, idx) in viscosity_t" :key="idx" :index="idx">
+                    <!--label-->
+                    <template slot="header" slot-scope="scope1">
+                        <p>
+                            {{column}}℃
+                        </p>
+                    </template>
+                    <template slot-scope="scope">
+                        <p>
+                            {{scope.row['vis'+column]}}
                         </p>
 
                     </template>
                 </el-table-column>
-                <!-- 折射率 -->
-                <el-table-column v-if="refract_t.length>0" label="折射率">
-                    <el-table-column v-for="(column, idx) in refract_t" :key="idx" :index="idx">
-                        <!--label-->
-                        <template slot="header" slot-scope="scope1">
-                            <p>
-                                {{column}}℃
-                            </p>
-                        </template>
-                        <template slot-scope="scope">
-                            <p>
-                                {{scope.row['re'+column]}}
-                            </p>
-                        </template>
-                    </el-table-column>
-                </el-table-column>
-                <!-- 运动粘度 -->
-                <el-table-column v-if="viscosity_t.length>0" label="运动粘度（m㎡/s）">
-                    <el-table-column v-for="(column, idx) in viscosity_t" :key="idx" :index="idx">
-                        <!--label-->
-                        <template slot="header" slot-scope="scope1">
-                            <p>
-                                {{column}}℃
-                            </p>
-                        </template>
-                        <template slot-scope="scope">
-                            <p>
-                                {{scope.row['vis'+column]}}
-                            </p>
-
-                        </template>
-                    </el-table-column>
-                </el-table-column>
-
-            </el-table>
-        </div>
-    </el-form>
+            </el-table-column>
+        </el-table>
+    </div>
     <br>
 </div>
 </template>

@@ -1,6 +1,5 @@
 <template>
 <div id="hello">
-
     <div>
         <h4>物料平衡表</h4>
         <el-table :data="tableDatas" border max-height="600" style="width: 100%;margin-top:10px">
@@ -21,7 +20,7 @@
             </el-table-column>
         </el-table>
     </div>
-    
+
 </div>
 </template>
 

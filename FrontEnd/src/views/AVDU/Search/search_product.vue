@@ -1,7 +1,7 @@
 <template>
 <div id="hello">
-    <div id="hello">
-        <h4 style="display: inline-block;margin:0;">产品性质</h4>
+    <div>
+        <h4>产品性质表</h4>
         <el-table :data="productDatas" border style="width: 100%;margin-top:10px" max-height="500">
             <el-table-column v-if="productCols.length > 0" type="index" :label="'编号'" :width="50"></el-table-column>
             <!-- 固定列 -->

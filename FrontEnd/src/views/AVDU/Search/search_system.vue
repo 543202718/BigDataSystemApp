@@ -2,7 +2,7 @@
 <div id="search" style="background:white">
     <table border="1" align="center">
         <caption>
-            <h4>装置概况</h4>
+            <h4>装置概况表</h4>
         </caption>
         <tr>
             <td colspan="1"><b>项目名称</b></td>
@@ -100,8 +100,6 @@
             <td colspan="1"><b>装置能耗</b></td>
             <td colspan="6">{{systemInfo.energy}}</td>
         </tr>
-
-        <!-- 类似的做完剩下的属性 -->
     </table>
     
 </div>
@@ -144,7 +142,7 @@ export default {
 
     created: function () {
         console.log("turn to system page");
-        
+        console.log(this.$store.search_systemInfo);
         this.systemInfo = this.$store.search_systemInfo;
 
     },

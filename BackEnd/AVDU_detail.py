@@ -13,7 +13,7 @@ system_id = -1
 def AVDU_detail():
     print("AVDU_detail_ok")
     dict = request.values.to_dict()
-    print(dict)
+    # print(dict)
     global system_id
     system_id = dict['id']
     db = pymysql.connect(host="localhost", user="root",
@@ -31,7 +31,11 @@ def AVDU_detail():
                     'productInfo': productInfo(cursor),
                     'balanceInfo': balanceInfo(cursor),
                     'operation_conditionInfo': operation_conditionInfo(cursor),
-                    'public_workInfo': public_workInfo(cursor)
+                    'public_workInfo': public_workInfo(cursor),
+                    'investmentInfo': investmentInfo(cursor),
+                    'deviceInfo': deviceInfo(cursor),
+                    'wasteInfo': wasteInfo(cursor),
+                    'chemicalInfo': chemicalInfo(cursor)
                 }
             )
         )
@@ -54,7 +58,8 @@ def AVDU_detail():
 def systemInfo(cursor):
     dict = {}
     # 从system表中获取指定system_id的记录
-    sql = "select `project_id`, `system_no`, `type` as `system_type`, `designer`, `design_time`, \
+    sql = "select `project_id`, `system_no`, `type` as `system_type`, `designer`,\
+        date_format(`design_time`,'%%Y-%%m-%%d') as `design_time`, \
         `name` as `system_name`, `property`, `design_stage`, `scale`, `set`, \
         `work_hour`, `flexibility`, `process_type`, `patentee`, `field`, \
         `technical_route`, `area`, `population`, `energy` from `system` \
@@ -149,7 +154,7 @@ def productInfo(cursor):
     # 从viscosity_product表中获取指定product_id的记录
     s = set()
     for row in dict['tableDatas']:
-        print(row)
+        # print(row)
         sql = "select `temperature`, `value` from `viscosity_product` \
             where `product_id` = %s"
         cursor.execute(sql, [row['id']])
@@ -203,6 +208,53 @@ def operation_conditionInfo(cursor):
     return dict
 
 
+def public_workInfo(cursor):
+    dict = {}
+    sql = "select `name`, `unit`, `value`, `note` \
+        from `publicwork` where `system_id` =  %s "
+    cursor.execute(sql, [system_id])
+    dict['tableDatas'] = cursor.fetchall()
+    return dict
+
+
+
+def investmentInfo(cursor):
+    dict = {}
+    sql = "select `total`,`con_invest`, `project_cost`, `equipment_fee`, \
+        `installation_fee`, `construction_fee`, `else` from `investment` \
+        where `system_id` = %s "
+    cursor.execute(sql, [system_id])
+    dict.update(cursor.fetchone())
+    return dict 
+
+def deviceInfo(cursor):
+    dict = {}
+    sql = "select `type`, `internal`, `overseas`, `internal`+`overseas` as `total`, `note` from \
+        `device` where `system_id` = %s "
+    cursor.execute(sql, [system_id])
+    dict['tableDatas'] = cursor.fetchall()
+    return dict
+
+
+def wasteInfo(cursor):
+    dict = {}
+    sql = "select `name`, `unit`, `value_con`, `value_dis`, `note` \
+        from `waste` where `system_id` = %s "
+    cursor.execute(sql, [system_id])
+    dict['tableDatas'] = cursor.fetchall()
+    return dict
+
+def chemicalInfo(cursor):
+    dict = {}
+    sql = "select `name`, `unit`, `value`, `type`, `pattern`, `transport`, \
+        `note` from `chemical` where `system_id` = %s "
+    cursor.execute(sql, [system_id])
+    dict['tableDatas'] = cursor.fetchall()
+    return dict
+
+
+
+
 def insertIntoList(list, cell, key):
     for item in list:
         if item['name'] == cell['name']:
@@ -211,20 +263,11 @@ def insertIntoList(list, cell, key):
     list.append({'name': cell['name'], 'unit': cell['unit'], key: cell['value']})
 
 
-def public_workInfo(cursor):
-    dict = {}
-    sql = "select `name`, `unit`, `value`, `note` from `publicwork` where `system_id`=%s"
-    cursor.execute(sql, [system_id])
-    dict['tableDatas'] = cursor.fetchall()
-    # print("public work info: \n", dict)
-    return dict
-
-
 # 测试代码
 if __name__ == '__main__':
     system_id = 2
     db = pymysql.connect(host="localhost", user="root",
-                         password="123456", db="bigdata",
+                         password="@liudf57489sql", db="bigdata",
                          charset='utf8', cursorclass=pymysql.cursors.DictCursor)
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()

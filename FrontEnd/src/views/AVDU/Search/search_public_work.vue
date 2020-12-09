@@ -1,6 +1,7 @@
 <template>
 <div id="hello">
     <div>
+        <h4>公用工程表</h4>
         <el-table :data="testDatas" border style=" width: 100%;margin-top:10px" max-height="600">
             <el-table-column v-if="testCols.length > 0" type="index" :label="'编号'" :width="50"></el-table-column>
             <el-table-column v-for="(column, idx) in testCols" :key="idx" :index="idx">
@@ -33,21 +34,13 @@ export default {
                 { col: "note", txt: '备注' },
             ],
             testDatas: [],
- 
+
         };
     },
 
     created: function () {
         console.log("turn to publicWork page");
-        console.log(this.$store.search_public_workInfo);
         this.testDatas = this.$store.search_public_workInfo.tableDatas;
-        console.log(this.testDatas);
     },
-    // methods: {
-    //     consoleDatas() {
-    //         console.log('表头', this.testCols);
-    //         console.log('数据', this.testDatas);
-    //     }
-    // }
 }
 </script>
