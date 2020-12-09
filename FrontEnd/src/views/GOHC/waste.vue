@@ -59,102 +59,60 @@ export default {
                 }
             ],
             testDatas: [{
-                    name: { content: '加热炉烟气', show: true },
-                    unit: { content: 't/h', show: true },
-                    value: { content: '', show: true },
-                    CONTvalue: { content: '', show: true },
-                    note: { content: '连续，独立烟囱', show: true }
-                },
-{
-                    name: { content: '催化剂再生废气', show: true },
-                    unit: { content: 'kg/h', show: true },
-                    value: { content: '', show: true },
-                    CONTvalue: { content: '', show: true },
-                    note: { content: '连续', show: true }
-                },
-{
-                    name: { content: '含硫污水', show: true },
-                    unit: { content: 't/h', show: true },
-                    value: { content: '', show: true },
-                    CONTvalue: { content: '', show: true },
-                    note: { content: '污水汽提装置', show: true }
-                },
-{
                     name: { content: '含油污水', show: true },
                     unit: { content: 't/h', show: true },
-                    value: { content: '', show: true },
-                    CONTvalue: { content: '', show: true },
-                    note: { content: '污水处理厂', show: true }
-                },
-{
-                    name: { content: '含烃污水', show: true },
-                    unit: { content: 't/h', show: true },
-                    value: { content: '', show: true },
+                    value: { content: '6', show: true },
                     CONTvalue: { content: '', show: true },
                     note: { content: '', show: true }
                 },
 {
-                    name: { content: '再生含盐污水', show: true },
+                    name: { content: '含硫污水', show: true },
                     unit: { content: 't/h', show: true },
-                    value: { content: '', show: true },
+                    value: { content: '56.5', show: true },
                     CONTvalue: { content: '', show: true },
-                    note: { content: '连续，污水处理厂', show: true }
+                    note: { content: '', show: true }
                 },
 {
-                    name: { content: '废重整催化剂', show: true },
-                    unit: { content: 't/次，3年1次', show: true },
-                    value: { content: '', show: true },
-                    CONTvalue: { content: '-', show: true },
-                    note: { content: '催化剂厂回收', show: true }
+                    name: { content: '生活污水', show: true },
+                    unit: { content: 't/h', show: true },
+                    value: { content: '3', show: true },
+                    CONTvalue: { content: '', show: true },
+                    note: { content: '', show: true }
                 },
 {
-                    name: { content: '废预加氢催化剂', show: true },
-                    unit: { content: 't/次，4年1次', show: true },
-                    value: { content: '', show: true },
-                    CONTvalue: { content: '-', show: true },
-                    note: { content: '集中处理-填埋', show: true }
+                    name: { content: '加热炉烟气', show: true },
+                    unit: { content: 'kg/h', show: true },
+                    value: { content: '156369', show: true },
+                    CONTvalue: { content: '', show: true },
+                    note: { content: '', show: true }
                 },
 {
-                    name: { content: '废预加氢脱氯剂', show: true },
-                    unit: { content: 't/次，2年1次', show: true },
+                    name: { content: '废催化剂', show: true },
+                    unit: { content: 't/次', show: true },
                     value: { content: '', show: true },
-                    CONTvalue: { content: '-', show: true },
-                    note: { content: '集中处理-填埋', show: true }
+                    CONTvalue: { content: '1120', show: true },
+                    note: { content: '6年排放一次', show: true }
                 },
 {
-                    name: { content: '废氢气脱氯剂', show: true },
-                    unit: { content: 't/次，1年1次', show: true },
+                    name: { content: '废保护剂', show: true },
+                    unit: { content: 't/次', show: true },
                     value: { content: '', show: true },
-                    CONTvalue: { content: '-', show: true },
-                    note: { content: '集中处理-填埋', show: true }
+                    CONTvalue: { content: '60', show: true },
+                    note: { content: '3年排放一次', show: true }
                 },
 {
-                    name: { content: '废重整油脱氯剂', show: true },
-                    unit: { content: 't/次，1年1次', show: true },
+                    name: { content: '废瓷球', show: true },
+                    unit: { content: 't/次', show: true },
                     value: { content: '', show: true },
-                    CONTvalue: { content: '-', show: true },
-                    note: { content: '集中处理-填埋', show: true }
+                    CONTvalue: { content: '130', show: true },
+                    note: { content: '3年排放一次', show: true }
                 },
 {
-                    name: { content: '废脱氯吸附剂', show: true },
-                    unit: { content: 't/次，2年1次', show: true },
+                    name: { content: '废脱硫剂', show: true },
+                    unit: { content: 't/次', show: true },
                     value: { content: '', show: true },
-                    CONTvalue: { content: '-', show: true },
-                    note: { content: '集中处理-填埋', show: true }
-                },
-{
-                    name: { content: '废白土', show: true },
-                    unit: { content: 't/次，2年1次', show: true },
-                    value: { content: '', show: true },
-                    CONTvalue: { content: '-', show: true },
-                    note: { content: '集中处理-填埋', show: true }
-                },
-{
-                    name: { content: '废环丁砜', show: true },
-                    unit: { content: 't/次，1年4次', show: true },
-                    value: { content: '', show: true },
-                    CONTvalue: { content: '-', show: true },
-                    note: { content: '集中处理-填埋', show: true }
+                    CONTvalue: { content: '320', show: true },
+                    note: { content: '3年排放一次', show: true }
                 }
             ],
             count_col: 0,
@@ -166,6 +124,10 @@ export default {
 
     created: function () {
         console.log("turn to system page");
+        if ('wasteInfo' in this.$store) {
+            this.testCols = this.$store.wasteInfo.tableCols;
+            this.testDatas = this.$store.wasteInfo.tableDatas;
+        }
     },
     methods: {
         addToStore: function () {
@@ -173,8 +135,8 @@ export default {
                 tableCols: null,
                 tableDatas: null
             };
-            this.$store.wasteInfo.tableCols = this.tableCols; //表头
-            this.$store.wasteInfo.tableDatas = this.tableDatas; //表格内容
+            this.$store.wasteInfo.tableCols = this.testCols; //表头
+            this.$store.wasteInfo.tableDatas = this.testDatas; //表格内容
             this.$message({
                         message: '暂存成功',
                         type: 'success',

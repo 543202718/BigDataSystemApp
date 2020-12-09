@@ -45,1008 +45,703 @@ export default {
                 },
                 {
                     col: "unit",
-                    txt: '用量单位'
+                    txt: '单位'
                 },
                 {
                     col: "value",
-                    txt: '用量数值'
-                }
+                    txt: '值'
+                },
             ],
             testDatas: [{
                     name: {
-                        content: '预加氢反应压力',
+                        content: '精制部分新鲜原料进料量',
                         show: true
                     },
                     unit: {
-                        content: 'MPa(g)',
+                        content: 't/h',
                         show: true
                     },
-                    value: {
-                        content: '',
+                    refiningValue1: {
+                        content: ' / a',
                         show: true
                     }
-                },
-                {
-                    name: {
-                        content: '预加氢体积空速（RS-1）',
-                        show: true
-                    },
-                    unit: {
-                        content: 'h-1',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '预加氢反应器初期温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '预加氢反应器末期温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '预加氢氢油比(体)',
-                        show: true
-                    },
-                    unit: {
-                        content: 'Nm3/m3',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '预加氢化学氢耗',
-                        show: true
-                    },
-                    unit: {
-                        content: 'w%',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '蒸发塔塔顶温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '蒸发塔塔顶压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa(g)',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '蒸发塔塔底温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '蒸发塔重量回流比R/D',
-                        show: true
-                    },
-                    unit: {
-                        content: '-',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '拔头油汽提塔塔顶温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '拔头油汽提塔塔顶压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa(g)',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '拔头油汽提塔塔底温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '拔头油汽提塔重量回流比R/D',
-                        show: true
-                    },
-                    unit: {
-                        content: '-',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整反应C5+产品研究法辛烷值(RONC)',
-                        show: true
-                    },
-                    unit: {
-                        content: '-',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整反应进料流量，',
-                        show: true
-                    },
-                    unit: {
-                        content: 'kg/h',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整反应重量平均入口温度WAIT',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整反应重量平均床层温度WABT',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整反应氢油(H2/HC)分子摩尔比',
-                        show: true
-                    },
-                    unit: {
-                        content: 'mol/mol',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整反应液时重量空速(LHSV)',
-                        show: true
-                    },
-                    unit: {
-                        content: 'h-1',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整反应体积空速(WHSV)',
-                        show: true
-                    },
-                    unit: {
-                        content: 'h-1',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整反应平均反应压力（表）',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa(g)',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整反应气液分离器压力（表）',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa(g)',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整反应气液分离器温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整反应C5＋产品液收',
-                        show: true
-                    },
-                    unit: {
-                        content: 'w%',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整反应芳烃产率',
-                        show: true
-                    },
-                    unit: {
-                        content: 'w%',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '重整反应纯氢产率',
-                        show: true
-                    },
-                    unit: {
-                        content: 'w%',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '1级再接触温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '2级再接触压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa(g)',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '2级再接触温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '3级再接触压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa(g)',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '脱戊烷塔塔顶温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '脱戊烷塔塔顶压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa(g)',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '脱戊烷塔塔底温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '脱戊烷塔重量回流比R/D',
-                        show: true
-                    },
-                    unit: {
-                        content: '-',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '脱丁烷塔塔顶温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '脱丁烷塔塔顶压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa(g)',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '脱丁烷塔塔底温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '脱丁烷塔重量回流比R/D',
-                        show: true
-                    },
-                    unit: {
-                        content: '-',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '脱C6塔塔顶温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '脱C7塔塔顶压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa(g)',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '脱C8塔塔底温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '脱C9塔重量回流比R/D',
-                        show: true
-                    },
-                    unit: {
-                        content: '-',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '烧焦再生催化剂循环量',
-                        show: true
-                    },
-                    unit: {
-                        content: 'kg/h',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '烧焦再生第一烧焦入口温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '烧焦再生第一烧焦入口压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa（g）',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '烧焦再生第二烧焦入口温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '烧焦再生第二烧焦入口压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa（g）',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '烧焦再生氧氯化区入口温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '烧焦再生氧氯化区入口压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa（g）',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '烧焦再生焙烧区入口温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '烧焦再生焙烧区入口压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa（g）',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '还原一段操作温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '还原一段操作压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa（g）',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '还原二段操作温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '还原二段操作压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa（g）',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '洗涤罐罐顶操作压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa（g）',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '洗涤罐操作温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '抽提蒸馏塔塔顶温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '抽提蒸馏塔塔顶压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa（g）',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '抽提蒸馏塔塔底温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '抽提蒸馏塔溶剂/进料重量比',
-                        show: true
-                    },
-                    unit: {
-                        content: '-',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '抽提蒸馏塔回流比R/D',
-                        show: true
-                    },
-                    unit: {
-                        content: '-',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '抽提蒸馏塔贫溶剂进塔温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '抽提蒸馏塔C6馏分进塔温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '溶剂回收塔塔顶温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '溶剂回收塔塔顶压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa（g）',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '溶剂回收塔塔底温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '溶剂回收塔回流比R/D',
-                        show: true
-                    },
-                    unit: {
-                        content: '-',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '溶剂再生罐罐顶压力',
-                        show: true
-                    },
-                    unit: {
-                        content: 'MPa(a)',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                },
-                {
-                    name: {
-                        content: '溶剂再生罐罐底温度',
-                        show: true
-                    },
-                    unit: {
-                        content: '℃',
-                        show: true
-                    },
-                    value: {
-                        content: '',
-                        show: true
-                    }
-                }
 
+                },
+                {
+                    name: {
+                        content: '精制部分循环油量',
+                        show: true
+                    },
+                    unit: {
+                        content: 't/h',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '精制部分冷高分压力',
+                        show: true
+                    },
+                    unit: {
+                        content: 'MPa',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '精制部分反应器入口氢油体积比',
+                        show: true
+                    },
+                    unit: {
+                        content: '-',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '≮610 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '精制部分催化剂',
+                        show: true
+                    },
+                    unit: {
+                        content: '-',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '保护剂 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '裂化部分催化剂',
+                        show: true
+                    },
+                    unit: {
+                        content: '',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '裂化剂 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '精制部分保护剂体积空速(新鲜进料)',
+                        show: true
+                    },
+                    unit: {
+                        content: 'm3',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '精制部分保护剂体积空速（包括循环油）',
+                        show: true
+                    },
+                    unit: {
+                        content: 'h-1',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '精制部分精制剂体积空速(新鲜进料)',
+                        show: true
+                    },
+                    unit: {
+                        content: 'm3',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '1 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '精制部分精制剂体积空速（包括循环油）',
+                        show: true
+                    },
+                    unit: {
+                        content: 'h-1',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '2 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '裂化部分裂化剂体积空速(新鲜进料)',
+                        show: true
+                    },
+                    unit: {
+                        content: 'm3',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '1 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '裂化部分裂化剂体积空速（包括循环油）',
+                        show: true
+                    },
+                    unit: {
+                        content: 'h-1',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '2 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '裂化部分补充精制剂体积空速(新鲜进料)',
+                        show: true
+                    },
+                    unit: {
+                        content: 'm3',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '7 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '裂化部分补充精制剂体积空速（包括循环油）',
+                        show: true
+                    },
+                    unit: {
+                        content: 'h-1',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '精制部分平均反应温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '裂化部分平均反应温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '精制单程转化率',
+                        show: true
+                    },
+                    unit: {
+                        content: 'm%',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '裂化单程转化率',
+                        show: true
+                    },
+                    unit: {
+                        content: 'm%',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '反应进料加热炉入口温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '反应进料加热炉出口温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '反应进料加热炉入口压力',
+                        show: true
+                    },
+                    unit: {
+                        content: 'MPa（g）',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '15 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '热高压分离器温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '热高压分离器压力',
+                        show: true
+                    },
+                    unit: {
+                        content: 'MPa（g）',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '13 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '冷高压分离器温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '冷高压分离器压力',
+                        show: true
+                    },
+                    unit: {
+                        content: 'MPa（g）',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '热低压分离器温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '热低压分离器压力',
+                        show: true
+                    },
+                    unit: {
+                        content: 'MPa（g）',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '2 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '冷低压分离器温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '冷低压分离器压力',
+                        show: true
+                    },
+                    unit: {
+                        content: 'MPa（g）',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '2 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '脱硫化氢塔温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '脱硫化氢塔压力',
+                        show: true
+                    },
+                    unit: {
+                        content: 'MPa（g）',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '1 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '分馏塔温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '分馏塔塔顶压力',
+                        show: true
+                    },
+                    unit: {
+                        content: 'MPa（g）',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '0 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '石脑油分馏塔温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '石脑油分馏塔塔顶压力',
+                        show: true
+                    },
+                    unit: {
+                        content: 'MPa（g）',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '0 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '石脑油稳定塔温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '石脑油稳定塔塔顶压力',
+                        show: true
+                    },
+                    unit: {
+                        content: 'MPa（g）',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '1 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '循环氢脱硫塔温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '循环氢脱硫塔压力',
+                        show: true
+                    },
+                    unit: {
+                        content: 'MPa（g）',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '脱硫化氢塔底重沸炉入口温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '脱硫化氢塔底重沸炉出口',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '脱硫化氢塔底重沸炉入口压力',
+                        show: true
+                    },
+                    unit: {
+                        content: 'MPa（g）',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '1 / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '分馏塔底重沸炉入口温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '分馏塔底重沸炉入口温度',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '分馏塔底重沸炉出口',
+                        show: true
+                    },
+                    unit: {
+                        content: '℃',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: ' / a',
+                        show: true
+                    }
+
+                },
+                {
+                    name: {
+                        content: '分馏塔底重沸炉入口压力',
+                        show: true
+                    },
+                    unit: {
+                        content: 'MPa（g）',
+                        show: true
+                    },
+                    refiningValue1: {
+                        content: '0 / a',
+                        show: true
+                    }
+
+                }
             ],
             count_col: 0,
             showMenu: false,
