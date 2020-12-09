@@ -148,7 +148,7 @@ export default {
 
     created: function () {
         console.log("turn to system page");
-        
+        console.log(this.$store.search_systemInfo);
         this.systemInfo = this.$store.search_systemInfo;
 
     },

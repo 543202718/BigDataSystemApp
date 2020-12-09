@@ -8,16 +8,16 @@ import json
 
 system_id = -1
 
-
+print("import AVDU_detail")
 @app.route('/AVDU_detail', methods=['POST'])
 def AVDU_detail():
     print("AVDU_detail_ok")
     dict = request.values.to_dict()
-    print(dict)
+    # print(dict)
     global system_id
     system_id = dict['id']
     db = pymysql.connect(host="localhost", user="root",
-                         password="123456", db="bigdata",
+                         password="@liudf57489sql", db="bigdata",
                          charset='utf8', cursorclass=pymysql.cursors.DictCursor)
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
@@ -30,7 +30,12 @@ def AVDU_detail():
                     'materialInfo': materialInfo(cursor),
                     'productInfo': productInfo(cursor),
                     'balanceInfo': balanceInfo(cursor),
-                    'operation_conditionInfo': operation_conditionInfo(cursor)
+                    'operation_conditionInfo': operation_conditionInfo(cursor),
+                    'public_workInfo': public_workInfo(cursor),
+                    'investmentInfo': investmentInfo(cursor),
+                    'deviceInfo': deviceInfo(cursor),
+                    'wasteInfo': wasteInfo(cursor),
+                    'chemicalInfo': chemicalInfo(cursor)
                 }
             )
         )
@@ -148,7 +153,7 @@ def productInfo(cursor):
     # 从viscosity_product表中获取指定product_id的记录
     s = set()
     for row in dict['tableDatas']:
-        print(row)
+        # print(row)
         sql = "select `temperature`, `value` from `viscosity_product` \
             where `product_id` = %s"
         cursor.execute(sql, [row['id']])
@@ -202,6 +207,58 @@ def operation_conditionInfo(cursor):
     return dict
 
 
+def public_workInfo(cursor):
+    dict = {}
+    sql = "select `name`, `unit`, `value`, `note` \
+        from `publicwork` where `system_id` =  %s "
+    cursor.execute(sql, [system_id])
+    dict['tableDatas'] = cursor.fetchall()
+    print("\n public work info: \n", dict)
+    return dict
+
+
+
+def investmentInfo(cursor):
+    dict = {}
+    sql = "select `total`,`con_invest`, `project_cost`, `equipment_fee`, \
+        `installation_fee`, `construction_fee`, `else` from `investment` \
+        where `system_id` = %s "
+    cursor.execute(sql, [system_id])
+    dict.update(cursor.fetchone())
+    # print("investment Info is : ", dict)
+    return dict 
+
+def deviceInfo(cursor):
+    dict = {}
+    sql = "select `type`, `internal`, `overseas`, `note` from \
+        `device` where `system_id` = %s "
+    cursor.execute(sql, [system_id])
+    dict['tableDatas'] = cursor.fetchall()
+    print("\n device info: \n", dict)
+    return dict
+
+
+def wasteInfo(cursor):
+    dict = {}
+    sql = "select `name`, `unit`, `value_con`, `value_dis`, `note` \
+        from `waste` where `system_id` = %s "
+    cursor.execute(sql, [system_id])
+    dict['tableDatas'] = cursor.fetchall()
+    print("\n waste info: \n", dict)
+    return dict
+
+def chemicalInfo(cursor):
+    dict = {}
+    sql = "select `name`, `unit`, `value`, `type`, `pattern`, `transport`, \
+        `note` from `chemical` where `system_id` = %s "
+    cursor.execute(sql, [system_id])
+    dict['tableDatas'] = cursor.fetchall()
+    print("\n chemical  info: \n", dict)
+    return dict
+
+
+
+
 def insertIntoList(list, cell, key):
     for item in list:
         if item['name'] == cell['name']:
@@ -214,7 +271,7 @@ def insertIntoList(list, cell, key):
 if __name__ == '__main__':
     system_id = 2
     db = pymysql.connect(host="localhost", user="root",
-                         password="123456", db="bigdata",
+                         password="@liudf57489sql", db="bigdata",
                          charset='utf8', cursorclass=pymysql.cursors.DictCursor)
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
