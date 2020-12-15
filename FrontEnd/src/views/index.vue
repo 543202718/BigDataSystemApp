@@ -14,7 +14,7 @@
                     <el-menu-item-group>
                         <el-menu-item index="1-1" @click="inputTemplate('/AVDU/input')">输入</el-menu-item>
                         <el-menu-item index="1-2" @click="inputTemplate('/AVDU/search')">查询</el-menu-item>
-                        <el-menu-item index="1-3">比对</el-menu-item>
+                        <el-menu-item index="1-3" @click="inputTemplate('/AVDU/compare')">比对</el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
                 <el-submenu index="2">
@@ -25,14 +25,9 @@
                     <el-menu-item-group>
                         <el-menu-item index="2-1" @click="inputTemplate('/CR/input')">输入</el-menu-item>
                         <el-menu-item index="2-2" @click="inputTemplate('/CR/search')">查询</el-menu-item>
-                        <el-menu-item index="2-3">比对</el-menu-item>
+                        <el-menu-item index="2-3" >比对</el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
-
-                <el-menu-item index="2">
-                    <i class="el-icon-menu"></i>
-                    <span slot="title">重整装置</span>
-                </el-menu-item>
                 <el-menu-item index="3">
                     <i class="el-icon-menu"></i>
                     <span slot="title">加氢裂化装置</span>

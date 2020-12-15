@@ -1,5 +1,5 @@
 <template>
-<div>
+<div style="background:white">
     <el-radio-group v-model="radio1">
         <el-radio-button @click.native="toSystem" label="装置概况"></el-radio-button>
         <el-radio-button @click.native="toMaterial" label="原料性质"></el-radio-button>
@@ -14,8 +14,7 @@
         <el-radio-button @click.native="toChemical" label="化学药剂"></el-radio-button>
     </el-radio-group>
 
-    <el-button type="primary" @click="onSubmit">提交</el-button>
-   
+
     <br>
     <router-view></router-view>
 </div>
@@ -58,10 +57,46 @@ export default {
 
         };
     },
+
+    created: function () {
+        console.log("turn to system page");
+        console.log(this.$route.query);
+        var id = this.$route.query.id
+        this.$http
+                .post(
+                    "http://" + document.domain + ":5000/AVDU_detail", {
+                        id: id,
+                        //发送给后端的信息，可以按照需求增加条目
+                    }, {
+                        emulateJSON: true //必需，否则可能会json解析出错
+                    }
+                )
+                .then(function (response) {
+                    //response.body是报文的主体内容
+                    if (parseInt(response.body.code) === 200) {
+                        this.$message({
+                            message: "查询成功",
+                            type: "success",
+                            duration: 3000,
+                            showClose: true
+                        })
+                        console.log(response.body.systemInfo)
+                        this.$store.search_systemInfo = response.body.systemInfo
+                    } else {
+                        this.$message({
+                            message: "查询失败",
+                            type: "error",
+                            duration: 3000,
+                            showClose: true
+                        });
+                    }
+                });
+        
+    },
     methods: {
         toSystem() {
             console.log("turn to system page, from input");
-            this.$router.push("/AVDU/system");
+            this.$router.push("/AVDU/search/bar/system");
         },
         toMaterial() {
             console.log("turn to system page, from input");
@@ -187,7 +222,6 @@ export default {
             systemInfo.design_time = design_time;
             console.log('submit!');
         },
-        
         showErrorMessage(v, s) {
             if (typeof v === "undefined") {
                 this.$message({

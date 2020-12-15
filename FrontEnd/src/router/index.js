@@ -68,6 +68,18 @@ const routers = [{
             {
                 path: "/AVDU/search",
                 component: search,
+                
+            },
+            {
+                path: "/AVDU/compare",
+                component: () =>
+                import ("@/views/AVDU/Compare/compare.vue"),
+                //redirect:'/build_graph',
+                children:[{
+                    path: "/build_graph",
+                        component: () =>
+                            import ("@/views/AVDU/Compare/build_graph.vue"),
+                }]
 
             },
             {
